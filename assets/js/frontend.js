@@ -56,12 +56,13 @@
                         showNotice(mrzGle.i18n.addedToCart, 'success');
                         $button.text(mrzGle.i18n.added);
 
-                        // Met à jour le compteur de panier si WooCommerce le supporte
+                        // Rafraîchit le mini-panier, puis recharge la page pour
+                        // refléter le compteur du thème et l'état « offert ».
                         $(document.body).trigger('wc_fragment_refresh');
 
                         setTimeout(function() {
-                            $button.prop('disabled', false).text(originalText);
-                        }, 2000);
+                            window.location.reload();
+                        }, 900);
                     } else {
                         showNotice(response.data.message || mrzGle.i18n.error, 'error');
                         $button.prop('disabled', false).text(originalText);
@@ -88,7 +89,7 @@
 
             var $button = $(this);
             var itemId = $button.data('item-id');
-            var $item = $button.closest('.mrz-gle-product-item');
+            var $item = $button.closest('.mrz-gle-product-row');
 
             $item.css('opacity', '0.5');
 
@@ -106,6 +107,10 @@
                             $(this).remove();
                         });
                         showNotice(mrzGle.i18n.productRemoved, 'success');
+                        // Recharge pour mettre à jour le compteur et la progression.
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 700);
                     } else {
                         $item.css('opacity', '1');
                         showNotice(response.data.message || mrzGle.i18n.error, 'error');
@@ -139,20 +144,10 @@
                 },
                 success: function(response) {
                     if (response.success) {
-                        var newIcon = response.data.priority ? '⭐' : '☆';
-                        $button.text(newIcon);
-
-                        // Met à jour l'icône de priorité sur l'item
-                        var $item = $button.closest('.mrz-gle-product-item');
-                        var $priorityIcon = $item.find('.mrz-gle-product-priority');
-
-                        if (response.data.priority) {
-                            if (!$priorityIcon.length) {
-                                $item.prepend('<span class="mrz-gle-product-priority" title="Prioritaire">⭐</span>');
-                            }
-                        } else {
-                            $priorityIcon.remove();
-                        }
+                        // Bascule l'icône étoile du bouton ; le tri (favoris en
+                        // haut) s'applique au rechargement de la page.
+                        var iconName = response.data.priority ? 'star-active' : 'star';
+                        $button.find('img').attr('src', mrzGle.iconBase + iconName + '.svg');
                     } else {
                         showNotice(response.data.message || mrzGle.i18n.error, 'error');
                     }

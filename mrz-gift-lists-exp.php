@@ -3,7 +3,7 @@
  * Plugin Name:       MRZ Gift Lists
  * Plugin URI:        https://github.com/m0r3z/mrz-gift-lists-exp
  * Description:       Listes de cadeaux pour WooCommerce : vos clients créent une liste de produits, partagent le lien, et leurs proches achètent.
- * Version:           0.10.0
+ * Version:           0.10.1
  * Requires at least: 6.0
  * Requires PHP:      8.0
  * Author:            Morez.co
@@ -28,7 +28,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Constantes du plugin
-define( 'MRZ_GIFTS_LISTS_EXP_VERSION', '0.10.0' );
+define( 'MRZ_GIFTS_LISTS_EXP_VERSION', '0.10.1' );
 define( 'MRZ_GIFTS_LISTS_EXP_PLUGIN_FILE', __FILE__ );
 define( 'MRZ_GIFTS_LISTS_EXP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MRZ_GIFTS_LISTS_EXP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

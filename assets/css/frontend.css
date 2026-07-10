@@ -48,12 +48,16 @@
     margin: 0 0 0.5rem;
 }
 
-/* --- Boutons --- */
-.mrz-gle-btn {
+/* --- Boutons : un seul style, liens (<a>) et boutons (<button>) identiques --- */
+/* Double classe (spécificité 0,2,0) pour l'emporter sur le style de bouton du
+   thème (ex. button[type="submit"]) et neutraliser majuscules/ombres. */
+.mrz-gle-btn.mrz-gle-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.4em;
+    width: auto;
+    margin: 0;
     padding: 0.55em 1.1em;
     border: 1px solid var(--mrz-gle-btn-border);
     border-radius: var(--mrz-gle-radius);
@@ -62,26 +66,23 @@
     font: inherit;
     line-height: 1.2;
     text-decoration: none;
+    text-transform: none;
+    letter-spacing: normal;
+    text-shadow: none;
+    box-shadow: none;
     cursor: pointer;
     transition: background 0.15s ease;
 }
 
-.mrz-gle-btn:hover {
+.mrz-gle-btn.mrz-gle-btn:hover,
+.mrz-gle-btn.mrz-gle-btn:focus {
     background: var(--mrz-gle-btn-bg-hover);
-}
-
-/* Toutes les variantes rendues identiques au bouton de base */
-.mrz-gle-btn-primary,
-.mrz-gle-btn-secondary,
-.mrz-gle-btn-outline,
-.mrz-gle-btn-danger {
-    background: var(--mrz-gle-btn-bg);
-    border-color: var(--mrz-gle-btn-border);
     color: var(--mrz-gle-btn-text);
+    border-color: var(--mrz-gle-btn-border);
 }
 
 /* Seule la taille change pour les petits boutons */
-.mrz-gle-btn-small {
+.mrz-gle-btn-small.mrz-gle-btn-small {
     padding: 0.35em 0.7em;
     font-size: 0.9em;
 }
@@ -90,6 +91,24 @@
 .mrz-gle-btn:disabled {
     opacity: 0.4;
     cursor: not-allowed;
+}
+
+/* Boutons « icône seule » — les SVG font 512px de base et le thème impose
+   `.row .col img { height:auto; max-width:100% }` (plus spécifique que nos
+   classes). On verrouille donc la taille avec !important, ciblé sur nos
+   seules icônes, pour neutraliser ce style de thème sans effet ailleurs. */
+.mrz-gle-icon {
+    display: block;
+    width: 18px !important;
+    height: 18px !important;
+    max-width: 18px !important;
+    margin: 0 !important;
+    flex: 0 0 auto;
+}
+
+.mrz-gle-btn-icon.mrz-gle-btn-icon {
+    padding: 0.45em;
+    line-height: 0;
 }
 
 /* --- En-têtes de page --- */
@@ -195,6 +214,11 @@
     background: #f3faf3;
 }
 
+.mrz-gle-notice-warning {
+    border-color: #e6d6a8;
+    background: #fdf9ec;
+}
+
 /* --- Grilles de listes --- */
 .mrz-gle-lists-grid {
     display: grid;
@@ -279,7 +303,7 @@
     height: 64px;
     display: block;
     background: var(--mrz-gle-bg-soft);
-    border-radius: var(--mrz-gle-radius);
+    border-radius: 50%;
     overflow: hidden;
 }
 
@@ -332,32 +356,62 @@
     }
 }
 
-/* --- Liste unique --- */
-.mrz-gle-list-header {
+/* --- Liste unique : bannière (image de fond + titre) --- */
+.mrz-gle-list-banner {
+    position: relative;
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--mrz-gle-gap);
-    align-items: flex-start;
+    align-items: flex-end;
+    min-height: 220px;
     margin-bottom: var(--mrz-gle-gap);
-}
-
-.mrz-gle-list-image {
-    flex: 0 0 260px;
-    max-width: 100%;
-}
-
-.mrz-gle-list-image img {
-    width: 100%;
+    padding: 1.25rem;
     border-radius: var(--mrz-gle-radius);
+    background-color: var(--mrz-gle-bg-soft);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
 }
 
-.mrz-gle-list-info {
-    flex: 1;
-    min-width: 240px;
+/* Voile sombre pour la lisibilité du titre sur l'image */
+.mrz-gle-list-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.05));
 }
 
-.mrz-gle-list-date,
+.mrz-gle-list-banner--noimg::before {
+    display: none;
+}
+
+.mrz-gle-list-banner-inner {
+    position: relative;
+    color: #fff;
+}
+
+.mrz-gle-list-banner-title {
+    margin: 0;
+    color: #fff;
+}
+
+.mrz-gle-list-banner-owner,
+.mrz-gle-list-banner-date {
+    margin: 0.25rem 0 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Sans image : texte sombre sur fond clair */
+.mrz-gle-list-banner--noimg .mrz-gle-list-banner-inner,
+.mrz-gle-list-banner--noimg .mrz-gle-list-banner-title {
+    color: inherit;
+}
+
+.mrz-gle-list-banner--noimg .mrz-gle-list-banner-owner,
+.mrz-gle-list-banner--noimg .mrz-gle-list-banner-date {
+    color: var(--mrz-gle-text-soft);
+}
+
 .mrz-gle-list-description {
+    margin-bottom: var(--mrz-gle-gap);
     color: var(--mrz-gle-text-soft);
 }
 
@@ -383,63 +437,67 @@
     color: var(--mrz-gle-text-soft);
 }
 
-/* --- Produits de la liste --- */
-.mrz-gle-products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(var(--mrz-gle-product-min), 1fr));
-    gap: var(--mrz-gle-gap);
-}
-
+/* --- Produits de la liste (mode liste : lignes séparées par des filets) --- */
 .mrz-gle-products-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--mrz-gle-border);
 }
 
-.mrz-gle-product-item {
-    position: relative;
+.mrz-gle-product-row {
     display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    padding: 0.85rem;
-    border: 1px solid var(--mrz-gle-border);
-    border-radius: var(--mrz-gle-radius);
-    background: var(--mrz-gle-surface);
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--mrz-gle-border);
 }
 
-.mrz-gle-product-item.mrz-gle-product-purchased {
+.mrz-gle-product-row.mrz-gle-product-purchased {
     opacity: 0.55;
 }
 
-.mrz-gle-product-priority {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-}
-
-.mrz-gle-product-image {
-    aspect-ratio: 1 / 1;
+.mrz-gle-product-thumb {
+    position: relative;
+    flex: 0 0 72px;
+    width: 72px;
+    height: 72px;
+    display: block;
     background: var(--mrz-gle-bg-soft);
     border-radius: var(--mrz-gle-radius);
     overflow: hidden;
 }
 
-.mrz-gle-product-image img {
+.mrz-gle-product-thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+.mrz-gle-product-priority {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 0.85rem;
+    line-height: 1;
+}
+
+.mrz-gle-product-main {
+    flex: 1;
+    min-width: 0;
+}
+
 .mrz-gle-product-name {
+    display: inline-block;
     font-weight: 600;
 }
 
-.mrz-gle-product-price {
-    color: var(--mrz-gle-text-soft);
-}
-
-.mrz-gle-product-buyer,
-.mrz-gle-product-quantity {
+.mrz-gle-product-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.2rem;
     font-size: 0.85em;
     color: var(--mrz-gle-text-soft);
 }
@@ -448,7 +506,17 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
-    margin-top: 0.25rem;
+    align-items: center;
+}
+
+@media (max-width: 600px) {
+    .mrz-gle-product-row {
+        flex-wrap: wrap;
+    }
+
+    .mrz-gle-product-actions {
+        width: 100%;
+    }
 }
 
 /* --- Recherche de produits (côté propriétaire) --- */
@@ -507,32 +575,52 @@
 }
 
 /* --- Ajout à une liste (page produit) --- */
+/* Le bloc occupe sa propre ligne pleine largeur (sous « Ajouter au panier »)
+   et empile verticalement : le bouton, puis le menu EN DESSOUS au clic —
+   quel que soit le flex du thème sur le formulaire panier. */
 .mrz-gle-add-to-list-wrapper {
-    position: relative;
-    display: block;
-    margin: 0.75rem 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    flex-basis: 100%;
+    margin: 20px 0;
 }
 
+/* Le bouton bascule prend toute la largeur. */
+.mrz-gle-add-to-list-wrapper .mrz-gle-add-to-list-toggle {
+    display: block;
+    width: 100%;
+}
+
+/* Le menu s'affiche EN DESSOUS, dans le flux (plus de pop-up superposé). */
 .mrz-gle-add-to-list-dropdown {
-    position: absolute;
-    z-index: 20;
-    margin-top: 0.4rem;
+    margin-top: 0.5rem;
     padding: 0.75rem;
-    min-width: 240px;
     border: 1px solid var(--mrz-gle-border);
     border-radius: var(--mrz-gle-radius);
     background: var(--mrz-gle-surface);
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Select pleine largeur + bouton « Ajouter » juste à côté. */
+.mrz-gle-add-to-list-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
 }
 
 .mrz-gle-add-to-list-dropdown select {
-    width: 100%;
+    flex: 1;
+    min-width: 0;
     box-sizing: border-box;
-    margin-bottom: 0.5rem;
     padding: 0.45em 0.6em;
     border: 1px solid var(--mrz-gle-border);
     border-radius: var(--mrz-gle-radius);
     font: inherit;
+}
+
+.mrz-gle-add-to-list-row .mrz-gle-confirm-add-to-list {
+    flex: 0 0 auto;
 }
 
 /* --- Indicateur de chargement --- */

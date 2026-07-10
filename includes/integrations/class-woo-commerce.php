@@ -74,7 +74,9 @@ class WooCommerce {
         add_action( 'woocommerce_admin_order_data_after_billing_address', [ $this, 'display_order_meta' ] );
 
         // Page produit - Bouton "Ajouter à une liste"
-        add_action( 'woocommerce_after_add_to_cart_button', [ $this, 'add_to_list_button' ] );
+        // Après le formulaire panier (hors du flex du thème) : le bloc s'affiche
+        // en pleine largeur, sous « Ajouter au panier », et déroule vers le bas.
+        add_action( 'woocommerce_after_add_to_cart_form', [ $this, 'add_to_list_button' ] );
 
         // Compatibilité HPOS
         add_filter( 'woocommerce_order_item_display_meta_key', [ $this, 'display_meta_key' ], 10, 3 );
@@ -369,17 +371,19 @@ class WooCommerce {
             </button>
 
             <div class="mrz-gle-add-to-list-dropdown" style="display: none;">
-                <select name="mrz_gle_add_to_list" class="mrz-gle-list-select" data-product-id="<?php echo esc_attr( $product->get_id() ); ?>">
-                    <option value=""><?php esc_html_e( 'Choisir une liste...', 'mrz-gift-lists-exp' ); ?></option>
-                    <?php foreach ( $lists as $list ) : ?>
-                        <option value="<?php echo esc_attr( $list->id ); ?>">
-                            <?php echo esc_html( $list->title ); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-                <button type="button" class="button mrz-gle-confirm-add-to-list">
-                    <?php esc_html_e( 'Ajouter', 'mrz-gift-lists-exp' ); ?>
-                </button>
+                <div class="mrz-gle-add-to-list-row">
+                    <select name="mrz_gle_add_to_list" class="mrz-gle-list-select" data-product-id="<?php echo esc_attr( $product->get_id() ); ?>">
+                        <option value=""><?php esc_html_e( 'Choisir une liste...', 'mrz-gift-lists-exp' ); ?></option>
+                        <?php foreach ( $lists as $list ) : ?>
+                            <option value="<?php echo esc_attr( $list->id ); ?>">
+                                <?php echo esc_html( $list->title ); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <button type="button" class="button mrz-gle-confirm-add-to-list">
+                        <?php esc_html_e( 'Ajouter', 'mrz-gift-lists-exp' ); ?>
+                    </button>
+                </div>
             </div>
         </div>
         <?php

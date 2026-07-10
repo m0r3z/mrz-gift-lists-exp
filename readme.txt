@@ -4,7 +4,7 @@ Tags: gift list, wishlist, woocommerce, gift registry, wedding registry
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 8.0
-Stable tag: 0.10.0
+Stable tag: 0.10.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -59,6 +59,15 @@ No. Anyone with the share link can buy items from a list. Creating a list requir
 Yes. The front-end CSS is intentionally minimal (structure only), so it inherits your theme's look. Style the `.mrz-gle-*` classes in your own CSS to match your brand.
 
 == Changelog ==
+
+= 0.10.1 =
+* Redesigned list page: banner header, products as a list, per-item actions (offer, view product, favourite, remove) and a notice to offer from this page.
+* "My lists" shown as a list view; owner can activate, deactivate or delete a list from the listing or the list page.
+* Products are added from the shop (configurable shop page) — inline product search removed.
+* Sharing reduced to a copy-link field (social and e-mail sharing removed).
+* Private lists, accessible via the share link only — public browsing and list search removed.
+* SVG button icons; login points to the WooCommerce account page; admins can always create lists.
+* Fixes: empty event date no longer displayed; the list refreshes after offering or removing a product.
 
 = 0.10.0 =
 * First public beta under the MRZ / Morez.co identity.

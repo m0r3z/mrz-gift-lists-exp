@@ -178,6 +178,7 @@ final class Plugin {
         wp_localize_script( 'mrz-gle-frontend', 'mrzGleData', [
             'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
             'nonce'     => wp_create_nonce( 'mrz_gle_frontend_nonce' ),
+            'iconBase'  => MRZ_GIFTS_LISTS_EXP_PLUGIN_URL . 'assets/img/',
             'i18n'      => [
                 'confirmDelete'     => __( 'Êtes-vous sûr de vouloir supprimer cet élément ?', 'mrz-gift-lists-exp' ),
                 'adding'            => __( 'Ajout en cours...', 'mrz-gift-lists-exp' ),
