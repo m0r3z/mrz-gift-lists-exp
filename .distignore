@@ -1,0 +1,32 @@
+# Files & folders excluded from the WordPress.org SVN trunk.
+# Reference: https://github.com/10up/action-wordpress-plugin-deploy#configure
+
+# Git
+.git
+.gitignore
+.gitattributes
+.github
+
+# IDE / OS
+.idea
+.vscode
+.DS_Store
+
+# Source-control-only files (kept on GitHub, not shipped to wp.org)
+.wordpress-org
+.distignore
+CLAUDE.md
+README.md
+
+# Dev-only
+node_modules
+package.json
+package-lock.json
+phpunit.xml
+phpcs.xml
+.editorconfig
+
+# Logs / swaps
+*.log
+*.swp
+*.swo

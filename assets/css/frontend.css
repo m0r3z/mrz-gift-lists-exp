@@ -1,0 +1,565 @@
+/**
+ * MRZ Gift Lists - Frontend Styles
+ *
+ * Template « wireframe » : neutre et minimaliste, juste ce qu'il faut pour que
+ * les éléments soient bien placés et lisibles. Aucune couleur de marque —
+ * tout passe par les variables --mrz-gle-* ci-dessous, surchargeables dans le
+ * thème pour appliquer votre charte sans toucher à ce fichier.
+ *
+ * @package MrzGiftsListsExp
+ */
+
+:root {
+    /* Layout */
+    --mrz-gle-max-width: 1400px;
+    --mrz-gle-gap: 1.25rem;
+    --mrz-gle-card-min: 240px;
+    --mrz-gle-product-min: 200px;
+
+    /* Palette neutre (à surcharger) */
+    --mrz-gle-border: #dcdcdc;
+    --mrz-gle-bg-soft: #f6f6f6;
+    --mrz-gle-surface: #ffffff;
+    --mrz-gle-text-soft: #6a6a6a;
+    --mrz-gle-accent: #444444;
+    --mrz-gle-radius: 6px;
+
+    /* Boutons — style unique : contour noir, texte noir, fond blanc */
+    --mrz-gle-btn-bg: #ffffff;
+    --mrz-gle-btn-bg-hover: #f4f4f4;
+    --mrz-gle-btn-border: #000000;
+    --mrz-gle-btn-text: #000000;
+}
+
+/* --- Conteneur --- */
+.mrz-gle-container {
+    max-width: var(--mrz-gle-max-width);
+    margin: 0 auto;
+}
+
+.mrz-gle-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.mrz-gle-container h1,
+.mrz-gle-container h2,
+.mrz-gle-container h3 {
+    margin: 0 0 0.5rem;
+}
+
+/* --- Boutons --- */
+.mrz-gle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4em;
+    padding: 0.55em 1.1em;
+    border: 1px solid var(--mrz-gle-btn-border);
+    border-radius: var(--mrz-gle-radius);
+    background: var(--mrz-gle-btn-bg);
+    color: var(--mrz-gle-btn-text);
+    font: inherit;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.mrz-gle-btn:hover {
+    background: var(--mrz-gle-btn-bg-hover);
+}
+
+/* Toutes les variantes rendues identiques au bouton de base */
+.mrz-gle-btn-primary,
+.mrz-gle-btn-secondary,
+.mrz-gle-btn-outline,
+.mrz-gle-btn-danger {
+    background: var(--mrz-gle-btn-bg);
+    border-color: var(--mrz-gle-btn-border);
+    color: var(--mrz-gle-btn-text);
+}
+
+/* Seule la taille change pour les petits boutons */
+.mrz-gle-btn-small {
+    padding: 0.35em 0.7em;
+    font-size: 0.9em;
+}
+
+.mrz-gle-btn.disabled,
+.mrz-gle-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* --- En-têtes de page --- */
+.mrz-gle-home-header,
+.mrz-gle-single-list .mrz-gle-list-info {
+    margin-bottom: 1rem;
+}
+
+.mrz-gle-home-header p {
+    color: var(--mrz-gle-text-soft);
+    margin: 0 0 1rem;
+}
+
+.mrz-gle-home-actions,
+.mrz-gle-header-with-action,
+.mrz-gle-owner-actions,
+.mrz-gle-visitor-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: var(--mrz-gle-gap);
+}
+
+/* Boutons de gestion de la liste (activer/désactiver, supprimer) */
+.mrz-gle-list-manage {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+}
+
+.mrz-gle-header-with-action h2 {
+    margin: 0;
+    margin-right: auto;
+}
+
+/* --- Formulaires --- */
+.mrz-gle-create-form,
+.mrz-gle-edit-form,
+.mrz-gle-add-product-form,
+.mrz-gle-password-form {
+    max-width: 640px;
+}
+
+.mrz-gle-form-row {
+    margin-bottom: var(--mrz-gle-gap);
+}
+
+.mrz-gle-form-row label {
+    display: block;
+    margin-bottom: 0.3em;
+    font-weight: 600;
+}
+
+.mrz-gle-form-row input,
+.mrz-gle-form-row select,
+.mrz-gle-form-row textarea,
+.mrz-gle-product-search,
+.mrz-gle-share-url {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5em 0.65em;
+    border: 1px solid var(--mrz-gle-border);
+    border-radius: var(--mrz-gle-radius);
+    background: var(--mrz-gle-surface);
+    font: inherit;
+}
+
+.mrz-gle-form-help {
+    margin: 0.3em 0 0;
+    font-size: 0.85em;
+    color: var(--mrz-gle-text-soft);
+}
+
+.mrz-gle-form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: var(--mrz-gle-gap);
+}
+
+/* --- Notices --- */
+.mrz-gle-notice {
+    padding: 0.75em 1em;
+    border: 1px solid var(--mrz-gle-border);
+    border-radius: var(--mrz-gle-radius);
+    background: var(--mrz-gle-bg-soft);
+    margin-bottom: var(--mrz-gle-gap);
+}
+
+.mrz-gle-notice p {
+    margin: 0;
+}
+
+.mrz-gle-notice-error {
+    border-color: #e0b4b4;
+    background: #fdf4f4;
+}
+
+.mrz-gle-notice-success {
+    border-color: #bcdcbc;
+    background: #f3faf3;
+}
+
+/* --- Grilles de listes --- */
+.mrz-gle-lists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--mrz-gle-card-min), 1fr));
+    gap: var(--mrz-gle-gap);
+}
+
+.mrz-gle-list-card {
+    border: 1px solid var(--mrz-gle-border);
+    border-radius: var(--mrz-gle-radius);
+    background: var(--mrz-gle-surface);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.mrz-gle-list-card-image {
+    aspect-ratio: 16 / 9;
+    background: var(--mrz-gle-bg-soft);
+    overflow: hidden;
+}
+
+.mrz-gle-list-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mrz-gle-list-card-content {
+    padding: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.mrz-gle-list-title {
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.mrz-gle-list-owner {
+    margin: 0;
+    color: var(--mrz-gle-text-soft);
+    font-size: 0.9em;
+}
+
+.mrz-gle-list-stats {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.85em;
+    color: var(--mrz-gle-text-soft);
+    margin-top: 0.25rem;
+}
+
+.mrz-gle-empty-state {
+    padding: 2rem;
+    border: 1px dashed var(--mrz-gle-border);
+    border-radius: var(--mrz-gle-radius);
+    text-align: center;
+    color: var(--mrz-gle-text-soft);
+}
+
+/* --- Mes listes : mode liste (lignes séparées par des filets) --- */
+.mrz-gle-list-rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--mrz-gle-border);
+}
+
+.mrz-gle-list-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--mrz-gle-border);
+}
+
+.mrz-gle-row-thumb {
+    flex: 0 0 64px;
+    width: 64px;
+    height: 64px;
+    display: block;
+    background: var(--mrz-gle-bg-soft);
+    border-radius: var(--mrz-gle-radius);
+    overflow: hidden;
+}
+
+.mrz-gle-row-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mrz-gle-row-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.mrz-gle-row-title {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.mrz-gle-row-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.2rem;
+    font-size: 0.85em;
+    color: var(--mrz-gle-text-soft);
+}
+
+.mrz-gle-row-inactive {
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-size: 0.75em;
+}
+
+.mrz-gle-row-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+@media (max-width: 600px) {
+    .mrz-gle-list-row {
+        flex-wrap: wrap;
+    }
+
+    .mrz-gle-row-actions {
+        width: 100%;
+    }
+}
+
+/* --- Liste unique --- */
+.mrz-gle-list-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--mrz-gle-gap);
+    align-items: flex-start;
+    margin-bottom: var(--mrz-gle-gap);
+}
+
+.mrz-gle-list-image {
+    flex: 0 0 260px;
+    max-width: 100%;
+}
+
+.mrz-gle-list-image img {
+    width: 100%;
+    border-radius: var(--mrz-gle-radius);
+}
+
+.mrz-gle-list-info {
+    flex: 1;
+    min-width: 240px;
+}
+
+.mrz-gle-list-date,
+.mrz-gle-list-description {
+    color: var(--mrz-gle-text-soft);
+}
+
+.mrz-gle-list-progress {
+    margin: 0.75rem 0;
+}
+
+.mrz-gle-progress-bar {
+    height: 8px;
+    background: var(--mrz-gle-bg-soft);
+    border: 1px solid var(--mrz-gle-border);
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.mrz-gle-progress-fill {
+    height: 100%;
+    background: var(--mrz-gle-accent);
+}
+
+.mrz-gle-progress-text {
+    font-size: 0.85em;
+    color: var(--mrz-gle-text-soft);
+}
+
+/* --- Produits de la liste --- */
+.mrz-gle-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--mrz-gle-product-min), 1fr));
+    gap: var(--mrz-gle-gap);
+}
+
+.mrz-gle-products-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.mrz-gle-product-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.85rem;
+    border: 1px solid var(--mrz-gle-border);
+    border-radius: var(--mrz-gle-radius);
+    background: var(--mrz-gle-surface);
+}
+
+.mrz-gle-product-item.mrz-gle-product-purchased {
+    opacity: 0.55;
+}
+
+.mrz-gle-product-priority {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+.mrz-gle-product-image {
+    aspect-ratio: 1 / 1;
+    background: var(--mrz-gle-bg-soft);
+    border-radius: var(--mrz-gle-radius);
+    overflow: hidden;
+}
+
+.mrz-gle-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mrz-gle-product-name {
+    font-weight: 600;
+}
+
+.mrz-gle-product-price {
+    color: var(--mrz-gle-text-soft);
+}
+
+.mrz-gle-product-buyer,
+.mrz-gle-product-quantity {
+    font-size: 0.85em;
+    color: var(--mrz-gle-text-soft);
+}
+
+.mrz-gle-product-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.25rem;
+}
+
+/* --- Recherche de produits (côté propriétaire) --- */
+.mrz-gle-search-results {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mrz-gle-search-result-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem;
+    border: 1px solid var(--mrz-gle-border);
+    border-radius: var(--mrz-gle-radius);
+}
+
+.mrz-gle-search-result-item img {
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.mrz-gle-search-result-info {
+    flex: 1;
+}
+
+/* --- Partage (lien + bouton copier) --- */
+.mrz-gle-share {
+    margin: var(--mrz-gle-gap) 0;
+    padding: 1rem;
+    border: 1px solid var(--mrz-gle-border);
+    border-radius: var(--mrz-gle-radius);
+    background: var(--mrz-gle-bg-soft);
+}
+
+.mrz-gle-share-intro {
+    margin: 0 0 0.6rem;
+    font-size: 0.9em;
+    color: var(--mrz-gle-text-soft);
+}
+
+.mrz-gle-share-link {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.mrz-gle-share-url {
+    flex: 1;
+    min-width: 14rem;
+}
+
+/* --- Ajout à une liste (page produit) --- */
+.mrz-gle-add-to-list-wrapper {
+    position: relative;
+    display: block;
+    margin: 0.75rem 0 0;
+}
+
+.mrz-gle-add-to-list-dropdown {
+    position: absolute;
+    z-index: 20;
+    margin-top: 0.4rem;
+    padding: 0.75rem;
+    min-width: 240px;
+    border: 1px solid var(--mrz-gle-border);
+    border-radius: var(--mrz-gle-radius);
+    background: var(--mrz-gle-surface);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+.mrz-gle-add-to-list-dropdown select {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0.5rem;
+    padding: 0.45em 0.6em;
+    border: 1px solid var(--mrz-gle-border);
+    border-radius: var(--mrz-gle-radius);
+    font: inherit;
+}
+
+/* --- Indicateur de chargement --- */
+.mrz-gle-loading {
+    width: 24px;
+    height: 24px;
+    margin: 1rem auto;
+    border: 2px solid var(--mrz-gle-border);
+    border-top-color: var(--mrz-gle-accent);
+    border-radius: 50%;
+    animation: mrz-gle-spin 0.7s linear infinite;
+}
+
+@keyframes mrz-gle-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+    .mrz-gle-lists-grid,
+    .mrz-gle-products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mrz-gle-list-image {
+        flex-basis: 100%;
+    }
+}

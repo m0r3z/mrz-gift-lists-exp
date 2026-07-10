@@ -1,0 +1,21 @@
+# Copyright (C) 2026 Morez.co
+# This file is distributed under the GPLv3 or later.
+#
+# Modèle de traduction pour MRZ Gift Lists.
+# Pour (re)générer ce fichier avec toutes les chaînes du plugin, exécuter
+# depuis la racine du plugin (WP-CLI requis, disponible dans le shell Local) :
+#
+#     wp i18n make-pot . languages/mrz-gift-lists-exp.pot --domain=mrz-gift-lists-exp
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MRZ Gift Lists 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/m0r3z/mrz-gift-lists-exp\n"
+"Last-Translator: Morez.co <hello@morez.co>\n"
+"Language-Team: Morez.co <hello@morez.co>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language: fr_FR\n"
+"X-Domain: mrz-gift-lists-exp\n"

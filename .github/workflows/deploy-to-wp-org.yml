@@ -1,0 +1,29 @@
+name: Deploy to WordPress.org
+
+# Déclenchement : push d'un tag annoté de la forme vX.Y.Z (ex: v1.0.0).
+# Le tag doit déjà avoir été créé manuellement (commit + tag + push).
+# Cette action s'occupe ensuite du SVN wordpress.org.
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  deploy:
+    name: Push tag to WordPress.org SVN
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: WordPress Plugin Deploy
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: mrz-gift-lists-exp
+          # L'action lit automatiquement la version depuis le tag Git
+          # (sans le 'v' initial), met à jour `Stable tag` dans le readme,
+          # synchronise trunk/, copie .wordpress-org/* dans assets/, et
+          # crée tags/X.Y.Z côté SVN. Idempotent : ré-exécuter sur le même
+          # tag ne fait rien si le tag SVN existe déjà.
