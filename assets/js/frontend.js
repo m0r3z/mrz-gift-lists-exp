@@ -11,6 +11,7 @@
     var mrzGle = {
         ajaxUrl: mrzGleData.ajaxUrl,
         nonce: mrzGleData.nonce,
+        iconBase: mrzGleData.iconBase,
         i18n: mrzGleData.i18n
     };
 

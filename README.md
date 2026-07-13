@@ -9,13 +9,11 @@ Plugin WordPress/WooCommerce permettant aux clients de créer des listes de cade
 3. [Administration (Back-office)](#administration-back-office)
    - [Menu principal](#menu-principal)
    - [Gestion des listes](#gestion-des-listes)
-   - [Types de listes](#types-de-listes)
    - [Réglages](#réglages)
 4. [Utilisation (Front-end)](#utilisation-front-end)
    - [Page d'accueil des listes](#page-daccueil-des-listes)
    - [Créer une liste](#créer-une-liste)
    - [Gérer sa liste](#gérer-sa-liste)
-   - [Rechercher une liste](#rechercher-une-liste)
    - [Offrir un cadeau](#offrir-un-cadeau)
 5. [Intégration WooCommerce](#intégration-woocommerce)
 6. [Shortcodes](#shortcodes)
@@ -32,7 +30,6 @@ Plugin WordPress/WooCommerce permettant aux clients de créer des listes de cade
 
 À l'activation, le plugin :
 - Crée les tables nécessaires dans la base de données
-- Insère les types de listes par défaut (Mariage, Naissance, Anniversaire, Noël, Autre)
 - Crée une page "Listes de cadeaux" avec le shortcode `[mrz_gift_lists]`
 
 ---
@@ -46,7 +43,6 @@ Après l'activation, rendez-vous dans **Listes cadeaux > Réglages** pour config
 1. **Vérifiez la page des listes** : Assurez-vous qu'une page est bien sélectionnée
 2. **Configurez l'email admin** : Pour recevoir les notifications
 3. **Activez les notifications** : Pour que les créateurs soient informés des achats
-4. **Choisissez les réseaux de partage** : Facebook, WhatsApp, Email, etc.
 
 ---
 
@@ -59,7 +55,6 @@ Le plugin ajoute un menu **Listes cadeaux** dans l'administration WordPress avec
 | Menu | Description |
 |------|-------------|
 | Toutes les listes | Vue d'ensemble de toutes les listes créées |
-| Types | Gestion des types de listes (mariage, naissance...) |
 | Réglages | Configuration générale du plugin |
 
 ### Gestion des listes
@@ -71,7 +66,6 @@ La page principale affiche :
 - **Tableau des listes** avec colonnes :
   - Titre de la liste
   - Créateur (nom + email)
-  - Type de liste
   - Nombre de produits (achetés / total)
   - Statut (Active, Archivée, Terminée)
   - Date de création
@@ -104,28 +98,6 @@ Affiche :
   - Statut (Disponible, Réservé, Acheté)
   - Nom de l'acheteur et numéro de commande
 
-### Types de listes
-
-Les types permettent de catégoriser les listes avec :
-- **Nom** : Ex: "Mariage", "Naissance"
-- **Description** : Texte explicatif
-- **Icône** : Emoji représentatif (❤️, 👶, 🎂, 🎁, etc.)
-- **Couleur** : Code couleur pour l'affichage
-- **Ordre** : Position dans les listes déroulantes
-- **Actif** : Permet de masquer un type sans le supprimer
-
-#### Types par défaut
-
-| Type | Icône | Couleur |
-|------|-------|---------|
-| Mariage | ❤️ | #e91e63 (rose) |
-| Naissance | 👶 | #03a9f4 (bleu) |
-| Anniversaire | 🎂 | #ff9800 (orange) |
-| Noël | 🎁 | #f44336 (rouge) |
-| Autre | 📋 | #9e9e9e (gris) |
-
-> **Note** : Un type utilisé par des listes ne peut pas être supprimé.
-
 ### Réglages
 
 #### Réglages généraux
@@ -136,29 +108,12 @@ Les types permettent de catégoriser les listes avec :
 | Qui peut créer | Utilisateurs connectés ou clients WC uniquement | Utilisateurs connectés |
 | Listes max par utilisateur | Limite de listes actives simultanées (0 = illimité) | 5 |
 
-#### Affichage
-
-| Option | Description | Valeur par défaut |
-|--------|-------------|-------------------|
-| Mode d'affichage | Grille ou Liste | Grille |
-| Produits par page | Nombre de produits affichés | 12 |
-
 #### Emails
 
 | Option | Description | Valeur par défaut |
 |--------|-------------|-------------------|
 | Email administrateur | Reçoit les notifications de nouvelles listes et achats | Email admin du site |
 | Notifier le créateur | Envoie un email quand un produit est acheté | Activé |
-
-#### Partage
-
-Sélectionnez les boutons de partage à afficher :
-- Facebook
-- Twitter/X
-- Pinterest
-- WhatsApp
-- Email
-- Copier le lien
 
 ---
 
@@ -173,7 +128,6 @@ Accessible via la page créée à l'activation ou en ajoutant le shortcode `[mrz
 - Boutons d'action :
   - "Mes listes" (si connecté)
   - "Créer une liste" (si autorisé)
-  - "Rechercher une liste"
 - Listes récentes (6 dernières)
 
 ### Créer une liste
@@ -185,7 +139,6 @@ Accessible via la page créée à l'activation ou en ajoutant le shortcode `[mrz
 1. Cliquer sur **"Créer une liste"**
 2. Remplir le formulaire :
    - **Titre** (obligatoire) : Ex: "Liste de mariage de Marie et Jean"
-   - **Type** : Choisir parmi les types disponibles
    - **Date de l'événement** : Date optionnelle
    - **Description** : Texte libre pour décrire l'événement
    - **Image** : Photo d'illustration (JPG/PNG, max 2 Mo)
@@ -200,10 +153,10 @@ Le créateur de la liste a accès à des fonctionnalités supplémentaires :
 
 #### Ajouter des produits
 
-1. Cliquer sur **"+ Ajouter un produit"**
-2. Rechercher un produit par son nom dans le champ de recherche
-3. Cliquer sur le bouton **"+"** à côté du produit souhaité
-4. Le produit est ajouté instantanément à la liste
+1. Cliquer sur **"+ Ajouter un produit"** depuis la page de la liste : le propriétaire est redirigé vers la boutique WooCommerce
+2. Parcourir la boutique et ouvrir la fiche du produit souhaité
+3. Cliquer sur le bouton **"+ Ajouter à une liste"** et choisir la liste dans le menu déroulant
+4. Le produit est ajouté à la liste sélectionnée
 
 #### Actions sur les produits
 
@@ -214,33 +167,15 @@ Le créateur de la liste a accès à des fonctionnalités supplémentaires :
 
 #### Partager sa liste
 
-Les boutons de partage permettent de :
-- Partager sur Facebook
-- Partager sur Twitter/X
-- Envoyer par WhatsApp
-- Envoyer par email
-- Copier le lien dans le presse-papiers
+La page de la liste affiche un champ en lecture seule contenant le lien de partage, accompagné d'un bouton **"Copier le lien"**. C'est le seul moyen de partage : la liste est privée et n'est accessible qu'à partir de ce lien.
 
 **URL de la liste** : `https://votre-site.com/mrz-gift-lists/?mrz_gle_list_key=XXXXXX`
-
-### Rechercher une liste
-
-1. Cliquer sur **"Rechercher une liste"**
-2. Saisir un terme de recherche :
-   - Nom du créateur
-   - Email du créateur
-   - Titre de la liste
-3. Les résultats s'affichent avec :
-   - Titre de la liste
-   - Type
-   - Nombre de produits
-   - Indicateur de protection 🔒
 
 ### Offrir un cadeau
 
 **Pour un visiteur souhaitant offrir un cadeau :**
 
-1. Accéder à une liste (via recherche ou lien partagé)
+1. Accéder à une liste via le lien de partage reçu
 2. Si la liste est protégée, saisir le mot de passe
 3. Parcourir les produits disponibles
 4. Cliquer sur **"Offrir"** sur le produit choisi
@@ -295,31 +230,14 @@ Shortcode principal affichant l'interface complète des listes.
 
 | Paramètre | Description | Valeurs |
 |-----------|-------------|---------|
-| view | Force une vue spécifique | `my-lists`, `create`, `search` |
+| view | Force une vue spécifique | `my-lists`, `create` |
 
 **Exemples :**
 
 ```
 [mrz_gift_lists]                    // Interface complète
 [mrz_gift_lists view="my-lists"]    // Affiche directement "Mes listes"
-[mrz_gift_lists view="search"]      // Affiche directement la recherche
-```
-
-### [mrz_gift_lists_search]
-
-Widget de recherche compact pour intégrer dans une sidebar ou un footer.
-
-**Paramètres :**
-
-| Paramètre | Description | Valeur par défaut |
-|-----------|-------------|-------------------|
-| placeholder | Texte du champ de recherche | "Rechercher par nom ou email..." |
-| button_text | Texte du bouton | "Rechercher" |
-
-**Exemple :**
-
-```
-[mrz_gift_lists_search placeholder="Trouver une liste..." button_text="Chercher"]
+[mrz_gift_lists view="create"]      // Affiche directement le formulaire de création
 ```
 
 ---
@@ -392,7 +310,7 @@ Le plugin utilise des classes CSS préfixées par `mrz-gle-`. Vous pouvez surcha
 
 ### Comment limiter les produits qu'on peut ajouter à une liste ?
 
-Actuellement, tous les produits publiés de WooCommerce sont disponibles. Pour filtrer, vous pouvez modifier la recherche AJAX via le hook WordPress :
+Actuellement, tous les produits publiés de WooCommerce peuvent être ajoutés à une liste depuis la boutique. Pour filtrer les produits éligibles, vous pouvez utiliser le hook WordPress :
 
 ```php
 add_filter( 'woocommerce_product_data_store_cpt_get_products_query', function( $query, $query_vars ) {
@@ -415,7 +333,7 @@ Le plugin est prêt pour la traduction. Le domaine de texte est `mrz-gift-lists-
 ### Comment supprimer toutes les données du plugin ?
 
 La suppression du plugin via l'admin WordPress supprime automatiquement :
-- Les 3 tables de base de données
+- Les 2 tables de base de données
 - Toutes les options du plugin
 - Les capabilities ajoutées aux rôles
 
@@ -434,9 +352,8 @@ Pour signaler un bug ou demander une fonctionnalité, créez une issue sur le d�
 ### Version 1.0.0
 - Version initiale
 - Création et gestion des listes de cadeaux
-- Types de listes personnalisables
 - Intégration complète WooCommerce
-- Système de partage social
+- Partage de liste par lien
 - Protection par mot de passe
 - Notifications par email
 - Interface d'administration complète

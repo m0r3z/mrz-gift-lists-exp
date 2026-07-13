@@ -71,34 +71,6 @@ class SettingsPage {
             'mrz_gle_general_section'
         );
 
-        // Section Affichage
-        add_settings_section(
-            'mrz_gle_display_section',
-            __( 'Affichage', 'mrz-gift-lists-exp' ),
-            [ $this, 'render_display_section' ],
-            $this->option_group
-        );
-
-        // Affichage des produits
-        register_setting( $this->option_group, 'mrz_gle_display_mode', 'sanitize_text_field' );
-        add_settings_field(
-            'mrz_gle_display_mode',
-            __( 'Mode d\'affichage', 'mrz-gift-lists-exp' ),
-            [ $this, 'render_display_mode_field' ],
-            $this->option_group,
-            'mrz_gle_display_section'
-        );
-
-        // Produits par page
-        register_setting( $this->option_group, 'mrz_gle_products_per_page', 'absint' );
-        add_settings_field(
-            'mrz_gle_products_per_page',
-            __( 'Produits par page', 'mrz-gift-lists-exp' ),
-            [ $this, 'render_products_per_page_field' ],
-            $this->option_group,
-            'mrz_gle_display_section'
-        );
-
         // Section Emails
         add_settings_section(
             'mrz_gle_email_section',
@@ -159,10 +131,6 @@ class SettingsPage {
         echo '<p>' . esc_html__( 'Configurez les options générales du plugin.', 'mrz-gift-lists-exp' ) . '</p>';
     }
 
-    public function render_display_section(): void {
-        echo '<p>' . esc_html__( 'Personnalisez l\'affichage des listes.', 'mrz-gift-lists-exp' ) . '</p>';
-    }
-
     public function render_email_section(): void {
         echo '<p>' . esc_html__( 'Configurez les notifications par email.', 'mrz-gift-lists-exp' ) . '</p>';
     }
@@ -203,27 +171,6 @@ class SettingsPage {
         ?>
         <input type="number" name="mrz_gle_max_lists_per_user" value="<?php echo esc_attr( $value ); ?>" min="1" max="50" class="small-text">
         <p class="description"><?php esc_html_e( 'Nombre maximum de listes actives par utilisateur (0 = illimité).', 'mrz-gift-lists-exp' ); ?></p>
-        <?php
-    }
-
-    public function render_display_mode_field(): void {
-        $value = get_option( 'mrz_gle_display_mode', 'grid' );
-        ?>
-        <select name="mrz_gle_display_mode">
-            <option value="grid" <?php selected( $value, 'grid' ); ?>>
-                <?php esc_html_e( 'Grille', 'mrz-gift-lists-exp' ); ?>
-            </option>
-            <option value="list" <?php selected( $value, 'list' ); ?>>
-                <?php esc_html_e( 'Liste', 'mrz-gift-lists-exp' ); ?>
-            </option>
-        </select>
-        <?php
-    }
-
-    public function render_products_per_page_field(): void {
-        $value = get_option( 'mrz_gle_products_per_page', 12 );
-        ?>
-        <input type="number" name="mrz_gle_products_per_page" value="<?php echo esc_attr( $value ); ?>" min="4" max="100" class="small-text">
         <?php
     }
 

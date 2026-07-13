@@ -212,7 +212,7 @@ class GiftListsShortcode {
 
                 <?php if ( Frontend::can_create_list() ) : ?>
                     <a href="<?php echo esc_url( add_query_arg( 'action', 'create' ) ); ?>" class="mrz-gle-btn mrz-gle-btn-primary">
-                        + <?php esc_html_e( 'Nouvelle liste', 'mrz-gift-lists-exp' ); ?>
+                        <?php echo $this->icon( 'add', '' ); ?> <?php esc_html_e( 'Nouvelle liste', 'mrz-gift-lists-exp' ); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -467,22 +467,22 @@ class GiftListsShortcode {
         ?>
         <div class="mrz-gle-single-list">
 
-            <!-- Bannière : image de fond + titre par-dessus -->
-            <?php
-            $banner_url   = $list->image_id ? wp_get_attachment_image_url( $list->image_id, 'large' ) : '';
-            $banner_class = $banner_url ? '' : ' mrz-gle-list-banner--noimg';
-            ?>
-            <div class="mrz-gle-list-banner<?php echo esc_attr( $banner_class ); ?>"<?php echo $banner_url ? ' style="background-image: url(\'' . esc_url( $banner_url ) . '\');"' : ''; ?>>
-                <div class="mrz-gle-list-banner-inner">
-                    <h1 class="mrz-gle-list-banner-title"><?php echo esc_html( $list->title ); ?></h1>
-                    <?php if ( $user ) : ?>
-                        <p class="mrz-gle-list-banner-owner"><?php echo esc_html( sprintf( __( 'Par %s', 'mrz-gift-lists-exp' ), $user->display_name ) ); ?></p>
-                    <?php endif; ?>
-                    <?php $event_ts = ( $list->event_date && '0000-00-00' !== $list->event_date ) ? strtotime( $list->event_date ) : false; ?>
-                    <?php if ( $event_ts ) : ?>
-                        <p class="mrz-gle-list-banner-date">📅 <?php echo esc_html( wp_date( get_option( 'date_format' ), $event_ts ) ); ?></p>
+            <!-- En-tête : pastille image + titre + auteur (empilés, centrés) -->
+            <?php $avatar_url = $list->image_id ? wp_get_attachment_image_url( $list->image_id, 'medium' ) : ''; ?>
+            <div class="mrz-gle-single-header">
+                <div class="mrz-gle-single-avatar<?php echo $avatar_url ? '' : ' mrz-gle-single-avatar--empty'; ?>">
+                    <?php if ( $avatar_url ) : ?>
+                        <img src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $list->title ); ?>">
                     <?php endif; ?>
                 </div>
+                <h1 class="mrz-gle-single-title"><?php echo esc_html( $list->title ); ?></h1>
+                <?php if ( $user ) : ?>
+                    <p class="mrz-gle-single-owner"><?php echo esc_html( sprintf( __( 'Par %s', 'mrz-gift-lists-exp' ), $user->display_name ) ); ?></p>
+                <?php endif; ?>
+                <?php $event_ts = ( $list->event_date && '0000-00-00' !== $list->event_date ) ? strtotime( $list->event_date ) : false; ?>
+                <?php if ( $event_ts ) : ?>
+                    <p class="mrz-gle-single-date">📅 <?php echo esc_html( wp_date( get_option( 'date_format' ), $event_ts ) ); ?></p>
+                <?php endif; ?>
             </div>
 
             <!-- Actions propriétaire -->
@@ -521,22 +521,22 @@ class GiftListsShortcode {
                 <div class="mrz-gle-list-description"><?php echo wp_kses_post( nl2br( $list->description ) ); ?></div>
             <?php endif; ?>
 
-            <!-- Progression -->
-            <?php $percent = $stats->total_items > 0 ? round( ( $stats->purchased_items / $stats->total_items ) * 100 ) : 0; ?>
-            <div class="mrz-gle-list-progress">
-                <div class="mrz-gle-progress-bar">
-                    <div class="mrz-gle-progress-fill" style="width: <?php echo esc_attr( $percent ); ?>%;"></div>
-                </div>
-                <p class="mrz-gle-progress-text"><?php echo esc_html( sprintf( __( '%1$d sur %2$d produits achetés (%3$d%%)', 'mrz-gift-lists-exp' ), $stats->purchased_items, $stats->total_items, $percent ) ); ?></p>
-            </div>
-
             <!-- Produits -->
+            <?php $percent = $stats->total_items > 0 ? round( ( $stats->purchased_items / $stats->total_items ) * 100 ) : 0; ?>
             <div class="mrz-gle-list-products">
                 <h2><?php esc_html_e( 'Produits', 'mrz-gift-lists-exp' ); ?> (<?php echo esc_html( count( $items ) ); ?>)</h2>
 
                 <?php if ( ! empty( $items ) ) : ?>
                     <div class="mrz-gle-notice mrz-gle-notice-warning">
                         <p>⚠️ <?php esc_html_e( 'Pour offrir un cadeau, cliquez sur « Offrir » ici même. N\'ajoutez pas le produit au panier depuis sa fiche : l\'achat ne serait alors pas rattaché à cette liste.', 'mrz-gift-lists-exp' ); ?></p>
+                    </div>
+
+                    <!-- Progression : nombre de produits déjà offerts -->
+                    <div class="mrz-gle-list-progress">
+                        <div class="mrz-gle-progress-bar">
+                            <div class="mrz-gle-progress-fill" style="width: <?php echo esc_attr( $percent ); ?>%;"></div>
+                        </div>
+                        <p class="mrz-gle-progress-text"><?php echo esc_html( sprintf( __( '%1$d sur %2$d produits achetés (%3$d%%)', 'mrz-gift-lists-exp' ), $stats->purchased_items, $stats->total_items, $percent ) ); ?></p>
                     </div>
 
                     <ul class="mrz-gle-products-list">
@@ -580,12 +580,9 @@ class GiftListsShortcode {
             </a>
 
             <div class="mrz-gle-product-main">
-                <a class="mrz-gle-product-name" href="<?php echo esc_url( $item->product_url ); ?>"><?php echo esc_html( $item->product_name ); ?></a>
+                <span class="mrz-gle-product-name"><?php echo esc_html( $item->product_name ); ?></span>
                 <div class="mrz-gle-product-meta">
                     <span class="mrz-gle-product-price"><?php echo wp_kses_post( $item->product_price_html ); ?></span>
-                    <?php if ( $item->quantity > 1 ) : ?>
-                        <span class="mrz-gle-product-quantity"><?php echo esc_html( sprintf( __( 'Qté : %1$d (reste %2$d)', 'mrz-gift-lists-exp' ), $item->quantity, $item->quantity_remaining ) ); ?></span>
-                    <?php endif; ?>
                     <?php if ( $is_purchased ) : ?>
                         <span class="mrz-gle-product-badge"><?php esc_html_e( 'Offert', 'mrz-gift-lists-exp' ); ?><?php echo $item->purchased_by ? ' · ' . esc_html( $item->purchased_by ) : ''; ?></span>
                     <?php endif; ?>
@@ -668,7 +665,7 @@ class GiftListsShortcode {
         ?>
         <div class="mrz-gle-share">
             <p class="mrz-gle-share-intro">
-                <?php esc_html_e( 'Pour partager votre liste, envoyez ce lien à vos proches — par message, e-mail ou sur les réseaux sociaux :', 'mrz-gift-lists-exp' ); ?>
+                <?php esc_html_e( 'Pour partager votre liste, envoyez ce lien à vos proches par message, e-mail ou sur les réseaux sociaux :', 'mrz-gift-lists-exp' ); ?>
             </p>
             <div class="mrz-gle-share-link">
                 <input type="text" class="mrz-gle-share-url" value="<?php echo esc_url( $list_url ); ?>" readonly onclick="this.select();">

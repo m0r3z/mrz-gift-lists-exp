@@ -46,13 +46,13 @@ class Admin {
     public function add_admin_menu(): void {
         // Menu principal
         add_menu_page(
-            __( 'Listes de cadeaux', 'mrz-gift-lists-exp' ),
-            __( 'Listes cadeaux', 'mrz-gift-lists-exp' ),
+            __( 'MRZ Gift Lists', 'mrz-gift-lists-exp' ),
+            __( 'MRZ Gift Lists', 'mrz-gift-lists-exp' ),
             'mrz_gle_manage_lists',
             'mrz-gle-lists',
             [ $this, 'render_lists_page' ],
             $this->get_menu_icon(),
-            56
+            '80.9' // Juste sous « Réglages » (position 80).
         );
 
         // Sous-menu Listes (remplace le menu parent)

@@ -122,6 +122,15 @@
     margin: 0 0 1rem;
 }
 
+/* Page d'accueil : tout est centré (titre, intro, boutons). */
+.mrz-gle-home {
+    text-align: center;
+}
+
+.mrz-gle-home .mrz-gle-home-actions {
+    justify-content: center;
+}
+
 .mrz-gle-home-actions,
 .mrz-gle-header-with-action,
 .mrz-gle-owner-actions,
@@ -131,6 +140,11 @@
     gap: 0.5rem;
     align-items: center;
     margin-bottom: var(--mrz-gle-gap);
+}
+
+/* Page « liste unique » : les actions propriétaire sont centrées sous l'en-tête. */
+.mrz-gle-owner-actions {
+    justify-content: center;
 }
 
 /* Boutons de gestion de la liste (activer/désactiver, supprimer) */
@@ -356,57 +370,39 @@
     }
 }
 
-/* --- Liste unique : bannière (image de fond + titre) --- */
-.mrz-gle-list-banner {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    min-height: 220px;
+/* --- Liste unique : en-tête (pastille image + titre + auteur, centrés) --- */
+.mrz-gle-single-header {
+    text-align: center;
     margin-bottom: var(--mrz-gle-gap);
-    padding: 1.25rem;
-    border-radius: var(--mrz-gle-radius);
-    background-color: var(--mrz-gle-bg-soft);
-    background-size: cover;
-    background-position: center;
+}
+
+.mrz-gle-single-avatar {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 0.75rem;
+    border: 1px solid var(--mrz-gle-border);
+    border-radius: 50%;
+    background: var(--mrz-gle-bg-soft);
     overflow: hidden;
 }
 
-/* Voile sombre pour la lisibilité du titre sur l'image */
-.mrz-gle-list-banner::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.05));
+/* height:auto est imposé par certains thèmes sur les <img> — on verrouille la
+   taille avec !important pour que l'image remplisse bien le cercle (object-fit). */
+.mrz-gle-single-avatar img {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    object-fit: cover;
 }
 
-.mrz-gle-list-banner--noimg::before {
-    display: none;
-}
-
-.mrz-gle-list-banner-inner {
-    position: relative;
-    color: #fff;
-}
-
-.mrz-gle-list-banner-title {
+.mrz-gle-single-title {
     margin: 0;
-    color: #fff;
 }
 
-.mrz-gle-list-banner-owner,
-.mrz-gle-list-banner-date {
+.mrz-gle-single-owner,
+.mrz-gle-single-date {
     margin: 0.25rem 0 0;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-/* Sans image : texte sombre sur fond clair */
-.mrz-gle-list-banner--noimg .mrz-gle-list-banner-inner,
-.mrz-gle-list-banner--noimg .mrz-gle-list-banner-title {
-    color: inherit;
-}
-
-.mrz-gle-list-banner--noimg .mrz-gle-list-banner-owner,
-.mrz-gle-list-banner--noimg .mrz-gle-list-banner-date {
     color: var(--mrz-gle-text-soft);
 }
 
@@ -420,7 +416,7 @@
 }
 
 .mrz-gle-progress-bar {
-    height: 8px;
+    height: 15px;
     background: var(--mrz-gle-bg-soft);
     border: 1px solid var(--mrz-gle-border);
     border-radius: 99px;
@@ -553,13 +549,14 @@
     padding: 1rem;
     border: 1px solid var(--mrz-gle-border);
     border-radius: var(--mrz-gle-radius);
-    background: var(--mrz-gle-bg-soft);
+    background: none;
 }
 
 .mrz-gle-share-intro {
     margin: 0 0 0.6rem;
+    padding: 0;
     font-size: 0.9em;
-    color: var(--mrz-gle-text-soft);
+    color: inherit;
 }
 
 .mrz-gle-share-link {

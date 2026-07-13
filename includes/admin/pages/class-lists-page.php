@@ -282,7 +282,6 @@ class ListsPage {
                                             <th style="width: 50px;"></th>
                                             <th><?php esc_html_e( 'Produit', 'mrz-gift-lists-exp' ); ?></th>
                                             <th style="width: 100px;"><?php esc_html_e( 'Prix', 'mrz-gift-lists-exp' ); ?></th>
-                                            <th style="width: 80px;"><?php esc_html_e( 'Qté', 'mrz-gift-lists-exp' ); ?></th>
                                             <th style="width: 100px;"><?php esc_html_e( 'Statut', 'mrz-gift-lists-exp' ); ?></th>
                                             <th><?php esc_html_e( 'Acheté par', 'mrz-gift-lists-exp' ); ?></th>
                                         </tr>
@@ -306,9 +305,6 @@ class ListsPage {
                                                     <?php endif; ?>
                                                 </td>
                                                 <td><?php echo wp_kses_post( $item->product_price_html ); ?></td>
-                                                <td>
-                                                    <?php echo esc_html( $item->quantity_purchased ); ?> / <?php echo esc_html( $item->quantity ); ?>
-                                                </td>
                                                 <td>
                                                     <?php
                                                     $item_statuses = [
@@ -355,14 +351,9 @@ class ListsPage {
                                     <strong style="color: #00a32a;"><?php echo esc_html( $stats->available_items ); ?></strong>
                                     <?php esc_html_e( 'disponibles', 'mrz-gift-lists-exp' ); ?>
                                 </li>
-                                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">
+                                <li style="padding: 8px 0;">
                                     <strong style="color: #2271b1;"><?php echo esc_html( $stats->purchased_items ); ?></strong>
                                     <?php esc_html_e( 'achetés', 'mrz-gift-lists-exp' ); ?>
-                                </li>
-                                <li style="padding: 8px 0;">
-                                    <strong><?php echo esc_html( $stats->purchased_quantity ); ?></strong> /
-                                    <strong><?php echo esc_html( $stats->total_quantity ); ?></strong>
-                                    <?php esc_html_e( 'articles achetés', 'mrz-gift-lists-exp' ); ?>
                                 </li>
                             </ul>
                         </div>

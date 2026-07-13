@@ -22,8 +22,8 @@ The plugin ships with deliberately minimal, unstyled front-end CSS (layout and f
 * Private lists, accessible only via the share link you send — no public browsing.
 * Simple copy-link sharing: a read-only link field with a one-click copy button.
 * "Add to a list" control on the product page.
-* Buyer notifications by e-mail to the list owner when an item is purchased.
-* Configurable limit of lists per user, display mode and products per page.
+* E-mail notification when an item is purchased, sent to the list owner (and, optionally, to the site admin).
+* Configurable maximum number of gift lists per user.
 * Dedicated "My gift lists" endpoint in the WooCommerce My Account area.
 * Minimal, theme-friendly front-end CSS; admin UI included.
 * Translation-ready (text-domain `mrz-gift-lists-exp`).
@@ -52,7 +52,7 @@ Development happens publicly on GitHub: https://github.com/m0r3z/mrz-gift-lists-
 
 = Do buyers need an account? =
 
-No. Anyone with the share link can buy items from a list. Creating a list requires being logged in (configurable).
+No. Anyone with the share link can buy items from a list. Creating a list requires being logged in.
 
 = Does it work with any theme? =
 

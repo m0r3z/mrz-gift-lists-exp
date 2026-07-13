@@ -35,7 +35,6 @@ Ce guide explique comment utiliser les listes de cadeaux en tant que client du s
    | Champ | Obligatoire | Description |
    |-------|-------------|-------------|
    | Titre | ✅ Oui | Le nom de votre liste (ex: "Mariage de Sophie et Marc") |
-   | Type | Non | Catégorie : Mariage, Naissance, Anniversaire, Noël, Autre |
    | Date de l'événement | Non | La date de votre événement |
    | Description | Non | Un texte pour présenter votre liste à vos invités |
    | Image | Non | Une photo pour illustrer votre liste (max 2 Mo) |
@@ -53,11 +52,10 @@ Votre liste est créée avec un **lien unique** que vous pourrez partager avec v
 ### Méthode 1 : Depuis ma liste
 
 1. Ouvrez votre liste
-2. Cliquez sur **"+ Ajouter un produit"**
-3. Tapez le nom du produit dans le champ de recherche
-4. Les produits correspondants s'affichent
-5. Cliquez sur le bouton **"+"** à côté du produit souhaité
-6. Le produit est ajouté instantanément à votre liste
+2. Cliquez sur **"+ Ajouter un produit"** : vous êtes redirigé vers la boutique
+3. Ouvrez la fiche du produit souhaité
+4. Cliquez sur **"+ Ajouter à une liste"** et sélectionnez votre liste dans le menu déroulant
+5. Le produit est ajouté à votre liste
 
 ### Méthode 2 : Depuis une page produit
 
@@ -76,17 +74,15 @@ Votre liste est créée avec un **lien unique** que vous pourrez partager avec v
 
 ## 3. Partager ma liste
 
-### Boutons de partage disponibles
+### Copier le lien de partage
 
-Votre liste dispose de boutons de partage :
+Votre liste dispose d'un champ en lecture seule contenant son lien unique, accompagné d'un bouton **"Copier le lien"**.
 
-| Bouton | Action |
-|--------|--------|
-| **f** (Facebook) | Partage sur votre mur Facebook |
-| **X** (Twitter) | Publie un tweet avec le lien |
-| **W** (WhatsApp) | Ouvre WhatsApp avec un message pré-rempli |
-| **@** (Email) | Ouvre votre messagerie avec un email pré-rempli |
-| **📋** (Copier) | Copie le lien dans votre presse-papiers |
+1. Cliquez sur le bouton **"Copier le lien"** (📋)
+2. Le lien est copié dans votre presse-papiers
+3. Collez-le où vous le souhaitez pour le transmettre à vos proches
+
+C'est le seul moyen de partage : votre liste est privée et n'est accessible qu'à partir de ce lien.
 
 ### Le lien de votre liste
 
@@ -96,9 +92,9 @@ https://www.site.com/listes-de-cadeaux/?list_key=abc123xyz
 ```
 
 Ce lien peut être :
-- Copié et envoyé par message
+- Copié et envoyé par message ou par email
 - Ajouté sur un faire-part
-- Partagé sur les réseaux sociaux
+- Transmis à qui vous souhaitez inviter
 
 ### Protection par mot de passe
 
@@ -143,14 +139,7 @@ Si vous souhaitez désactiver votre liste sans la supprimer :
 
 ### Accéder à une liste
 
-**Option 1 : Via le lien partagé**
-- Cliquez sur le lien reçu par email, SMS ou réseaux sociaux
-
-**Option 2 : Via la recherche**
-1. Allez sur la page des listes de cadeaux
-2. Cliquez sur "Rechercher une liste"
-3. Entrez le nom ou l'email de la personne
-4. Cliquez sur la liste dans les résultats
+Cliquez sur le lien de partage reçu du créateur (par message, email, SMS ou sur un faire-part). C'est le seul moyen d'accéder à une liste : les listes sont privées et n'apparaissent pas dans une recherche publique.
 
 ### Si la liste est protégée
 
@@ -203,7 +192,6 @@ Sur la liste, vous voyez tous les produits avec :
 
 Pour chaque liste, vous voyez :
 - Image et titre de la liste
-- Type (badge coloré)
 - Nombre de produits
 - Nombre de produits déjà achetés
 - 🔒 si la liste est protégée
@@ -265,11 +253,11 @@ Le produit ne sera pas marqué comme acheté sur votre liste. Demandez à vos in
 
 Non, la suppression n'est pas possible par l'utilisateur. Contactez l'administrateur du site si nécessaire.
 
-### Le produit que je veux ajouter n'apparaît pas dans la recherche
+### Le bouton "Ajouter à une liste" n'apparaît pas sur un produit
 
-- Vérifiez l'orthographe
 - Le produit doit être en vente sur le site (publié et en stock)
-- Essayez avec un terme plus court
+- Vous devez être connecté et avoir au moins une liste active
+- Rendez-vous sur la fiche du produit dans la boutique pour trouver le bouton
 
 ### Comment contacter l'administrateur ?
 
