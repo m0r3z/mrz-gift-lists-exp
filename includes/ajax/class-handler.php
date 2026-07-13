@@ -242,15 +242,15 @@ class Handler {
         $data = [];
 
         if ( isset( $_POST['title'] ) ) {
-            $data['title'] = sanitize_text_field( $_POST['title'] );
+            $data['title'] = sanitize_text_field( wp_unslash( $_POST['title'] ) );
         }
 
         if ( isset( $_POST['description'] ) ) {
-            $data['description'] = sanitize_textarea_field( $_POST['description'] );
+            $data['description'] = sanitize_textarea_field( wp_unslash( $_POST['description'] ) );
         }
 
         if ( isset( $_POST['event_date'] ) ) {
-            $data['event_date'] = sanitize_text_field( $_POST['event_date'] );
+            $data['event_date'] = sanitize_text_field( wp_unslash( $_POST['event_date'] ) );
         }
 
         if ( isset( $_POST['status'] ) ) {

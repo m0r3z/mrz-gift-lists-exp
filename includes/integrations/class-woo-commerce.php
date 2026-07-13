@@ -264,7 +264,7 @@ class WooCommerce {
      */
     public function save_checkout_fields( $order, $data ): void {
         if ( isset( $_POST['mrz_gle_gift_message'] ) && ! empty( $_POST['mrz_gle_gift_message'] ) ) {
-            $message = sanitize_textarea_field( $_POST['mrz_gle_gift_message'] );
+            $message = sanitize_textarea_field( wp_unslash( $_POST['mrz_gle_gift_message'] ) );
             $order->update_meta_data( '_mrz_gle_gift_message', $message );
         }
     }

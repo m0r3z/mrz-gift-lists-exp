@@ -197,6 +197,15 @@
     color: var(--mrz-gle-text-soft);
 }
 
+/* Aperçu de l'image actuelle dans le formulaire d'édition */
+.mrz-gle-edit-current-image {
+    margin-bottom: 0.5rem;
+}
+
+.mrz-gle-edit-current-image img {
+    border-radius: var(--mrz-gle-radius);
+}
+
 .mrz-gle-form-actions {
     display: flex;
     flex-wrap: wrap;

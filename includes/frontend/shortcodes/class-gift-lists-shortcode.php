@@ -118,7 +118,6 @@ class GiftListsShortcode {
         ?>
         <div class="mrz-gle-home">
             <div class="mrz-gle-home-header">
-                <h2><?php esc_html_e( 'Listes de cadeaux', 'mrz-gift-lists-exp' ); ?></h2>
                 <p><?php esc_html_e( 'Créez votre liste de cadeaux et partagez-la avec vos proches.', 'mrz-gift-lists-exp' ); ?></p>
             </div>
 
@@ -175,6 +174,7 @@ class GiftListsShortcode {
 
             <div class="mrz-gle-row-actions">
                 <a class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon" href="<?php echo esc_url( $list_url ); ?>" title="<?php esc_attr_e( 'Voir', 'mrz-gift-lists-exp' ); ?>"><?php echo $this->icon( 'eye', __( 'Voir', 'mrz-gift-lists-exp' ) ); ?></a>
+                <a class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon" href="<?php echo esc_url( add_query_arg( [ 'action' => 'edit', 'list_id' => $list->id ], \MrzGiftsListsExp\Plugin::instance()->get_lists_page_url() ) ); ?>" title="<?php esc_attr_e( 'Modifier', 'mrz-gift-lists-exp' ); ?>"><?php echo $this->icon( 'edit', __( 'Modifier', 'mrz-gift-lists-exp' ) ); ?></a>
                 <form method="post" class="mrz-gle-list-manage">
                     <?php wp_nonce_field( 'mrz_gle_owner_list_action_' . $list->id, 'mrz_gle_list_nonce' ); ?>
                     <input type="hidden" name="mrz_gle_list_id" value="<?php echo esc_attr( $list->id ); ?>">
@@ -290,9 +290,10 @@ class GiftListsShortcode {
                 </div>
 
                 <div class="mrz-gle-form-row">
-                    <label for="mrz_gle_event_date"><?php esc_html_e( 'Date de l\'événement', 'mrz-gift-lists-exp' ); ?></label>
-                    <input type="date" name="mrz_gle_event_date" id="mrz_gle_event_date"
+                    <label for="mrz_gle_event_date"><?php esc_html_e( 'Date de fin de l\'événement', 'mrz-gift-lists-exp' ); ?> *</label>
+                    <input type="date" name="mrz_gle_event_date" id="mrz_gle_event_date" required
                            value="<?php echo esc_attr( $_POST['mrz_gle_event_date'] ?? '' ); ?>">
+                    <p class="mrz-gle-form-help"><?php esc_html_e( 'Date limite de publication de votre liste.', 'mrz-gift-lists-exp' ); ?></p>
                 </div>
 
                 <div class="mrz-gle-form-row">
@@ -302,8 +303,8 @@ class GiftListsShortcode {
                 </div>
 
                 <div class="mrz-gle-form-row">
-                    <label for="mrz_gle_image"><?php esc_html_e( 'Image', 'mrz-gift-lists-exp' ); ?></label>
-                    <input type="file" name="mrz_gle_image" id="mrz_gle_image" accept="image/*">
+                    <label for="mrz_gle_image"><?php esc_html_e( 'Image', 'mrz-gift-lists-exp' ); ?> *</label>
+                    <input type="file" name="mrz_gle_image" id="mrz_gle_image" accept="image/*" required>
                     <p class="mrz-gle-form-help"><?php esc_html_e( 'Image d\'illustration pour votre liste (JPG, PNG, max 2 Mo)', 'mrz-gift-lists-exp' ); ?></p>
                 </div>
 
@@ -326,19 +327,25 @@ class GiftListsShortcode {
      * @return string|\WP_Error Clé d'accès ou erreur
      */
     private function process_create_form() {
-        $title = isset( $_POST['mrz_gle_title'] ) ? sanitize_text_field( $_POST['mrz_gle_title'] ) : '';
+        $title = isset( $_POST['mrz_gle_title'] ) ? sanitize_text_field( wp_unslash( $_POST['mrz_gle_title'] ) ) : '';
 
         if ( empty( $title ) ) {
             return new \WP_Error( 'empty_title', __( 'Le titre est obligatoire.', 'mrz-gift-lists-exp' ) );
         }
 
-        // Traite l'image si uploadée
-        $image_id = null;
-        if ( ! empty( $_FILES['mrz_gle_image']['name'] ) ) {
-            $image_id = $this->handle_image_upload();
-            if ( is_wp_error( $image_id ) ) {
-                return $image_id;
-            }
+        // Date de fin obligatoire (date limite de publication de la liste)
+        $event_date = isset( $_POST['mrz_gle_event_date'] ) ? sanitize_text_field( wp_unslash( $_POST['mrz_gle_event_date'] ) ) : '';
+        if ( empty( $event_date ) ) {
+            return new \WP_Error( 'empty_event_date', __( 'La date de fin de l\'événement est obligatoire.', 'mrz-gift-lists-exp' ) );
+        }
+
+        // Image obligatoire
+        if ( empty( $_FILES['mrz_gle_image']['name'] ) ) {
+            return new \WP_Error( 'empty_image', __( 'Une image est obligatoire.', 'mrz-gift-lists-exp' ) );
+        }
+        $image_id = $this->handle_image_upload();
+        if ( is_wp_error( $image_id ) ) {
+            return $image_id;
         }
 
         // Génère la clé d'accès
@@ -348,10 +355,8 @@ class GiftListsShortcode {
         $data = [
             'user_id'     => get_current_user_id(),
             'title'       => $title,
-            'description' => isset( $_POST['mrz_gle_description'] ) ? sanitize_textarea_field( $_POST['mrz_gle_description'] ) : '',
-            'event_date'  => isset( $_POST['mrz_gle_event_date'] ) && ! empty( $_POST['mrz_gle_event_date'] )
-                ? sanitize_text_field( $_POST['mrz_gle_event_date'] )
-                : null,
+            'description' => isset( $_POST['mrz_gle_description'] ) ? sanitize_textarea_field( wp_unslash( $_POST['mrz_gle_description'] ) ) : '',
+            'event_date'  => $event_date,
             'image_id'    => $image_id,
             'access_key'  => $access_key,
             'status'      => 'active',
@@ -420,19 +425,131 @@ class GiftListsShortcode {
         $list_id = isset( $_GET['list_id'] ) ? absint( $_GET['list_id'] ) : 0;
         $list = $list_id ? $this->list_repo->find( $list_id ) : null;
 
-        if ( ! $list || $list->user_id !== get_current_user_id() ) {
+        if ( ! $list || (int) $list->user_id !== get_current_user_id() ) {
             echo '<p>' . esc_html__( 'Liste non trouvée ou accès non autorisé.', 'mrz-gift-lists-exp' ) . '</p>';
             return;
         }
 
-        // Traitement identique à create mais avec update
-        // Pour la concision, on simplifie ici
+        // Traitement du formulaire
+        $errors = [];
+
+        if ( isset( $_POST['mrz_gle_edit_list'] ) && isset( $_POST['mrz_gle_edit_nonce'] ) ) {
+            if ( wp_verify_nonce( $_POST['mrz_gle_edit_nonce'], 'mrz_gle_edit_list_' . $list->id ) ) {
+                $result = $this->process_edit_form( $list );
+                if ( is_wp_error( $result ) ) {
+                    $errors = $result->get_error_messages();
+                } else {
+                    // Redirige vers la liste modifiée
+                    wp_safe_redirect( \MrzGiftsListsExp\Plugin::instance()->get_list_url( $list->access_key ) );
+                    exit;
+                }
+            } else {
+                $errors[] = __( 'Erreur de sécurité. Veuillez réessayer.', 'mrz-gift-lists-exp' );
+            }
+        }
+
+        // Valeurs pré-remplies : POST (repopulation après erreur) sinon la liste existante.
+        $val_title = isset( $_POST['mrz_gle_title'] ) ? wp_unslash( $_POST['mrz_gle_title'] ) : $list->title;
+        $val_date  = isset( $_POST['mrz_gle_event_date'] )
+            ? wp_unslash( $_POST['mrz_gle_event_date'] )
+            : ( ( $list->event_date && '0000-00-00' !== $list->event_date ) ? $list->event_date : '' );
+        $val_desc  = isset( $_POST['mrz_gle_description'] ) ? wp_unslash( $_POST['mrz_gle_description'] ) : $list->description;
         ?>
         <div class="mrz-gle-edit-form">
             <h2><?php esc_html_e( 'Modifier la liste', 'mrz-gift-lists-exp' ); ?></h2>
-            <p><?php esc_html_e( 'Formulaire de modification (à implémenter)', 'mrz-gift-lists-exp' ); ?></p>
+
+            <?php if ( ! empty( $errors ) ) : ?>
+                <div class="mrz-gle-notice mrz-gle-notice-error">
+                    <?php foreach ( $errors as $error ) : ?>
+                        <p><?php echo esc_html( $error ); ?></p>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+            <form method="post" enctype="multipart/form-data">
+                <?php wp_nonce_field( 'mrz_gle_edit_list_' . $list->id, 'mrz_gle_edit_nonce' ); ?>
+
+                <div class="mrz-gle-form-row">
+                    <label for="mrz_gle_title"><?php esc_html_e( 'Titre de la liste', 'mrz-gift-lists-exp' ); ?> *</label>
+                    <input type="text" name="mrz_gle_title" id="mrz_gle_title" required
+                           value="<?php echo esc_attr( $val_title ); ?>">
+                </div>
+
+                <div class="mrz-gle-form-row">
+                    <label for="mrz_gle_event_date"><?php esc_html_e( 'Date de fin de l\'événement', 'mrz-gift-lists-exp' ); ?> *</label>
+                    <input type="date" name="mrz_gle_event_date" id="mrz_gle_event_date" required
+                           value="<?php echo esc_attr( $val_date ); ?>">
+                    <p class="mrz-gle-form-help"><?php esc_html_e( 'Date limite de publication de votre liste.', 'mrz-gift-lists-exp' ); ?></p>
+                </div>
+
+                <div class="mrz-gle-form-row">
+                    <label for="mrz_gle_description"><?php esc_html_e( 'Description', 'mrz-gift-lists-exp' ); ?></label>
+                    <textarea name="mrz_gle_description" id="mrz_gle_description" rows="4"><?php echo esc_textarea( $val_desc ); ?></textarea>
+                </div>
+
+                <div class="mrz-gle-form-row">
+                    <label for="mrz_gle_image"><?php esc_html_e( 'Image', 'mrz-gift-lists-exp' ); ?></label>
+                    <?php if ( $list->image_id ) : ?>
+                        <div class="mrz-gle-edit-current-image"><?php echo wp_get_attachment_image( $list->image_id, 'thumbnail' ); ?></div>
+                    <?php endif; ?>
+                    <input type="file" name="mrz_gle_image" id="mrz_gle_image" accept="image/*">
+                    <p class="mrz-gle-form-help"><?php esc_html_e( 'Laissez vide pour conserver l\'image actuelle (JPG, PNG, max 2 Mo).', 'mrz-gift-lists-exp' ); ?></p>
+                </div>
+
+                <div class="mrz-gle-form-actions">
+                    <button type="submit" name="mrz_gle_edit_list" class="mrz-gle-btn mrz-gle-btn-primary">
+                        <?php esc_html_e( 'Enregistrer les modifications', 'mrz-gift-lists-exp' ); ?>
+                    </button>
+                    <a href="<?php echo esc_url( \MrzGiftsListsExp\Plugin::instance()->get_list_url( $list->access_key ) ); ?>" class="mrz-gle-btn mrz-gle-btn-outline">
+                        <?php esc_html_e( 'Annuler', 'mrz-gift-lists-exp' ); ?>
+                    </a>
+                </div>
+            </form>
         </div>
         <?php
+    }
+
+    /**
+     * Traite le formulaire de modification.
+     *
+     * @param object $list Liste à modifier (ownership déjà vérifié).
+     * @return true|\WP_Error
+     */
+    private function process_edit_form( object $list ) {
+        $title = isset( $_POST['mrz_gle_title'] ) ? sanitize_text_field( wp_unslash( $_POST['mrz_gle_title'] ) ) : '';
+
+        if ( empty( $title ) ) {
+            return new \WP_Error( 'empty_title', __( 'Le titre est obligatoire.', 'mrz-gift-lists-exp' ) );
+        }
+
+        // Date de fin obligatoire (date limite de publication de la liste)
+        $event_date = isset( $_POST['mrz_gle_event_date'] ) ? sanitize_text_field( wp_unslash( $_POST['mrz_gle_event_date'] ) ) : '';
+        if ( empty( $event_date ) ) {
+            return new \WP_Error( 'empty_event_date', __( 'La date de fin de l\'événement est obligatoire.', 'mrz-gift-lists-exp' ) );
+        }
+
+        $data = [
+            'title'       => $title,
+            'event_date'  => $event_date,
+            'description' => isset( $_POST['mrz_gle_description'] ) ? sanitize_textarea_field( wp_unslash( $_POST['mrz_gle_description'] ) ) : '',
+        ];
+
+        // Image facultative en édition : on ne la remplace que si un nouveau fichier est fourni.
+        if ( ! empty( $_FILES['mrz_gle_image']['name'] ) ) {
+            $image_id = $this->handle_image_upload();
+            if ( is_wp_error( $image_id ) ) {
+                return $image_id;
+            }
+            $data['image_id'] = $image_id;
+        }
+
+        $updated = $this->list_repo->update( $list->id, $data );
+
+        if ( false === $updated ) {
+            return new \WP_Error( 'update_failed', __( 'Erreur lors de la mise à jour de la liste.', 'mrz-gift-lists-exp' ) );
+        }
+
+        return true;
     }
 
     /**
@@ -455,8 +572,13 @@ class GiftListsShortcode {
 
         $is_owner = is_user_logged_in() && get_current_user_id() === (int) $list->user_id;
 
-        // Une liste désactivée n'est visible que par son propriétaire (ou un admin).
-        if ( 'active' !== $list->status && ! $is_owner && ! current_user_can( 'manage_options' ) ) {
+        // Liste expirée : la date de fin est dépassée (disponible toute la journée
+        // de la date de fin, expirée à partir du lendemain).
+        $is_expired = ( $list->event_date && '0000-00-00' !== $list->event_date )
+            && $list->event_date < current_time( 'Y-m-d' );
+
+        // Une liste désactivée OU expirée n'est visible que par son propriétaire (ou un admin).
+        if ( ( 'active' !== $list->status || $is_expired ) && ! $is_owner && ! current_user_can( 'manage_options' ) ) {
             echo '<p>' . esc_html__( 'Cette liste n\'est plus disponible.', 'mrz-gift-lists-exp' ) . '</p>';
             return;
         }
@@ -481,7 +603,7 @@ class GiftListsShortcode {
                 <?php endif; ?>
                 <?php $event_ts = ( $list->event_date && '0000-00-00' !== $list->event_date ) ? strtotime( $list->event_date ) : false; ?>
                 <?php if ( $event_ts ) : ?>
-                    <p class="mrz-gle-single-date">📅 <?php echo esc_html( wp_date( get_option( 'date_format' ), $event_ts ) ); ?></p>
+                    <p class="mrz-gle-single-date">📅 <?php echo esc_html( sprintf( __( 'Date de fin : %s', 'mrz-gift-lists-exp' ), wp_date( get_option( 'date_format' ), $event_ts ) ) ); ?></p>
                 <?php endif; ?>
             </div>
 
@@ -491,11 +613,19 @@ class GiftListsShortcode {
                     <div class="mrz-gle-notice">
                         <p><?php esc_html_e( 'Cette liste est désactivée : elle n\'est pas visible par les personnes qui ont le lien.', 'mrz-gift-lists-exp' ); ?></p>
                     </div>
+                <?php elseif ( $is_expired ) : ?>
+                    <div class="mrz-gle-notice mrz-gle-notice-warning">
+                        <p><?php echo esc_html( sprintf( __( 'Cette liste a expiré le %s et n\'est plus visible par vos invités.', 'mrz-gift-lists-exp' ), wp_date( get_option( 'date_format' ), strtotime( $list->event_date ) ) ) ); ?></p>
+                    </div>
                 <?php endif; ?>
 
                 <div class="mrz-gle-owner-actions">
                     <a href="<?php echo esc_url( $this->get_shop_url() ); ?>" class="mrz-gle-btn mrz-gle-btn-primary">
                         <?php echo $this->icon( 'add', '' ); ?> <?php esc_html_e( 'Ajouter un produit', 'mrz-gift-lists-exp' ); ?>
+                    </a>
+
+                    <a href="<?php echo esc_url( add_query_arg( [ 'action' => 'edit', 'list_id' => $list->id ], \MrzGiftsListsExp\Plugin::instance()->get_lists_page_url() ) ); ?>" class="mrz-gle-btn">
+                        <?php echo $this->icon( 'edit', '' ); ?> <?php esc_html_e( 'Modifier', 'mrz-gift-lists-exp' ); ?>
                     </a>
 
                     <form method="post" class="mrz-gle-list-manage">
@@ -549,6 +679,11 @@ class GiftListsShortcode {
                         <p><?php esc_html_e( 'Aucun produit dans cette liste.', 'mrz-gift-lists-exp' ); ?></p>
                         <?php if ( $is_owner ) : ?>
                             <p><?php esc_html_e( 'Commencez par ajouter des produits depuis votre boutique.', 'mrz-gift-lists-exp' ); ?></p>
+                            <p class="mrz-gle-empty-actions">
+                                <a href="<?php echo esc_url( $this->get_shop_url() ); ?>" class="mrz-gle-btn mrz-gle-btn-primary">
+                                    <?php echo $this->icon( 'add', '' ); ?> <?php esc_html_e( 'Ajouter un produit', 'mrz-gift-lists-exp' ); ?>
+                                </a>
+                            </p>
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>

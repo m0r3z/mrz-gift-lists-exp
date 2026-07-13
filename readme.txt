@@ -4,7 +4,7 @@ Tags: gift list, wishlist, woocommerce, gift registry, wedding registry
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 8.0
-Stable tag: 0.10.1
+Stable tag: 0.11.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -59,6 +59,14 @@ No. Anyone with the share link can buy items from a list. Creating a list requir
 Yes. The front-end CSS is intentionally minimal (structure only), so it inherits your theme's look. Style the `.mrz-gle-*` classes in your own CSS to match your brand.
 
 == Changelog ==
+
+= 0.11.0 =
+* New: edit an existing list (title, end date, description, image) from the list page or the "My lists" view.
+* New: lists expire automatically after their end date — they are no longer visible to guests once it has passed (the owner keeps access and sees an "expired" notice).
+* The end date and an image are now required when creating a list; the "event date" is relabelled "end date" and acts as the list's publication deadline.
+* Fix: apostrophes in list titles and descriptions are no longer stored/displayed with a stray backslash.
+* An "Add a product" button is now shown in the empty-list state.
+* Removed the "Gift lists" heading from the home view.
 
 = 0.10.1 =
 * Redesigned list page: banner header, products as a list, per-item actions (offer, view product, favourite, remove) and a notice to offer from this page.
