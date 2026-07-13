@@ -81,6 +81,35 @@
     border-color: var(--mrz-gle-btn-border);
 }
 
+/* Certains thèmes habillent agressivement les button[type="submit"] (fond
+   coloré, padding et coins arrondis propres). On rétablit intégralement le
+   style neutre du plugin en montant la spécificité (conteneur + attribut +
+   double classe = 0,4,1), sans recourir à !important. */
+.mrz-gle-container button[type="submit"].mrz-gle-btn.mrz-gle-btn {
+    padding: 0.55em 1.1em;
+    border: 1px solid var(--mrz-gle-btn-border);
+    border-radius: var(--mrz-gle-radius);
+    background: var(--mrz-gle-btn-bg);
+    color: var(--mrz-gle-btn-text);
+}
+
+.mrz-gle-container button[type="submit"].mrz-gle-btn.mrz-gle-btn:hover,
+.mrz-gle-container button[type="submit"].mrz-gle-btn.mrz-gle-btn:focus {
+    border-color: var(--mrz-gle-btn-border);
+    background: var(--mrz-gle-btn-bg-hover);
+    color: var(--mrz-gle-btn-text);
+}
+
+/* Variantes de taille : on réaffirme leur padding à la même spécificité pour
+   qu'il l'emporte aussi sur le thème (boutons « Mes listes » en icône). */
+.mrz-gle-container button[type="submit"].mrz-gle-btn-small.mrz-gle-btn-small {
+    padding: 0.35em 0.7em;
+}
+
+.mrz-gle-container button[type="submit"].mrz-gle-btn-icon.mrz-gle-btn-icon {
+    padding: 0.45em;
+}
+
 /* Seule la taille change pour les petits boutons */
 .mrz-gle-btn-small.mrz-gle-btn-small {
     padding: 0.35em 0.7em;
@@ -589,7 +618,7 @@
     align-items: stretch;
     width: 100%;
     flex-basis: 100%;
-    margin: 20px 0;
+    margin: 0 0 20px;
 }
 
 /* Le bouton bascule prend toute la largeur. */
