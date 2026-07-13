@@ -73,7 +73,6 @@ Cliquez sur le titre d'une liste ou sur "Voir détails"
 | Date de l'événement | Date prévue pour l'événement (si renseignée) |
 | Statut | Active / Archivée / Terminée |
 | Clé d'accès | Code unique pour accéder à la liste + bouton "Voir" |
-| Protection | 🔒 Protégée par mot de passe / 🔓 Accès libre |
 | Description | Texte descriptif de la liste |
 
 #### Tableau des produits
@@ -222,7 +221,6 @@ add_action( 'init', function() {
 | event_date | DATE | Date de l'événement |
 | image_id | BIGINT | ID de l'image (attachment) |
 | access_key | VARCHAR(64) | Clé d'accès unique |
-| password_hash | VARCHAR(255) | Hash du mot de passe |
 | status | VARCHAR(20) | active, archived, completed |
 | created_at | DATETIME | Date de création |
 | updated_at | DATETIME | Date de modification |

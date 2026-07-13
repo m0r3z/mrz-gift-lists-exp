@@ -142,7 +142,6 @@ Accessible via la page créée à l'activation ou en ajoutant le shortcode `[mrz
    - **Date de l'événement** : Date optionnelle
    - **Description** : Texte libre pour décrire l'événement
    - **Image** : Photo d'illustration (JPG/PNG, max 2 Mo)
-   - **Mot de passe** : Protection optionnelle de la liste
 3. Cliquer sur **"Créer la liste"**
 
 **Résultat** : Redirection vers la nouvelle liste avec une clé d'accès unique générée automatiquement.
@@ -176,12 +175,11 @@ La page de la liste affiche un champ en lecture seule contenant le lien de parta
 **Pour un visiteur souhaitant offrir un cadeau :**
 
 1. Accéder à une liste via le lien de partage reçu
-2. Si la liste est protégée, saisir le mot de passe
-3. Parcourir les produits disponibles
-4. Cliquer sur **"Offrir"** sur le produit choisi
-5. Le produit est ajouté au panier WooCommerce
-6. Procéder au paiement normalement
-7. Optionnel : Laisser un message pour le créateur au moment du checkout
+2. Parcourir les produits disponibles
+3. Cliquer sur **"Offrir"** sur le produit choisi
+4. Le produit est ajouté au panier WooCommerce
+5. Procéder au paiement normalement
+6. Optionnel : Laisser un message pour le créateur au moment du checkout
 
 **Après l'achat :**
 - Le produit est automatiquement marqué comme "Acheté"
@@ -354,6 +352,5 @@ Pour signaler un bug ou demander une fonctionnalité, créez une issue sur le d�
 - Création et gestion des listes de cadeaux
 - Intégration complète WooCommerce
 - Partage de liste par lien
-- Protection par mot de passe
 - Notifications par email
 - Interface d'administration complète

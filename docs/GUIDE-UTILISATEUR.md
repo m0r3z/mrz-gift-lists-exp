@@ -38,7 +38,6 @@ Ce guide explique comment utiliser les listes de cadeaux en tant que client du s
    | Date de l'événement | Non | La date de votre événement |
    | Description | Non | Un texte pour présenter votre liste à vos invités |
    | Image | Non | Une photo pour illustrer votre liste (max 2 Mo) |
-   | Mot de passe | Non | Pour restreindre l'accès à votre liste |
 
 4. **Cliquez sur "Créer la liste"**
 
@@ -96,13 +95,6 @@ Ce lien peut être :
 - Ajouté sur un faire-part
 - Transmis à qui vous souhaitez inviter
 
-### Protection par mot de passe
-
-Si vous avez défini un mot de passe :
-- Vos invités devront le saisir pour voir la liste
-- Communiquez-leur le mot de passe séparément
-- Seuls les détenteurs du mot de passe pourront voir les produits
-
 ---
 
 ## 4. Gérer ma liste
@@ -140,12 +132,6 @@ Si vous souhaitez désactiver votre liste sans la supprimer :
 ### Accéder à une liste
 
 Cliquez sur le lien de partage reçu du créateur (par message, email, SMS ou sur un faire-part). C'est le seul moyen d'accéder à une liste : les listes sont privées et n'apparaissent pas dans une recherche publique.
-
-### Si la liste est protégée
-
-1. Une page de mot de passe s'affiche
-2. Saisissez le mot de passe communiqué par le créateur
-3. Cliquez sur "Accéder"
 
 ### Choisir un cadeau
 
@@ -194,7 +180,6 @@ Pour chaque liste, vous voyez :
 - Image et titre de la liste
 - Nombre de produits
 - Nombre de produits déjà achetés
-- 🔒 si la liste est protégée
 
 ### Progression de ma liste
 
@@ -241,10 +226,6 @@ Non, vous ne pouvez pas modifier :
 - L'image
 (Contactez l'administrateur si nécessaire)
 
-### Comment protéger ma liste par mot de passe ?
-
-Lors de la création, remplissez le champ "Mot de passe". Communiquez ensuite ce mot de passe à vos invités par un autre canal (invitation papier, SMS...).
-
 ### Que se passe-t-il si quelqu'un achète un produit hors de la liste ?
 
 Le produit ne sera pas marqué comme acheté sur votre liste. Demandez à vos invités d'utiliser exclusivement le bouton "Offrir" de votre liste.
@@ -272,8 +253,6 @@ Utilisez le formulaire de contact du site ou l'adresse email indiquée dans les 
 | ⭐ | Produit prioritaire / favori |
 | ☆ | Marquer comme prioritaire |
 | ✕ | Supprimer le produit |
-| 🔒 | Liste protégée par mot de passe |
-| 🔓 | Liste accessible librement |
 | 📋 | Copier le lien |
 
 ---
