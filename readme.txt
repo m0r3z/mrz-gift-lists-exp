@@ -1,10 +1,10 @@
 === MRZ Gift Lists ===
-Contributors: mrzxp
+Contributors: m0r3z
 Tags: gift list, wishlist, woocommerce, gift registry, wedding registry
 Requires at least: 6.0
-Tested up to: 6.7
+Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 0.11.0
+Stable tag: 0.11.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -59,6 +59,11 @@ No. Anyone with the share link can buy items from a list. Creating a list requir
 Yes. The front-end CSS is intentionally minimal (structure only), so it inherits your theme's look. Style the `.mrz-gle-*` classes in your own CSS to match your brand.
 
 == Changelog ==
+
+= 0.11.1 =
+* WordPress.org compliance pass: wp_unslash() applied to all request data before sanitising, escaped wp_die() messages, and "Tested up to" updated.
+* The "Gift list" order column now also works on HPOS (High-Performance Order Storage), not just the classic orders screen.
+* Removed dead code: the unused email-template loader (extract()), leftover "type" repository stubs and a phantom database table, and non-functional bulk actions in the admin list table.
 
 = 0.11.0 =
 * New: edit an existing list (title, end date, description, image) from the list page or the "My lists" view.

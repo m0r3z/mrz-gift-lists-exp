@@ -17,6 +17,7 @@
 .distignore
 CLAUDE.md
 README.md
+docs
 
 # Dev-only
 node_modules

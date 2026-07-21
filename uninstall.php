@@ -19,7 +19,6 @@ global $wpdb;
 $tables = [
     $wpdb->prefix . 'mrz_gle_lists',
     $wpdb->prefix . 'mrz_gle_items',
-    $wpdb->prefix . 'mrz_gle_types',
 ];
 
 foreach ( $tables as $table ) {

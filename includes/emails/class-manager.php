@@ -65,7 +65,7 @@ class Manager {
             return;
         }
 
-        $list = $this->list_repo->find_with_type( $list_id );
+        $list = $this->list_repo->find( $list_id );
 
         if ( ! $list ) {
             return;
@@ -79,7 +79,7 @@ class Manager {
             get_bloginfo( 'name' )
         );
 
-        $message = $this->get_template( 'list-created-admin', [
+        $message = $this->get_fallback_template('list-created-admin', [
             'list'     => $list,
             'user'     => $user,
             'list_url' => $list_url,
@@ -133,7 +133,7 @@ class Manager {
             $list->title
         );
 
-        $message = $this->get_template( 'item-purchased-owner', [
+        $message = $this->get_fallback_template('item-purchased-owner', [
             'list'         => $list,
             'item'         => $item,
             'product'      => $product,
@@ -153,7 +153,7 @@ class Manager {
                 get_bloginfo( 'name' )
             );
 
-            $admin_message = $this->get_template( 'item-purchased-admin', [
+            $admin_message = $this->get_fallback_template('item-purchased-admin', [
                 'list'       => $list,
                 'item'       => $item,
                 'product'    => $product,
@@ -167,27 +167,7 @@ class Manager {
     }
 
     /**
-     * Récupère un template d'email
-     *
-     * @param string $template Nom du template
-     * @param array  $data     Données pour le template
-     * @return string
-     */
-    private function get_template( string $template, array $data ): string {
-        $template_file = MRZ_GIFTS_LISTS_EXP_PLUGIN_DIR . 'templates/emails/' . $template . '.php';
-
-        if ( ! file_exists( $template_file ) ) {
-            return $this->get_fallback_template( $template, $data );
-        }
-
-        ob_start();
-        extract( $data );
-        include $template_file;
-        return ob_get_clean();
-    }
-
-    /**
-     * Template de fallback si le fichier n'existe pas
+     * Construit le corps d'un e-mail (texte).
      *
      * @param string $template Nom du template
      * @param array  $data     Données

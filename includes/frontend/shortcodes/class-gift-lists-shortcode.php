@@ -253,7 +253,7 @@ class GiftListsShortcode {
         $success = false;
 
         if ( isset( $_POST['mrz_gle_create_list'] ) && isset( $_POST['mrz_gle_create_nonce'] ) ) {
-            if ( wp_verify_nonce( $_POST['mrz_gle_create_nonce'], 'mrz_gle_create_list' ) ) {
+            if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mrz_gle_create_nonce'] ) ), 'mrz_gle_create_list' ) ) {
                 $result = $this->process_create_form();
                 if ( is_wp_error( $result ) ) {
                     $errors = $result->get_error_messages();
@@ -285,21 +285,21 @@ class GiftListsShortcode {
                 <div class="mrz-gle-form-row">
                     <label for="mrz_gle_title"><?php esc_html_e( 'Titre de la liste', 'mrz-gift-lists-exp' ); ?> *</label>
                     <input type="text" name="mrz_gle_title" id="mrz_gle_title" required
-                           value="<?php echo esc_attr( $_POST['mrz_gle_title'] ?? '' ); ?>"
+                           value="<?php echo esc_attr( wp_unslash( $_POST['mrz_gle_title'] ?? '' ) ); ?>"
                            placeholder="<?php esc_attr_e( 'Ex: Liste de mariage de Marie et Jean', 'mrz-gift-lists-exp' ); ?>">
                 </div>
 
                 <div class="mrz-gle-form-row">
                     <label for="mrz_gle_event_date"><?php esc_html_e( 'Date de fin de l\'événement', 'mrz-gift-lists-exp' ); ?> *</label>
                     <input type="date" name="mrz_gle_event_date" id="mrz_gle_event_date" required
-                           value="<?php echo esc_attr( $_POST['mrz_gle_event_date'] ?? '' ); ?>">
+                           value="<?php echo esc_attr( wp_unslash( $_POST['mrz_gle_event_date'] ?? '' ) ); ?>">
                     <p class="mrz-gle-form-help"><?php esc_html_e( 'Date limite de publication de votre liste.', 'mrz-gift-lists-exp' ); ?></p>
                 </div>
 
                 <div class="mrz-gle-form-row">
                     <label for="mrz_gle_description"><?php esc_html_e( 'Description', 'mrz-gift-lists-exp' ); ?></label>
                     <textarea name="mrz_gle_description" id="mrz_gle_description" rows="4"
-                              placeholder="<?php esc_attr_e( 'Décrivez votre événement...', 'mrz-gift-lists-exp' ); ?>"><?php echo esc_textarea( $_POST['mrz_gle_description'] ?? '' ); ?></textarea>
+                              placeholder="<?php esc_attr_e( 'Décrivez votre événement...', 'mrz-gift-lists-exp' ); ?>"><?php echo esc_textarea( wp_unslash( $_POST['mrz_gle_description'] ?? '' ) ); ?></textarea>
                 </div>
 
                 <div class="mrz-gle-form-row">
@@ -434,7 +434,7 @@ class GiftListsShortcode {
         $errors = [];
 
         if ( isset( $_POST['mrz_gle_edit_list'] ) && isset( $_POST['mrz_gle_edit_nonce'] ) ) {
-            if ( wp_verify_nonce( $_POST['mrz_gle_edit_nonce'], 'mrz_gle_edit_list_' . $list->id ) ) {
+            if ( wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mrz_gle_edit_nonce'] ) ), 'mrz_gle_edit_list_' . $list->id ) ) {
                 $result = $this->process_edit_form( $list );
                 if ( is_wp_error( $result ) ) {
                     $errors = $result->get_error_messages();
@@ -563,7 +563,7 @@ class GiftListsShortcode {
             return;
         }
 
-        $list = $this->list_repo->find_by_access_key_with_type( $list_key );
+        $list = $this->list_repo->find_by_access_key( $list_key );
 
         if ( ! $list ) {
             echo '<p>' . esc_html__( 'Liste non trouvée.', 'mrz-gift-lists-exp' ) . '</p>';

@@ -74,40 +74,6 @@ class ListRepository extends BaseRepository {
     }
 
     /**
-     * Récupère une liste complète avec son type
-     *
-     * @param int $id ID de la liste
-     * @return object|null
-     */
-    public function find_with_type( int $id ): ?object {
-        $sql = $this->db->prepare(
-            "SELECT * FROM {$this->table} WHERE id = %d",
-            $id
-        );
-
-        $result = $this->db->get_row( $sql );
-
-        return $result ?: null;
-    }
-
-    /**
-     * Récupère une liste par clé d'accès avec son type
-     *
-     * @param string $access_key Clé d'accès
-     * @return object|null
-     */
-    public function find_by_access_key_with_type( string $access_key ): ?object {
-        $sql = $this->db->prepare(
-            "SELECT * FROM {$this->table} WHERE access_key = %s",
-            $access_key
-        );
-
-        $result = $this->db->get_row( $sql );
-
-        return $result ?: null;
-    }
-
-    /**
      * Recherche des listes
      *
      * @param string $search Terme de recherche

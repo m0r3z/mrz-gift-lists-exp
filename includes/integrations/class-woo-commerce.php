@@ -67,8 +67,12 @@ class WooCommerce {
         add_action( 'woocommerce_checkout_create_order', [ $this, 'save_checkout_fields' ], 10, 2 );
 
         // Admin - Colonne commandes
+        // Colonne « Liste cadeaux » — écran commandes classique (CPT)…
         add_filter( 'manage_edit-shop_order_columns', [ $this, 'add_order_column' ], 20 );
         add_action( 'manage_shop_order_posts_custom_column', [ $this, 'render_order_column' ], 10, 2 );
+        // …et écran commandes HPOS (custom order tables).
+        add_filter( 'manage_woocommerce_page_wc-orders_columns', [ $this, 'add_order_column' ], 20 );
+        add_action( 'woocommerce_shop_order_list_table_custom_column', [ $this, 'render_order_column' ], 10, 2 );
 
         // Admin - Détail commande
         add_action( 'woocommerce_admin_order_data_after_billing_address', [ $this, 'display_order_meta' ] );
@@ -129,7 +133,7 @@ class WooCommerce {
         // Vérifie si on ajoute depuis une liste
         if ( isset( $_POST['mrz_gle_list_id'] ) && isset( $_POST['mrz_gle_item_id'] ) ) {
             // Vérifie le nonce
-            if ( ! isset( $_POST['mrz_gle_nonce'] ) || ! wp_verify_nonce( $_POST['mrz_gle_nonce'], 'mrz_gle_add_to_cart' ) ) {
+            if ( ! isset( $_POST['mrz_gle_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mrz_gle_nonce'] ) ), 'mrz_gle_add_to_cart' ) ) {
                 return $cart_item_data;
             }
 
@@ -290,17 +294,17 @@ class WooCommerce {
     }
 
     /**
-     * Affiche le contenu de la colonne
+     * Affiche le contenu de la colonne « Liste cadeaux ».
      *
-     * @param string $column  Nom de la colonne
-     * @param int    $post_id ID du post
+     * @param string        $column          Nom de la colonne.
+     * @param int|\WC_Order  $post_id_or_order ID de commande (écran classique) ou objet commande (HPOS).
      */
-    public function render_order_column( string $column, int $post_id ): void {
+    public function render_order_column( string $column, $post_id_or_order ): void {
         if ( 'mrz_gle_list' !== $column ) {
             return;
         }
 
-        $order = wc_get_order( $post_id );
+        $order = wc_get_order( $post_id_or_order );
 
         if ( ! $order ) {
             echo '—';

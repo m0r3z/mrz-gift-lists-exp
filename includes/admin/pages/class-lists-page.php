@@ -61,13 +61,13 @@ class ListsPage {
         // Vérifie le nonce
         $nonce = isset( $_GET['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) : '';
         if ( ! wp_verify_nonce( $nonce, 'mrz_gle_list_action' ) ) {
-            wp_die( __( 'Action non autorisée.', 'mrz-gift-lists-exp' ) );
+            wp_die( esc_html__( 'Action non autorisée.', 'mrz-gift-lists-exp' ) );
         }
 
         // Défense en profondeur : handle_actions() s'exécute sur toute requête
         // admin (via le constructeur), avant le contrôle de capacité du menu.
         if ( ! current_user_can( 'mrz_gle_manage_lists' ) ) {
-            wp_die( __( 'Action non autorisée.', 'mrz-gift-lists-exp' ) );
+            wp_die( esc_html__( 'Action non autorisée.', 'mrz-gift-lists-exp' ) );
         }
 
         switch ( $action ) {
@@ -182,10 +182,10 @@ class ListsPage {
      * @param int $list_id ID de la liste
      */
     private function render_list_details( int $list_id ): void {
-        $list = $this->list_repo->find_with_type( $list_id );
+        $list = $this->list_repo->find( $list_id );
 
         if ( ! $list ) {
-            wp_die( __( 'Liste non trouvée.', 'mrz-gift-lists-exp' ) );
+            wp_die( esc_html__( 'Liste non trouvée.', 'mrz-gift-lists-exp' ) );
         }
 
         $items = $this->item_repo->find_by_list( $list_id );

@@ -106,7 +106,7 @@ class SettingsPage {
      */
     public function render(): void {
         if ( ! current_user_can( 'mrz_gle_manage_lists' ) ) {
-            wp_die( __( 'Vous n\'avez pas les droits nécessaires.', 'mrz-gift-lists-exp' ) );
+            wp_die( esc_html__( 'Vous n\'avez pas les droits nécessaires.', 'mrz-gift-lists-exp' ) );
         }
         ?>
         <div class="wrap">

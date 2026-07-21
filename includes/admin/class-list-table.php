@@ -58,7 +58,6 @@ class ListTable extends \WP_List_Table {
      */
     public function get_columns(): array {
         return [
-            'cb'         => '<input type="checkbox">',
             'title'      => __( 'Titre', 'mrz-gift-lists-exp' ),
             'owner'      => __( 'Créateur', 'mrz-gift-lists-exp' ),
             'items'      => __( 'Produits', 'mrz-gift-lists-exp' ),
@@ -95,7 +94,7 @@ class ListTable extends \WP_List_Table {
 
         // Récupère les filtres
         $status = isset( $_GET['status'] ) ? sanitize_key( $_GET['status'] ) : '';
-        $search = isset( $_GET['s'] ) ? sanitize_text_field( $_GET['s'] ) : '';
+        $search = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
         $orderby = isset( $_GET['orderby'] ) ? sanitize_key( $_GET['orderby'] ) : 'created_at';
         $order = isset( $_GET['order'] ) ? sanitize_key( $_GET['order'] ) : 'DESC';
 
@@ -177,19 +176,6 @@ class ListTable extends \WP_List_Table {
      */
     protected function column_default( $item, $column_name ): string {
         return isset( $item->$column_name ) ? esc_html( $item->$column_name ) : '';
-    }
-
-    /**
-     * Colonne checkbox
-     *
-     * @param object $item Item
-     * @return string
-     */
-    protected function column_cb( $item ): string {
-        return sprintf(
-            '<input type="checkbox" name="list_ids[]" value="%d">',
-            $item->id
-        );
     }
 
     /**
@@ -356,17 +342,5 @@ class ListTable extends \WP_List_Table {
             <?php submit_button( __( 'Filtrer', 'mrz-gift-lists-exp' ), '', 'filter_action', false ); ?>
         </div>
         <?php
-    }
-
-    /**
-     * Actions groupées
-     *
-     * @return array
-     */
-    protected function get_bulk_actions(): array {
-        return [
-            'delete'  => __( 'Supprimer', 'mrz-gift-lists-exp' ),
-            'archive' => __( 'Archiver', 'mrz-gift-lists-exp' ),
-        ];
     }
 }
