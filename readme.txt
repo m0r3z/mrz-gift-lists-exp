@@ -1,4 +1,4 @@
-=== MRZ Gift Lists ===
+=== MRZ Gift Lists Exp ===
 Contributors: m0r3z
 Tags: gift list, wishlist, woocommerce, gift registry, wedding registry
 Requires at least: 6.0
