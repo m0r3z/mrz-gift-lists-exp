@@ -2,13 +2,13 @@
 /**
  * Handler AJAX
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
-namespace MrzGiftsListsExp\Ajax;
+namespace Mrzgle\Ajax;
 
-use MrzGiftsListsExp\Repositories\ListRepository;
-use MrzGiftsListsExp\Repositories\ItemRepository;
+use Mrzgle\Repositories\ListRepository;
+use Mrzgle\Repositories\ItemRepository;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -48,25 +48,25 @@ class Handler {
     private function register_actions(): void {
         // Actions pour utilisateurs connectés
         $logged_in_actions = [
-            'mrz_gle_add_product_to_list',
-            'mrz_gle_remove_product_from_list',
-            'mrz_gle_toggle_priority',
-            'mrz_gle_update_list',
-            'mrz_gle_delete_list',
+            'mrzgle_add_product_to_list',
+            'mrzgle_remove_product_from_list',
+            'mrzgle_toggle_priority',
+            'mrzgle_update_list',
+            'mrzgle_delete_list',
         ];
 
         foreach ( $logged_in_actions as $action ) {
-            add_action( 'wp_ajax_' . $action, [ $this, str_replace( 'mrz_gle_', '', $action ) ] );
+            add_action( 'wp_ajax_' . $action, [ $this, str_replace( 'mrzgle_', '', $action ) ] );
         }
 
         // Actions pour tous (connectés + non connectés)
         $public_actions = [
-            'mrz_gle_add_to_cart',
+            'mrzgle_add_to_cart',
         ];
 
         foreach ( $public_actions as $action ) {
-            add_action( 'wp_ajax_' . $action, [ $this, str_replace( 'mrz_gle_', '', $action ) ] );
-            add_action( 'wp_ajax_nopriv_' . $action, [ $this, str_replace( 'mrz_gle_', '', $action ) ] );
+            add_action( 'wp_ajax_' . $action, [ $this, str_replace( 'mrzgle_', '', $action ) ] );
+            add_action( 'wp_ajax_nopriv_' . $action, [ $this, str_replace( 'mrzgle_', '', $action ) ] );
         }
     }
 
@@ -77,7 +77,7 @@ class Handler {
      * @param bool   $check_login  Vérifier la connexion
      * @return bool
      */
-    private function verify_request( string $nonce_action = 'mrz_gle_frontend_nonce', bool $check_login = true ): bool {
+    private function verify_request( string $nonce_action = 'mrzgle_frontend_nonce', bool $check_login = true ): bool {
         // Vérifie le nonce
         $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
         if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
@@ -291,7 +291,7 @@ class Handler {
         if ( $this->list_repo->delete( $list_id ) ) {
             wp_send_json_success( [
                 'message'  => __( 'Liste supprimée.', 'mrz-gift-lists-exp' ),
-                'redirect' => \MrzGiftsListsExp\Plugin::instance()->get_lists_page_url(),
+                'redirect' => \Mrzgle\Plugin::instance()->get_lists_page_url(),
             ] );
         } else {
             wp_send_json_error( [ 'message' => __( 'Erreur lors de la suppression.', 'mrz-gift-lists-exp' ) ] );
@@ -302,7 +302,7 @@ class Handler {
      * Ajoute un produit au panier depuis une liste
      */
     public function add_to_cart(): void {
-        $this->verify_request( 'mrz_gle_frontend_nonce', false );
+        $this->verify_request( 'mrzgle_frontend_nonce', false );
 
         $product_id = isset( $_POST['product_id'] ) ? absint( $_POST['product_id'] ) : 0;
         $list_id = isset( $_POST['list_id'] ) ? absint( $_POST['list_id'] ) : 0;
@@ -333,9 +333,9 @@ class Handler {
 
         // Ajoute au panier WooCommerce
         $cart_item_key = WC()->cart->add_to_cart( $product_id, $quantity, 0, [], [
-            'mrz_gle_list_id'    => $list_id,
-            'mrz_gle_item_id'    => $item_id,
-            'mrz_gle_list_title' => $this->list_repo->find( $list_id )->title ?? '',
+            'mrzgle_list_id'    => $list_id,
+            'mrzgle_item_id'    => $item_id,
+            'mrzgle_list_title' => $this->list_repo->find( $list_id )->title ?? '',
             'unique_key'      => md5( microtime() . rand() ),
         ] );
 

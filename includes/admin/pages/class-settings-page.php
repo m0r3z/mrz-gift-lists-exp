@@ -2,10 +2,10 @@
 /**
  * Page des réglages
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
-namespace MrzGiftsListsExp\Admin\Pages;
+namespace Mrzgle\Admin\Pages;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -20,7 +20,7 @@ class SettingsPage {
      *
      * @var string
      */
-    private string $option_group = 'mrz_gle_settings';
+    private string $option_group = 'mrzgle_settings';
 
     /**
      * Constructeur
@@ -35,68 +35,68 @@ class SettingsPage {
     public function register_settings(): void {
         // Section Général
         add_settings_section(
-            'mrz_gle_general_section',
+            'mrzgle_general_section',
             __( 'Réglages généraux', 'mrz-gift-lists-exp' ),
             [ $this, 'render_general_section' ],
             $this->option_group
         );
 
         // Page des listes
-        register_setting( $this->option_group, 'mrz_gle_page_id', 'absint' );
+        register_setting( $this->option_group, 'mrzgle_page_id', 'absint' );
         add_settings_field(
-            'mrz_gle_page_id',
+            'mrzgle_page_id',
             __( 'Page des listes', 'mrz-gift-lists-exp' ),
             [ $this, 'render_page_field' ],
             $this->option_group,
-            'mrz_gle_general_section'
+            'mrzgle_general_section'
         );
 
         // Page boutique (cible du bouton « Ajouter un produit »)
-        register_setting( $this->option_group, 'mrz_gle_shop_page_id', 'absint' );
+        register_setting( $this->option_group, 'mrzgle_shop_page_id', 'absint' );
         add_settings_field(
-            'mrz_gle_shop_page_id',
+            'mrzgle_shop_page_id',
             __( 'Page boutique', 'mrz-gift-lists-exp' ),
             [ $this, 'render_shop_page_field' ],
             $this->option_group,
-            'mrz_gle_general_section'
+            'mrzgle_general_section'
         );
 
         // Nombre max de listes par utilisateur
-        register_setting( $this->option_group, 'mrz_gle_max_lists_per_user', 'absint' );
+        register_setting( $this->option_group, 'mrzgle_max_lists_per_user', 'absint' );
         add_settings_field(
-            'mrz_gle_max_lists_per_user',
+            'mrzgle_max_lists_per_user',
             __( 'Listes max par utilisateur', 'mrz-gift-lists-exp' ),
             [ $this, 'render_max_lists_field' ],
             $this->option_group,
-            'mrz_gle_general_section'
+            'mrzgle_general_section'
         );
 
         // Section Emails
         add_settings_section(
-            'mrz_gle_email_section',
+            'mrzgle_email_section',
             __( 'Emails', 'mrz-gift-lists-exp' ),
             [ $this, 'render_email_section' ],
             $this->option_group
         );
 
         // Notification admin
-        register_setting( $this->option_group, 'mrz_gle_admin_email', 'sanitize_email' );
+        register_setting( $this->option_group, 'mrzgle_admin_email', 'sanitize_email' );
         add_settings_field(
-            'mrz_gle_admin_email',
+            'mrzgle_admin_email',
             __( 'Email administrateur', 'mrz-gift-lists-exp' ),
             [ $this, 'render_admin_email_field' ],
             $this->option_group,
-            'mrz_gle_email_section'
+            'mrzgle_email_section'
         );
 
         // Notifier le créateur
-        register_setting( $this->option_group, 'mrz_gle_notify_owner_on_purchase', 'absint' );
+        register_setting( $this->option_group, 'mrzgle_notify_owner_on_purchase', 'absint' );
         add_settings_field(
-            'mrz_gle_notify_owner_on_purchase',
+            'mrzgle_notify_owner_on_purchase',
             __( 'Notifier le créateur', 'mrz-gift-lists-exp' ),
             [ $this, 'render_notify_owner_field' ],
             $this->option_group,
-            'mrz_gle_email_section'
+            'mrzgle_email_section'
         );
 
     }
@@ -105,7 +105,7 @@ class SettingsPage {
      * Affiche la page
      */
     public function render(): void {
-        if ( ! current_user_can( 'mrz_gle_manage_lists' ) ) {
+        if ( ! current_user_can( 'mrzgle_manage_lists' ) ) {
             wp_die( esc_html__( 'Vous n\'avez pas les droits nécessaires.', 'mrz-gift-lists-exp' ) );
         }
         ?>
@@ -140,24 +140,24 @@ class SettingsPage {
     // ========================================
 
     public function render_page_field(): void {
-        $page_id = get_option( 'mrz_gle_page_id', 0 );
+        $page_id = get_option( 'mrzgle_page_id', 0 );
 
         wp_dropdown_pages( [
-            'name'              => 'mrz_gle_page_id',
+            'name'              => 'mrzgle_page_id',
             'selected'          => $page_id,
             'show_option_none'  => __( '-- Sélectionner --', 'mrz-gift-lists-exp' ),
             'option_none_value' => 0,
         ] );
 
-        echo '<p class="description">' . esc_html__( 'Page contenant le shortcode [mrz_gift_lists].', 'mrz-gift-lists-exp' ) . '</p>';
+        echo '<p class="description">' . esc_html__( 'Page contenant le shortcode [mrzgle_lists].', 'mrz-gift-lists-exp' ) . '</p>';
     }
 
     public function render_shop_page_field(): void {
         $default = function_exists( 'wc_get_page_id' ) ? (int) wc_get_page_id( 'shop' ) : 0;
-        $page_id = (int) get_option( 'mrz_gle_shop_page_id', $default > 0 ? $default : 0 );
+        $page_id = (int) get_option( 'mrzgle_shop_page_id', $default > 0 ? $default : 0 );
 
         wp_dropdown_pages( [
-            'name'              => 'mrz_gle_shop_page_id',
+            'name'              => 'mrzgle_shop_page_id',
             'selected'          => $page_id,
             'show_option_none'  => __( '-- Sélectionner --', 'mrz-gift-lists-exp' ),
             'option_none_value' => 0,
@@ -167,26 +167,26 @@ class SettingsPage {
     }
 
     public function render_max_lists_field(): void {
-        $value = get_option( 'mrz_gle_max_lists_per_user', 5 );
+        $value = get_option( 'mrzgle_max_lists_per_user', 5 );
         ?>
-        <input type="number" name="mrz_gle_max_lists_per_user" value="<?php echo esc_attr( $value ); ?>" min="1" max="50" class="small-text">
+        <input type="number" name="mrzgle_max_lists_per_user" value="<?php echo esc_attr( $value ); ?>" min="1" max="50" class="small-text">
         <p class="description"><?php esc_html_e( 'Nombre maximum de listes actives par utilisateur (0 = illimité).', 'mrz-gift-lists-exp' ); ?></p>
         <?php
     }
 
     public function render_admin_email_field(): void {
-        $value = get_option( 'mrz_gle_admin_email', get_option( 'admin_email' ) );
+        $value = get_option( 'mrzgle_admin_email', get_option( 'admin_email' ) );
         ?>
-        <input type="email" name="mrz_gle_admin_email" value="<?php echo esc_attr( $value ); ?>" class="regular-text">
+        <input type="email" name="mrzgle_admin_email" value="<?php echo esc_attr( $value ); ?>" class="regular-text">
         <p class="description"><?php esc_html_e( 'Email pour recevoir les notifications (laisser vide pour désactiver).', 'mrz-gift-lists-exp' ); ?></p>
         <?php
     }
 
     public function render_notify_owner_field(): void {
-        $value = get_option( 'mrz_gle_notify_owner_on_purchase', 1 );
+        $value = get_option( 'mrzgle_notify_owner_on_purchase', 1 );
         ?>
         <label>
-            <input type="checkbox" name="mrz_gle_notify_owner_on_purchase" value="1" <?php checked( $value, 1 ); ?>>
+            <input type="checkbox" name="mrzgle_notify_owner_on_purchase" value="1" <?php checked( $value, 1 ); ?>>
             <?php esc_html_e( 'Envoyer un email au créateur de la liste quand un produit est acheté', 'mrz-gift-lists-exp' ); ?>
         </label>
         <?php

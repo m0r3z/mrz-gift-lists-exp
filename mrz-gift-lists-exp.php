@@ -3,7 +3,7 @@
  * Plugin Name:       MRZ Gift Lists Exp
  * Plugin URI:        https://github.com/m0r3z/mrz-gift-lists-exp
  * Description:       Listes de cadeaux pour WooCommerce : vos clients créent une liste de produits, partagent le lien, et leurs proches achètent.
- * Version:           0.11.1
+ * Version:           0.11.2
  * Requires at least: 6.0
  * Requires PHP:      8.0
  * Author:            Morez.co
@@ -22,36 +22,36 @@
  * it under the terms of the GNU General Public License v3 as published by
  * the Free Software Foundation. See LICENSE for the full license text.
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
 defined( 'ABSPATH' ) || exit;
 
 // Constantes du plugin
-define( 'MRZ_GIFTS_LISTS_EXP_VERSION', '0.11.1' );
-define( 'MRZ_GIFTS_LISTS_EXP_PLUGIN_FILE', __FILE__ );
-define( 'MRZ_GIFTS_LISTS_EXP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'MRZ_GIFTS_LISTS_EXP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'MRZ_GIFTS_LISTS_EXP_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+define( 'MRZGLE_VERSION', '0.11.2' );
+define( 'MRZGLE_PLUGIN_FILE', __FILE__ );
+define( 'MRZGLE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'MRZGLE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'MRZGLE_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 // Tables de base de données
 global $wpdb;
-define( 'MRZ_GIFTS_LISTS_EXP_TABLE_LISTS', $wpdb->prefix . 'mrz_gle_lists' );
-define( 'MRZ_GIFTS_LISTS_EXP_TABLE_ITEMS', $wpdb->prefix . 'mrz_gle_items' );
+define( 'MRZGLE_TABLE_LISTS', $wpdb->prefix . 'mrzgle_lists' );
+define( 'MRZGLE_TABLE_ITEMS', $wpdb->prefix . 'mrzgle_items' );
 
 /**
  * Vérifie si WooCommerce est actif
  *
  * @return bool
  */
-function mrz_gle_is_woocommerce_active(): bool {
+function mrzgle_is_woocommerce_active(): bool {
     return class_exists( 'WooCommerce' );
 }
 
 /**
  * Affiche une notice d'erreur si WooCommerce n'est pas actif
  */
-function mrz_gle_woocommerce_missing_notice(): void {
+function mrzgle_woocommerce_missing_notice(): void {
     ?>
     <div class="notice notice-error">
         <p>
@@ -65,42 +65,42 @@ function mrz_gle_woocommerce_missing_notice(): void {
 /**
  * Initialise le plugin
  */
-function mrz_gle_init(): void {
+function mrzgle_init(): void {
     // Vérifie WooCommerce
-    if ( ! mrz_gle_is_woocommerce_active() ) {
-        add_action( 'admin_notices', 'mrz_gle_woocommerce_missing_notice' );
+    if ( ! mrzgle_is_woocommerce_active() ) {
+        add_action( 'admin_notices', 'mrzgle_woocommerce_missing_notice' );
         return;
     }
 
     // Charge les traductions
-    load_plugin_textdomain( 'mrz-gift-lists-exp', false, dirname( MRZ_GIFTS_LISTS_EXP_PLUGIN_BASENAME ) . '/languages' );
+    load_plugin_textdomain( 'mrz-gift-lists-exp', false, dirname( MRZGLE_PLUGIN_BASENAME ) . '/languages' );
 
     // Charge l'autoloader
-    require_once MRZ_GIFTS_LISTS_EXP_PLUGIN_DIR . 'includes/class-autoloader.php';
-    MrzGiftsListsExp\Autoloader::register();
+    require_once MRZGLE_PLUGIN_DIR . 'includes/class-autoloader.php';
+    Mrzgle\Autoloader::register();
 
     // Initialise le plugin
-    MrzGiftsListsExp\Plugin::instance();
+    Mrzgle\Plugin::instance();
 }
-add_action( 'plugins_loaded', 'mrz_gle_init', 20 );
+add_action( 'plugins_loaded', 'mrzgle_init', 20 );
 
 /**
  * Activation du plugin
  */
-function mrz_gle_activate(): void {
-    require_once MRZ_GIFTS_LISTS_EXP_PLUGIN_DIR . 'includes/class-activator.php';
-    MrzGiftsListsExp\Activator::activate();
+function mrzgle_activate(): void {
+    require_once MRZGLE_PLUGIN_DIR . 'includes/class-activator.php';
+    Mrzgle\Activator::activate();
 }
-register_activation_hook( __FILE__, 'mrz_gle_activate' );
+register_activation_hook( __FILE__, 'mrzgle_activate' );
 
 /**
  * Désactivation du plugin
  */
-function mrz_gle_deactivate(): void {
-    require_once MRZ_GIFTS_LISTS_EXP_PLUGIN_DIR . 'includes/class-activator.php';
-    MrzGiftsListsExp\Activator::deactivate();
+function mrzgle_deactivate(): void {
+    require_once MRZGLE_PLUGIN_DIR . 'includes/class-activator.php';
+    Mrzgle\Activator::deactivate();
 }
-register_deactivation_hook( __FILE__, 'mrz_gle_deactivate' );
+register_deactivation_hook( __FILE__, 'mrzgle_deactivate' );
 
 /**
  * Déclare la compatibilité HPOS (High-Performance Order Storage) de WooCommerce

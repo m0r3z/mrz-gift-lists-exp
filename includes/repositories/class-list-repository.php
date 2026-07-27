@@ -2,10 +2,10 @@
 /**
  * Repository des listes
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
-namespace MrzGiftsListsExp\Repositories;
+namespace Mrzgle\Repositories;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -20,7 +20,7 @@ class ListRepository extends BaseRepository {
      */
     public function __construct() {
         parent::__construct();
-        $this->table = MRZ_GIFTS_LISTS_EXP_TABLE_LISTS;
+        $this->table = MRZGLE_TABLE_LISTS;
     }
 
     /**

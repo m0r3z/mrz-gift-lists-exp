@@ -2,13 +2,13 @@
 /**
  * Gestionnaire d'emails
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
-namespace MrzGiftsListsExp\Emails;
+namespace Mrzgle\Emails;
 
-use MrzGiftsListsExp\Repositories\ListRepository;
-use MrzGiftsListsExp\Repositories\ItemRepository;
+use Mrzgle\Repositories\ListRepository;
+use Mrzgle\Repositories\ItemRepository;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -47,10 +47,10 @@ class Manager {
      */
     private function init_hooks(): void {
         // Notification quand une liste est créée
-        add_action( 'mrz_gle_list_created', [ $this, 'send_list_created_notification' ] );
+        add_action( 'mrzgle_list_created', [ $this, 'send_list_created_notification' ] );
 
         // Notification quand un produit est acheté
-        add_action( 'mrz_gle_item_purchased', [ $this, 'send_item_purchased_notification' ], 10, 4 );
+        add_action( 'mrzgle_item_purchased', [ $this, 'send_item_purchased_notification' ], 10, 4 );
     }
 
     /**
@@ -59,7 +59,7 @@ class Manager {
      * @param int $list_id ID de la liste
      */
     public function send_list_created_notification( int $list_id ): void {
-        $admin_email = get_option( 'mrz_gle_admin_email', '' );
+        $admin_email = get_option( 'mrzgle_admin_email', '' );
 
         if ( empty( $admin_email ) ) {
             return;
@@ -72,7 +72,7 @@ class Manager {
         }
 
         $user = get_user_by( 'id', $list->user_id );
-        $list_url = \MrzGiftsListsExp\Plugin::instance()->get_list_url( $list->access_key );
+        $list_url = \Mrzgle\Plugin::instance()->get_list_url( $list->access_key );
 
         $subject = sprintf(
             __( '[%s] Nouvelle liste de cadeaux créée', 'mrz-gift-lists-exp' ),
@@ -98,7 +98,7 @@ class Manager {
      */
     public function send_item_purchased_notification( int $item_id, int $list_id, int $order_id, string $buyer_name ): void {
         // Vérifie si les notifications sont activées
-        if ( ! get_option( 'mrz_gle_notify_owner_on_purchase', 1 ) ) {
+        if ( ! get_option( 'mrzgle_notify_owner_on_purchase', 1 ) ) {
             return;
         }
 
@@ -126,7 +126,7 @@ class Manager {
         $product = wc_get_product( $product_id );
 
         // Récupère le message cadeau si présent
-        $gift_message = $order->get_meta( '_mrz_gle_gift_message' );
+        $gift_message = $order->get_meta( '_mrzgle_gift_message' );
 
         $subject = sprintf(
             __( '🎁 Un cadeau a été offert depuis votre liste "%s"', 'mrz-gift-lists-exp' ),
@@ -145,7 +145,7 @@ class Manager {
         $this->send( $user->user_email, $subject, $message );
 
         // Notification admin également
-        $admin_email = get_option( 'mrz_gle_admin_email', '' );
+        $admin_email = get_option( 'mrzgle_admin_email', '' );
 
         if ( $admin_email && $admin_email !== $user->user_email ) {
             $admin_subject = sprintf(

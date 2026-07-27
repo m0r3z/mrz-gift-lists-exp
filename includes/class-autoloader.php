@@ -2,10 +2,10 @@
 /**
  * Autoloader pour le plugin MRZ Gift Lists
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
-namespace MrzGiftsListsExp;
+namespace Mrzgle;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -20,7 +20,7 @@ class Autoloader {
      *
      * @var string
      */
-    private const NAMESPACE_PREFIX = 'MrzGiftsListsExp\\';
+    private const NAMESPACE_PREFIX = 'Mrzgle\\';
 
     /**
      * Enregistre l'autoloader
@@ -59,7 +59,7 @@ class Autoloader {
      * @return string|null
      */
     private static function get_file_path( string $relative_class ): ?string {
-        $base_dir = MRZ_GIFTS_LISTS_EXP_PLUGIN_DIR . 'includes/';
+        $base_dir = MRZGLE_PLUGIN_DIR . 'includes/';
 
         // Sépare le namespace et le nom de classe
         $parts = explode( '\\', $relative_class );

@@ -2,10 +2,10 @@
 /**
  * Classe principale du plugin
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
-namespace MrzGiftsListsExp;
+namespace Mrzgle;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -126,9 +126,9 @@ final class Plugin {
      * Flush les rewrite rules si nécessaire
      */
     public function maybe_flush_rewrite_rules(): void {
-        if ( get_transient( 'mrz_gle_flush_rewrite_rules' ) ) {
+        if ( get_transient( 'mrzgle_flush_rewrite_rules' ) ) {
             flush_rewrite_rules();
-            delete_transient( 'mrz_gle_flush_rewrite_rules' );
+            delete_transient( 'mrzgle_flush_rewrite_rules' );
         }
     }
 
@@ -148,8 +148,8 @@ final class Plugin {
      */
     public function add_query_vars( array $vars ): array {
         $vars[] = 'mrz-gift-lists';
-        $vars[] = 'mrz_gle_list_key';
-        $vars[] = 'mrz_gle_list_action';
+        $vars[] = 'mrzgle_list_key';
+        $vars[] = 'mrzgle_list_action';
         return $vars;
     }
 
@@ -160,25 +160,25 @@ final class Plugin {
         // CSS
         wp_register_style(
             'mrz-gle-frontend',
-            MRZ_GIFTS_LISTS_EXP_PLUGIN_URL . 'assets/css/frontend.css',
+            MRZGLE_PLUGIN_URL . 'assets/css/frontend.css',
             [],
-            MRZ_GIFTS_LISTS_EXP_VERSION
+            MRZGLE_VERSION
         );
 
         // JS
         wp_register_script(
             'mrz-gle-frontend',
-            MRZ_GIFTS_LISTS_EXP_PLUGIN_URL . 'assets/js/frontend.js',
+            MRZGLE_PLUGIN_URL . 'assets/js/frontend.js',
             [ 'jquery', 'wp-util' ],
-            MRZ_GIFTS_LISTS_EXP_VERSION,
+            MRZGLE_VERSION,
             true
         );
 
         // Données localisées pour JS
         wp_localize_script( 'mrz-gle-frontend', 'mrzGleData', [
             'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
-            'nonce'     => wp_create_nonce( 'mrz_gle_frontend_nonce' ),
-            'iconBase'  => MRZ_GIFTS_LISTS_EXP_PLUGIN_URL . 'assets/img/',
+            'nonce'     => wp_create_nonce( 'mrzgle_frontend_nonce' ),
+            'iconBase'  => MRZGLE_PLUGIN_URL . 'assets/img/',
             'i18n'      => [
                 'confirmDelete'     => __( 'Êtes-vous sûr de vouloir supprimer cet élément ?', 'mrz-gift-lists-exp' ),
                 'adding'            => __( 'Ajout en cours...', 'mrz-gift-lists-exp' ),
@@ -199,23 +199,23 @@ final class Plugin {
         // CSS Admin
         wp_register_style(
             'mrz-gle-admin',
-            MRZ_GIFTS_LISTS_EXP_PLUGIN_URL . 'assets/css/admin.css',
+            MRZGLE_PLUGIN_URL . 'assets/css/admin.css',
             [],
-            MRZ_GIFTS_LISTS_EXP_VERSION
+            MRZGLE_VERSION
         );
 
         // JS Admin
         wp_register_script(
             'mrz-gle-admin',
-            MRZ_GIFTS_LISTS_EXP_PLUGIN_URL . 'assets/js/admin.js',
+            MRZGLE_PLUGIN_URL . 'assets/js/admin.js',
             [ 'jquery', 'wp-util' ],
-            MRZ_GIFTS_LISTS_EXP_VERSION,
+            MRZGLE_VERSION,
             true
         );
 
         wp_localize_script( 'mrz-gle-admin', 'mrzGleAdminData', [
             'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-            'nonce'   => wp_create_nonce( 'mrz_gle_admin_nonce' ),
+            'nonce'   => wp_create_nonce( 'mrzgle_admin_nonce' ),
             'i18n'    => [
                 'confirmDelete' => __( 'Êtes-vous sûr de vouloir supprimer ?', 'mrz-gift-lists-exp' ),
                 'saved'         => __( 'Enregistré', 'mrz-gift-lists-exp' ),
@@ -230,7 +230,7 @@ final class Plugin {
      * @return string
      */
     public function get_lists_page_url(): string {
-        $page_id = get_option( 'mrz_gle_page_id' );
+        $page_id = get_option( 'mrzgle_page_id' );
         return $page_id ? get_permalink( $page_id ) : home_url( '/mrz-gift-lists/' );
     }
 
@@ -241,7 +241,7 @@ final class Plugin {
      * @return string
      */
     public function get_list_url( string $access_key ): string {
-        return add_query_arg( 'mrz_gle_list_key', $access_key, $this->get_lists_page_url() );
+        return add_query_arg( 'mrzgle_list_key', $access_key, $this->get_lists_page_url() );
     }
 
     /**
@@ -250,6 +250,6 @@ final class Plugin {
      * @return bool
      */
     public function current_user_can_manage(): bool {
-        return current_user_can( 'mrz_gle_manage_lists' );
+        return current_user_can( 'mrzgle_manage_lists' );
     }
 }

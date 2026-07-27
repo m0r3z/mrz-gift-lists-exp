@@ -2,10 +2,10 @@
 /**
  * Gestion de l'activation et désactivation du plugin
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
-namespace MrzGiftsListsExp;
+namespace Mrzgle;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -27,7 +27,7 @@ class Activator {
      *
      * @var string
      */
-    private const DB_VERSION_OPTION = 'mrz_gle_db_version';
+    private const DB_VERSION_OPTION = 'mrzgle_db_version';
 
     /**
      * Activation du plugin
@@ -41,7 +41,7 @@ class Activator {
         update_option( self::DB_VERSION_OPTION, self::DB_VERSION );
 
         // Force le flush des rewrite rules
-        set_transient( 'mrz_gle_flush_rewrite_rules', true, 30 );
+        set_transient( 'mrzgle_flush_rewrite_rules', true, 30 );
     }
 
     /**
@@ -49,7 +49,7 @@ class Activator {
      */
     public static function deactivate(): void {
         // Nettoie les transients
-        delete_transient( 'mrz_gle_flush_rewrite_rules' );
+        delete_transient( 'mrzgle_flush_rewrite_rules' );
 
         // Flush des rewrite rules
         flush_rewrite_rules();
@@ -64,7 +64,7 @@ class Activator {
         $charset_collate = $wpdb->get_charset_collate();
 
         // Table des listes
-        $sql_lists = "CREATE TABLE " . MRZ_GIFTS_LISTS_EXP_TABLE_LISTS . " (
+        $sql_lists = "CREATE TABLE " . MRZGLE_TABLE_LISTS . " (
             id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
             user_id BIGINT(20) UNSIGNED NOT NULL,
             title VARCHAR(255) NOT NULL,
@@ -82,7 +82,7 @@ class Activator {
         ) $charset_collate;";
 
         // Table des produits de liste
-        $sql_items = "CREATE TABLE " . MRZ_GIFTS_LISTS_EXP_TABLE_ITEMS . " (
+        $sql_items = "CREATE TABLE " . MRZGLE_TABLE_ITEMS . " (
             id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
             list_id BIGINT(20) UNSIGNED NOT NULL,
             product_id BIGINT(20) UNSIGNED NOT NULL,
@@ -115,12 +115,12 @@ class Activator {
      */
     private static function create_pages(): void {
         // Page principale des listes
-        $page_id = get_option( 'mrz_gle_page_id' );
+        $page_id = get_option( 'mrzgle_page_id' );
 
         if ( ! $page_id || ! get_post( $page_id ) ) {
             $page_data = [
                 'post_title'   => __( 'Listes de cadeaux', 'mrz-gift-lists-exp' ),
-                'post_content' => '[mrz_gift_lists]',
+                'post_content' => '[mrzgle_lists]',
                 'post_status'  => 'publish',
                 'post_type'    => 'page',
                 'post_author'  => 1,
@@ -129,7 +129,7 @@ class Activator {
             $page_id = wp_insert_post( $page_data );
 
             if ( $page_id && ! is_wp_error( $page_id ) ) {
-                update_option( 'mrz_gle_page_id', $page_id );
+                update_option( 'mrzgle_page_id', $page_id );
             }
         }
     }
@@ -141,16 +141,16 @@ class Activator {
         $admin = get_role( 'administrator' );
 
         if ( $admin ) {
-            $admin->add_cap( 'mrz_gle_manage_lists' );
-            $admin->add_cap( 'mrz_gle_edit_lists' );
-            $admin->add_cap( 'mrz_gle_delete_lists' );
+            $admin->add_cap( 'mrzgle_manage_lists' );
+            $admin->add_cap( 'mrzgle_edit_lists' );
+            $admin->add_cap( 'mrzgle_delete_lists' );
         }
 
         $shop_manager = get_role( 'shop_manager' );
 
         if ( $shop_manager ) {
-            $shop_manager->add_cap( 'mrz_gle_manage_lists' );
-            $shop_manager->add_cap( 'mrz_gle_edit_lists' );
+            $shop_manager->add_cap( 'mrzgle_manage_lists' );
+            $shop_manager->add_cap( 'mrzgle_edit_lists' );
         }
     }
 }

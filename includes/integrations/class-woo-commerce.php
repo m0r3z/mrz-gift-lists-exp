@@ -2,13 +2,13 @@
 /**
  * Intégration WooCommerce
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
-namespace MrzGiftsListsExp\Integrations;
+namespace Mrzgle\Integrations;
 
-use MrzGiftsListsExp\Repositories\ListRepository;
-use MrzGiftsListsExp\Repositories\ItemRepository;
+use Mrzgle\Repositories\ListRepository;
+use Mrzgle\Repositories\ItemRepository;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -118,7 +118,7 @@ class WooCommerce {
      * Affiche la page Mon Compte
      */
     public function render_account_page(): void {
-        echo do_shortcode( '[mrz_gift_lists view="my-lists"]' );
+        echo do_shortcode( '[mrzgle_lists view="my-lists"]' );
     }
 
     /**
@@ -131,23 +131,23 @@ class WooCommerce {
      */
     public function add_cart_item_data( array $cart_item_data, int $product_id, int $variation_id ): array {
         // Vérifie si on ajoute depuis une liste
-        if ( isset( $_POST['mrz_gle_list_id'] ) && isset( $_POST['mrz_gle_item_id'] ) ) {
+        if ( isset( $_POST['mrzgle_list_id'] ) && isset( $_POST['mrzgle_item_id'] ) ) {
             // Vérifie le nonce
-            if ( ! isset( $_POST['mrz_gle_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mrz_gle_nonce'] ) ), 'mrz_gle_add_to_cart' ) ) {
+            if ( ! isset( $_POST['mrzgle_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mrzgle_nonce'] ) ), 'mrzgle_add_to_cart' ) ) {
                 return $cart_item_data;
             }
 
-            $list_id = absint( $_POST['mrz_gle_list_id'] );
-            $item_id = absint( $_POST['mrz_gle_item_id'] );
+            $list_id = absint( $_POST['mrzgle_list_id'] );
+            $item_id = absint( $_POST['mrzgle_item_id'] );
 
             // Vérifie que l'item existe dans la liste
             $item = $this->item_repo->find( $item_id );
             if ( $item && $item->list_id === $list_id ) {
                 $list = $this->list_repo->find( $list_id );
 
-                $cart_item_data['mrz_gle_list_id'] = $list_id;
-                $cart_item_data['mrz_gle_item_id'] = $item_id;
-                $cart_item_data['mrz_gle_list_title'] = $list ? $list->title : '';
+                $cart_item_data['mrzgle_list_id'] = $list_id;
+                $cart_item_data['mrzgle_item_id'] = $item_id;
+                $cart_item_data['mrzgle_list_title'] = $list ? $list->title : '';
 
                 // Clé unique pour permettre le même produit plusieurs fois
                 $cart_item_data['unique_key'] = md5( microtime() . rand() );
@@ -165,10 +165,10 @@ class WooCommerce {
      * @return array
      */
     public function display_cart_item_data( array $item_data, array $cart_item ): array {
-        if ( isset( $cart_item['mrz_gle_list_title'] ) ) {
+        if ( isset( $cart_item['mrzgle_list_title'] ) ) {
             $item_data[] = [
                 'key'   => __( 'Liste de cadeaux', 'mrz-gift-lists-exp' ),
-                'value' => $cart_item['mrz_gle_list_title'],
+                'value' => $cart_item['mrzgle_list_title'],
             ];
         }
 
@@ -184,10 +184,10 @@ class WooCommerce {
      * @param \WC_Order              $order         Commande
      */
     public function save_order_item_meta( $item, $cart_item_key, $values, $order ): void {
-        if ( isset( $values['mrz_gle_list_id'] ) ) {
-            $item->add_meta_data( '_mrz_gle_list_id', $values['mrz_gle_list_id'] );
-            $item->add_meta_data( '_mrz_gle_item_id', $values['mrz_gle_item_id'] );
-            $item->add_meta_data( '_mrz_gle_list_title', $values['mrz_gle_list_title'] );
+        if ( isset( $values['mrzgle_list_id'] ) ) {
+            $item->add_meta_data( '_mrzgle_list_id', $values['mrzgle_list_id'] );
+            $item->add_meta_data( '_mrzgle_item_id', $values['mrzgle_item_id'] );
+            $item->add_meta_data( '_mrzgle_list_title', $values['mrzgle_list_title'] );
         }
     }
 
@@ -207,8 +207,8 @@ class WooCommerce {
         $buyer_name = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
 
         foreach ( $order->get_items() as $item ) {
-            $list_id = $item->get_meta( '_mrz_gle_list_id' );
-            $item_id = $item->get_meta( '_mrz_gle_item_id' );
+            $list_id = $item->get_meta( '_mrzgle_list_id' );
+            $item_id = $item->get_meta( '_mrzgle_item_id' );
 
             if ( $list_id && $item_id ) {
                 $quantity = $item->get_quantity();
@@ -222,7 +222,7 @@ class WooCommerce {
                 );
 
                 // Déclenche l'action pour les notifications
-                do_action( 'mrz_gle_item_purchased', $item_id, $list_id, $order_id, $buyer_name );
+                do_action( 'mrzgle_item_purchased', $item_id, $list_id, $order_id, $buyer_name );
             }
         }
     }
@@ -237,7 +237,7 @@ class WooCommerce {
         $has_list_items = false;
 
         foreach ( WC()->cart->get_cart() as $cart_item ) {
-            if ( isset( $cart_item['mrz_gle_list_id'] ) ) {
+            if ( isset( $cart_item['mrzgle_list_id'] ) ) {
                 $has_list_items = true;
                 break;
             }
@@ -250,12 +250,12 @@ class WooCommerce {
         echo '<div class="mrz-gle-checkout-fields">';
         echo '<h3>' . esc_html__( 'Message pour le créateur de la liste', 'mrz-gift-lists-exp' ) . '</h3>';
 
-        woocommerce_form_field( 'mrz_gle_gift_message', [
+        woocommerce_form_field( 'mrzgle_gift_message', [
             'type'        => 'textarea',
             'class'       => [ 'form-row-wide' ],
             'label'       => __( 'Votre message (optionnel)', 'mrz-gift-lists-exp' ),
             'placeholder' => __( 'Laissez un petit mot pour accompagner votre cadeau...', 'mrz-gift-lists-exp' ),
-        ], $checkout->get_value( 'mrz_gle_gift_message' ) );
+        ], $checkout->get_value( 'mrzgle_gift_message' ) );
 
         echo '</div>';
     }
@@ -267,9 +267,9 @@ class WooCommerce {
      * @param array     $data  Données
      */
     public function save_checkout_fields( $order, $data ): void {
-        if ( isset( $_POST['mrz_gle_gift_message'] ) && ! empty( $_POST['mrz_gle_gift_message'] ) ) {
-            $message = sanitize_textarea_field( wp_unslash( $_POST['mrz_gle_gift_message'] ) );
-            $order->update_meta_data( '_mrz_gle_gift_message', $message );
+        if ( isset( $_POST['mrzgle_gift_message'] ) && ! empty( $_POST['mrzgle_gift_message'] ) ) {
+            $message = sanitize_textarea_field( wp_unslash( $_POST['mrzgle_gift_message'] ) );
+            $order->update_meta_data( '_mrzgle_gift_message', $message );
         }
     }
 
@@ -286,7 +286,7 @@ class WooCommerce {
             $new_columns[ $key ] = $value;
 
             if ( 'order_total' === $key ) {
-                $new_columns['mrz_gle_list'] = __( 'Liste cadeaux', 'mrz-gift-lists-exp' );
+                $new_columns['mrzgle_list'] = __( 'Liste cadeaux', 'mrz-gift-lists-exp' );
             }
         }
 
@@ -300,7 +300,7 @@ class WooCommerce {
      * @param int|\WC_Order  $post_id_or_order ID de commande (écran classique) ou objet commande (HPOS).
      */
     public function render_order_column( string $column, $post_id_or_order ): void {
-        if ( 'mrz_gle_list' !== $column ) {
+        if ( 'mrzgle_list' !== $column ) {
             return;
         }
 
@@ -314,7 +314,7 @@ class WooCommerce {
         $list_titles = [];
 
         foreach ( $order->get_items() as $item ) {
-            $list_title = $item->get_meta( '_mrz_gle_list_title' );
+            $list_title = $item->get_meta( '_mrzgle_list_title' );
             if ( $list_title && ! in_array( $list_title, $list_titles, true ) ) {
                 $list_titles[] = $list_title;
             }
@@ -335,7 +335,7 @@ class WooCommerce {
      * @param \WC_Order $order Commande
      */
     public function display_order_meta( $order ): void {
-        $message = $order->get_meta( '_mrz_gle_gift_message' );
+        $message = $order->get_meta( '_mrzgle_gift_message' );
 
         if ( ! $message ) {
             return;
@@ -376,7 +376,7 @@ class WooCommerce {
 
             <div class="mrz-gle-add-to-list-dropdown" style="display: none;">
                 <div class="mrz-gle-add-to-list-row">
-                    <select name="mrz_gle_add_to_list" class="mrz-gle-list-select" data-product-id="<?php echo esc_attr( $product->get_id() ); ?>">
+                    <select name="mrzgle_add_to_list" class="mrz-gle-list-select" data-product-id="<?php echo esc_attr( $product->get_id() ); ?>">
                         <option value=""><?php esc_html_e( 'Choisir une liste...', 'mrz-gift-lists-exp' ); ?></option>
                         <?php foreach ( $lists as $list ) : ?>
                             <option value="<?php echo esc_attr( $list->id ); ?>">
@@ -403,7 +403,7 @@ class WooCommerce {
      */
     public function display_meta_key( string $display_key, $meta, $item ): string {
         $custom_keys = [
-            '_mrz_gle_list_title' => __( 'Liste de cadeaux', 'mrz-gift-lists-exp' ),
+            '_mrzgle_list_title' => __( 'Liste de cadeaux', 'mrz-gift-lists-exp' ),
         ];
 
         if ( isset( $custom_keys[ $display_key ] ) ) {
@@ -411,7 +411,7 @@ class WooCommerce {
         }
 
         // Cache les métadonnées internes
-        if ( in_array( $display_key, [ '_mrz_gle_list_id', '_mrz_gle_item_id' ], true ) ) {
+        if ( in_array( $display_key, [ '_mrzgle_list_id', '_mrzgle_item_id' ], true ) ) {
             return '';
         }
 

@@ -2,10 +2,10 @@
 /**
  * Classe principale Admin
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
-namespace MrzGiftsListsExp\Admin;
+namespace Mrzgle\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -29,7 +29,7 @@ class Admin {
     private function init_hooks(): void {
         add_action( 'admin_menu', [ $this, 'add_admin_menu' ] );
         add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
-        add_filter( 'plugin_action_links_' . MRZ_GIFTS_LISTS_EXP_PLUGIN_BASENAME, [ $this, 'add_plugin_links' ] );
+        add_filter( 'plugin_action_links_' . MRZGLE_PLUGIN_BASENAME, [ $this, 'add_plugin_links' ] );
     }
 
     /**
@@ -48,7 +48,7 @@ class Admin {
         add_menu_page(
             __( 'MRZ Gift Lists', 'mrz-gift-lists-exp' ),
             __( 'MRZ Gift Lists', 'mrz-gift-lists-exp' ),
-            'mrz_gle_manage_lists',
+            'mrzgle_manage_lists',
             'mrz-gle-lists',
             [ $this, 'render_lists_page' ],
             $this->get_menu_icon(),
@@ -60,7 +60,7 @@ class Admin {
             'mrz-gle-lists',
             __( 'Toutes les listes', 'mrz-gift-lists-exp' ),
             __( 'Toutes les listes', 'mrz-gift-lists-exp' ),
-            'mrz_gle_manage_lists',
+            'mrzgle_manage_lists',
             'mrz-gle-lists',
             [ $this, 'render_lists_page' ]
         );
@@ -70,7 +70,7 @@ class Admin {
             'mrz-gle-lists',
             __( 'Réglages', 'mrz-gift-lists-exp' ),
             __( 'Réglages', 'mrz-gift-lists-exp' ),
-            'mrz_gle_manage_lists',
+            'mrzgle_manage_lists',
             'mrz-gle-settings',
             [ $this, 'render_settings_page' ]
         );
@@ -87,7 +87,7 @@ class Admin {
      * @return string
      */
     private function get_menu_icon(): string {
-        $file = MRZ_GIFTS_LISTS_EXP_PLUGIN_DIR . 'icon-gift-lists.svg';
+        $file = MRZGLE_PLUGIN_DIR . 'icon-gift-lists.svg';
 
         if ( ! is_readable( $file ) ) {
             return 'dashicons-gifts';
@@ -131,7 +131,7 @@ class Admin {
      */
     public function enqueue_assets( string $hook ): void {
         // Seulement sur nos pages
-        if ( strpos( $hook, 'mrz-gle-' ) === false && strpos( $hook, 'mrz_gle_' ) === false ) {
+        if ( strpos( $hook, 'mrz-gle-' ) === false && strpos( $hook, 'mrzgle_' ) === false ) {
             return;
         }
 
@@ -164,8 +164,8 @@ class Admin {
      */
     public static function add_notice( string $message, string $type = 'success' ): void {
         add_settings_error(
-            'mrz_gle_notices',
-            'mrz_gle_notice',
+            'mrzgle_notices',
+            'mrzgle_notice',
             $message,
             $type
         );
@@ -175,6 +175,6 @@ class Admin {
      * Affiche les notices
      */
     public static function display_notices(): void {
-        settings_errors( 'mrz_gle_notices' );
+        settings_errors( 'mrzgle_notices' );
     }
 }

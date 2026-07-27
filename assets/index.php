@@ -2,5 +2,5 @@
 /**
  * Silence is golden.
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */

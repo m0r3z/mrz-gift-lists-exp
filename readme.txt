@@ -4,7 +4,7 @@ Tags: gift list, wishlist, woocommerce, gift registry, wedding registry
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 0.11.1
+Stable tag: 0.11.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -45,7 +45,7 @@ Development happens publicly on GitHub: https://github.com/m0r3z/mrz-gift-lists-
 
 1. Install and activate WooCommerce.
 2. Upload the plugin to `/wp-content/plugins/mrz-gift-lists-exp` and activate it.
-3. Create a page and add the `[mrz_gift_lists]` shortcode to display and manage lists.
+3. Create a page and add the `[mrzgle_lists]` shortcode to display and manage lists.
 4. Adjust the options under the "MRZ Gift Lists" admin menu.
 
 == Frequently Asked Questions ==
@@ -59,6 +59,10 @@ No. Anyone with the share link can buy items from a list. Creating a list requir
 Yes. The front-end CSS is intentionally minimal (structure only), so it inherits your theme's look. Style the `.mrz-gle-*` classes in your own CSS to match your brand.
 
 == Changelog ==
+
+= 0.11.2 =
+* Renamed all PHP identifiers (functions, classes, namespace, constants, options, hooks, meta keys) to a consistent 4+ character prefix ("mrzgle") to meet WordPress.org naming guidelines and avoid conflicts with other plugins.
+* The shortcode is now `[mrzgle_lists]` (previously `[mrz_gift_lists]`).
 
 = 0.11.1 =
 * WordPress.org compliance pass: wp_unslash() applied to all request data before sanitising, escaped wp_die() messages, and "Tested up to" updated.

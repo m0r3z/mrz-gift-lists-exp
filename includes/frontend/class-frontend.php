@@ -2,10 +2,10 @@
 /**
  * Classe principale Frontend
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
-namespace MrzGiftsListsExp\Frontend;
+namespace Mrzgle\Frontend;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -69,13 +69,13 @@ class Frontend {
         }
 
         // Page des listes
-        $page_id = get_option( 'mrz_gle_page_id' );
+        $page_id = get_option( 'mrzgle_page_id' );
         if ( $page_id && $post->ID == $page_id ) {
             return true;
         }
 
         // Contient le shortcode
-        if ( has_shortcode( $post->post_content, 'mrz_gift_lists' ) ) {
+        if ( has_shortcode( $post->post_content, 'mrzgle_lists' ) ) {
             return true;
         }
 
@@ -87,24 +87,24 @@ class Frontend {
      * supprimer) soumises en POST depuis la fiche, puis redirige.
      */
     public function handle_owner_list_actions(): void {
-        if ( empty( $_POST['mrz_gle_list_action'] ) || ! is_user_logged_in() ) {
+        if ( empty( $_POST['mrzgle_list_action'] ) || ! is_user_logged_in() ) {
             return;
         }
 
-        $action  = sanitize_key( wp_unslash( $_POST['mrz_gle_list_action'] ) );
-        $list_id = isset( $_POST['mrz_gle_list_id'] ) ? absint( $_POST['mrz_gle_list_id'] ) : 0;
+        $action  = sanitize_key( wp_unslash( $_POST['mrzgle_list_action'] ) );
+        $list_id = isset( $_POST['mrzgle_list_id'] ) ? absint( $_POST['mrzgle_list_id'] ) : 0;
 
         if ( ! $list_id || ! in_array( $action, [ 'activate', 'deactivate', 'delete' ], true ) ) {
             return;
         }
 
         // Nonce lié à la liste concernée.
-        $nonce = isset( $_POST['mrz_gle_list_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['mrz_gle_list_nonce'] ) ) : '';
-        if ( ! wp_verify_nonce( $nonce, 'mrz_gle_owner_list_action_' . $list_id ) ) {
+        $nonce = isset( $_POST['mrzgle_list_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['mrzgle_list_nonce'] ) ) : '';
+        if ( ! wp_verify_nonce( $nonce, 'mrzgle_owner_list_action_' . $list_id ) ) {
             return;
         }
 
-        $list_repo = new \MrzGiftsListsExp\Repositories\ListRepository();
+        $list_repo = new \Mrzgle\Repositories\ListRepository();
 
         // Seul le propriétaire (ou un administrateur) peut agir.
         if ( ! $list_repo->user_owns_list( $list_id, get_current_user_id() ) && ! current_user_can( 'manage_options' ) ) {
@@ -116,12 +116,12 @@ class Frontend {
             return;
         }
 
-        $plugin     = \MrzGiftsListsExp\Plugin::instance();
+        $plugin     = \Mrzgle\Plugin::instance();
         $list_url   = $plugin->get_list_url( $list->access_key );
         $lists_page = add_query_arg( 'action', 'my-lists', $plugin->get_lists_page_url() );
 
         // Où revenir après une bascule d'état : la liste des listes ou la fiche.
-        $return = isset( $_POST['mrz_gle_return'] ) ? sanitize_key( wp_unslash( $_POST['mrz_gle_return'] ) ) : 'list';
+        $return = isset( $_POST['mrzgle_return'] ) ? sanitize_key( wp_unslash( $_POST['mrzgle_return'] ) ) : 'list';
         $back   = ( 'my-lists' === $return ) ? $lists_page : $list_url;
 
         switch ( $action ) {
@@ -136,7 +136,7 @@ class Frontend {
                 break;
 
             case 'delete':
-                $item_repo = new \MrzGiftsListsExp\Repositories\ItemRepository();
+                $item_repo = new \Mrzgle\Repositories\ItemRepository();
                 $item_repo->delete_by_list( $list_id );
                 $list_repo->delete( $list_id );
                 $redirect = $lists_page;
@@ -167,9 +167,9 @@ class Frontend {
         }
 
         // Vérifie la limite de listes
-        $max_lists = (int) get_option( 'mrz_gle_max_lists_per_user', 5 );
+        $max_lists = (int) get_option( 'mrzgle_max_lists_per_user', 5 );
         if ( $max_lists > 0 ) {
-            $list_repo = new \MrzGiftsListsExp\Repositories\ListRepository();
+            $list_repo = new \Mrzgle\Repositories\ListRepository();
             $current_count = $list_repo->count_by_user( get_current_user_id(), 'active' );
 
             if ( $current_count >= $max_lists ) {
@@ -210,9 +210,9 @@ class Frontend {
             );
         }
 
-        $max_lists = (int) get_option( 'mrz_gle_max_lists_per_user', 5 );
+        $max_lists = (int) get_option( 'mrzgle_max_lists_per_user', 5 );
         if ( $max_lists > 0 ) {
-            $list_repo = new \MrzGiftsListsExp\Repositories\ListRepository();
+            $list_repo = new \Mrzgle\Repositories\ListRepository();
             $current_count = $list_repo->count_by_user( get_current_user_id(), 'active' );
 
             if ( $current_count >= $max_lists ) {

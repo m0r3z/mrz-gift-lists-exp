@@ -2,10 +2,10 @@
 /**
  * Repository de base
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
-namespace MrzGiftsListsExp\Repositories;
+namespace Mrzgle\Repositories;
 
 defined( 'ABSPATH' ) || exit;
 

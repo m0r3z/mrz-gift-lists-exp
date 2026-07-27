@@ -2,7 +2,7 @@
 /**
  * Silence is golden.
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
 // Empêche l'accès direct aux dossiers

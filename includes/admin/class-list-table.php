@@ -2,13 +2,13 @@
 /**
  * Tableau des listes pour l'admin
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
-namespace MrzGiftsListsExp\Admin;
+namespace Mrzgle\Admin;
 
-use MrzGiftsListsExp\Repositories\ListRepository;
-use MrzGiftsListsExp\Repositories\ItemRepository;
+use Mrzgle\Repositories\ListRepository;
+use Mrzgle\Repositories\ItemRepository;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -158,7 +158,7 @@ class ListTable extends \WP_List_Table {
         $params[] = $offset;
 
         $sql = "SELECT l.*, u.display_name as owner_name, u.user_email as owner_email
-                FROM " . MRZ_GIFTS_LISTS_EXP_TABLE_LISTS . " l
+                FROM " . MRZGLE_TABLE_LISTS . " l
                 LEFT JOIN {$wpdb->users} u ON l.user_id = u.ID
                 {$where}
                 ORDER BY l.{$orderby} {$order}
@@ -197,10 +197,10 @@ class ListTable extends \WP_List_Table {
                 'action'  => 'delete',
                 'list_id' => $item->id,
             ], admin_url( 'admin.php' ) ),
-            'mrz_gle_list_action'
+            'mrzgle_list_action'
         );
 
-        $front_url = \MrzGiftsListsExp\Plugin::instance()->get_list_url( $item->access_key );
+        $front_url = \Mrzgle\Plugin::instance()->get_list_url( $item->access_key );
 
         $actions = [
             'view'   => sprintf(

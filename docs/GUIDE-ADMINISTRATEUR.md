@@ -111,7 +111,7 @@ Pour chaque produit de la liste :
 ### Section "Réglages généraux"
 
 #### Page des listes
-- **Description** : Page WordPress contenant le shortcode `[mrz_gift_lists]`
+- **Description** : Page WordPress contenant le shortcode `[mrzgle_lists]`
 - **Valeur par défaut** : Page créée automatiquement à l'activation
 - **Action** : Sélectionnez une autre page si nécessaire
 

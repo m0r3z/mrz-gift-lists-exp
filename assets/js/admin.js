@@ -1,7 +1,7 @@
 /**
  * MRZ Gift Lists - Admin JavaScript
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
 (function($) {

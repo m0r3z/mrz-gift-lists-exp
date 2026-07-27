@@ -1,7 +1,7 @@
 /**
  * MRZ Gift Lists - Frontend JavaScript
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
 (function($) {
@@ -45,7 +45,7 @@
                 url: mrzGle.ajaxUrl,
                 type: 'POST',
                 data: {
-                    action: 'mrz_gle_add_to_cart',
+                    action: 'mrzgle_add_to_cart',
                     nonce: mrzGle.nonce,
                     product_id: productId,
                     list_id: listId,
@@ -98,7 +98,7 @@
                 url: mrzGle.ajaxUrl,
                 type: 'POST',
                 data: {
-                    action: 'mrz_gle_remove_product_from_list',
+                    action: 'mrzgle_remove_product_from_list',
                     nonce: mrzGle.nonce,
                     item_id: itemId
                 },
@@ -139,7 +139,7 @@
                 url: mrzGle.ajaxUrl,
                 type: 'POST',
                 data: {
-                    action: 'mrz_gle_toggle_priority',
+                    action: 'mrzgle_toggle_priority',
                     nonce: mrzGle.nonce,
                     item_id: itemId
                 },
@@ -218,7 +218,7 @@
                 url: mrzGle.ajaxUrl,
                 type: 'POST',
                 data: {
-                    action: 'mrz_gle_add_product_to_list',
+                    action: 'mrzgle_add_product_to_list',
                     nonce: mrzGle.nonce,
                     product_id: productId,
                     list_id: listId

@@ -2,14 +2,14 @@
 /**
  * Page d'administration des listes
  *
- * @package MrzGiftsListsExp
+ * @package Mrzgle
  */
 
-namespace MrzGiftsListsExp\Admin\Pages;
+namespace Mrzgle\Admin\Pages;
 
-use MrzGiftsListsExp\Repositories\ListRepository;
-use MrzGiftsListsExp\Repositories\ItemRepository;
-use MrzGiftsListsExp\Admin\ListTable;
+use Mrzgle\Repositories\ListRepository;
+use Mrzgle\Repositories\ItemRepository;
+use Mrzgle\Admin\ListTable;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -60,13 +60,13 @@ class ListsPage {
 
         // Vérifie le nonce
         $nonce = isset( $_GET['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) : '';
-        if ( ! wp_verify_nonce( $nonce, 'mrz_gle_list_action' ) ) {
+        if ( ! wp_verify_nonce( $nonce, 'mrzgle_list_action' ) ) {
             wp_die( esc_html__( 'Action non autorisée.', 'mrz-gift-lists-exp' ) );
         }
 
         // Défense en profondeur : handle_actions() s'exécute sur toute requête
         // admin (via le constructeur), avant le contrôle de capacité du menu.
-        if ( ! current_user_can( 'mrz_gle_manage_lists' ) ) {
+        if ( ! current_user_can( 'mrzgle_manage_lists' ) ) {
             wp_die( esc_html__( 'Action non autorisée.', 'mrz-gift-lists-exp' ) );
         }
 
@@ -251,7 +251,7 @@ class ListsPage {
                                     <th><?php esc_html_e( 'Clé d\'accès', 'mrz-gift-lists-exp' ); ?></th>
                                     <td>
                                         <code><?php echo esc_html( $list->access_key ); ?></code>
-                                        <a href="<?php echo esc_url( \MrzGiftsListsExp\Plugin::instance()->get_list_url( $list->access_key ) ); ?>" target="_blank" class="button button-small">
+                                        <a href="<?php echo esc_url( \Mrzgle\Plugin::instance()->get_list_url( $list->access_key ) ); ?>" target="_blank" class="button button-small">
                                             <?php esc_html_e( 'Voir', 'mrz-gift-lists-exp' ); ?>
                                         </a>
                                     </td>
@@ -364,27 +364,27 @@ class ListsPage {
                         <h2 class="hndle"><?php esc_html_e( 'Actions', 'mrz-gift-lists-exp' ); ?></h2>
                         <div class="inside">
                             <p>
-                                <a href="<?php echo esc_url( \MrzGiftsListsExp\Plugin::instance()->get_list_url( $list->access_key ) ); ?>" class="button button-primary" target="_blank" style="width: 100%; text-align: center;">
+                                <a href="<?php echo esc_url( \Mrzgle\Plugin::instance()->get_list_url( $list->access_key ) ); ?>" class="button button-primary" target="_blank" style="width: 100%; text-align: center;">
                                     <?php esc_html_e( 'Voir la liste', 'mrz-gift-lists-exp' ); ?>
                                 </a>
                             </p>
 
                             <?php if ( 'active' === $list->status ) : ?>
                                 <p>
-                                    <a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mrz-gle-lists&action=archive&list_id=' . $list->id ), 'mrz_gle_list_action' ) ); ?>" class="button" style="width: 100%; text-align: center;">
+                                    <a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mrz-gle-lists&action=archive&list_id=' . $list->id ), 'mrzgle_list_action' ) ); ?>" class="button" style="width: 100%; text-align: center;">
                                         <?php esc_html_e( 'Archiver', 'mrz-gift-lists-exp' ); ?>
                                     </a>
                                 </p>
                             <?php else : ?>
                                 <p>
-                                    <a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mrz-gle-lists&action=activate&list_id=' . $list->id ), 'mrz_gle_list_action' ) ); ?>" class="button" style="width: 100%; text-align: center;">
+                                    <a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mrz-gle-lists&action=activate&list_id=' . $list->id ), 'mrzgle_list_action' ) ); ?>" class="button" style="width: 100%; text-align: center;">
                                         <?php esc_html_e( 'Réactiver', 'mrz-gift-lists-exp' ); ?>
                                     </a>
                                 </p>
                             <?php endif; ?>
 
                             <p>
-                                <a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mrz-gle-lists&action=delete&list_id=' . $list->id ), 'mrz_gle_list_action' ) ); ?>" class="button" style="width: 100%; text-align: center; color: #d63638;" onclick="return confirm('<?php esc_attr_e( 'Êtes-vous sûr de vouloir supprimer cette liste ?', 'mrz-gift-lists-exp' ); ?>');">
+                                <a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mrz-gle-lists&action=delete&list_id=' . $list->id ), 'mrzgle_list_action' ) ); ?>" class="button" style="width: 100%; text-align: center; color: #d63638;" onclick="return confirm('<?php esc_attr_e( 'Êtes-vous sûr de vouloir supprimer cette liste ?', 'mrz-gift-lists-exp' ); ?>');">
                                     <?php esc_html_e( 'Supprimer', 'mrz-gift-lists-exp' ); ?>
                                 </a>
                             </p>

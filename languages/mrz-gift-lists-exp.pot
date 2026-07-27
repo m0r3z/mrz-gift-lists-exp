@@ -9,7 +9,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MRZ Gift Lists 0.11.1\n"
+"Project-Id-Version: MRZ Gift Lists Exp 0.11.2\n"
 "Report-Msgid-Bugs-To: https://github.com/m0r3z/mrz-gift-lists-exp\n"
 "Last-Translator: Morez.co <hello@morez.co>\n"
 "Language-Team: Morez.co <hello@morez.co>\n"
