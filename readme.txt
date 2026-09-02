@@ -2,7 +2,7 @@
 Contributors: m0r3z
 Tags: gift list, wishlist, woocommerce, gift registry, wedding registry
 Requires at least: 6.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 8.0
 Stable tag: 0.11.3
 License: GPLv3 or later
