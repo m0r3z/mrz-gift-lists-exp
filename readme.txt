@@ -4,7 +4,7 @@ Tags: gift list, wishlist, woocommerce, gift registry, wedding registry
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.11.3
+Stable tag: 0.11.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -59,6 +59,9 @@ No. Anyone with the share link can buy items from a list. Creating a list requir
 Yes. The front-end CSS is intentionally minimal (structure only), so it inherits your theme's look. Style the `.mrz-gle-*` classes in your own CSS to match your brand.
 
 == Changelog ==
+
+= 0.11.4 =
+* Declared compatibility with WordPress 7.1.
 
 = 0.11.3 =
 * Removed the redundant load_plugin_textdomain() call — WordPress.org loads translations automatically since WordPress 4.6.
