@@ -30,6 +30,29 @@ class Admin {
         add_action( 'admin_menu', [ $this, 'add_admin_menu' ] );
         add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
         add_filter( 'plugin_action_links_' . MRZGLE_PLUGIN_BASENAME, [ $this, 'add_plugin_links' ] );
+        add_action( 'admin_notices', [ $this, 'render_missing_page_notice' ] );
+    }
+
+    /**
+     * Alerte tant qu'aucune page des listes publiée n'est choisie : tous les
+     * liens du plugin (partage, « Mes listes », redirections) en dépendent.
+     */
+    public function render_missing_page_notice(): void {
+        if ( ! current_user_can( 'mrzgle_manage_lists' ) ) {
+            return;
+        }
+
+        $page_id = (int) get_option( 'mrzgle_page_id', 0 );
+        if ( $page_id && 'publish' === get_post_status( $page_id ) ) {
+            return;
+        }
+
+        printf(
+            '<div class="notice notice-warning"><p>%s <a href="%s">%s</a></p></div>',
+            esc_html__( 'MRZ Gift Lists : aucune page des listes n\'est définie. Créez une page contenant le shortcode [mrzgle_lists], puis sélectionnez-la dans les réglages.', 'mrz-gift-lists-exp' ),
+            esc_url( admin_url( 'admin.php?page=mrz-gle-settings' ) ),
+            esc_html__( 'Ouvrir les réglages', 'mrz-gift-lists-exp' )
+        );
     }
 
     /**

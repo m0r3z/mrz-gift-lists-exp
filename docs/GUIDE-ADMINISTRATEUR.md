@@ -112,8 +112,8 @@ Pour chaque produit de la liste :
 
 #### Page des listes
 - **Description** : Page WordPress contenant le shortcode `[mrzgle_lists]`
-- **Valeur par défaut** : Page créée automatiquement à l'activation
-- **Action** : Sélectionnez une autre page si nécessaire
+- **Valeur par défaut** : Aucune. Le plugin ne crée pas de page : créez-la (le shortcode peut être placé dans n'importe quel bloc, y compris WPBakery) puis sélectionnez-la ici
+- **Important** : Obligatoire. Les liens de partage, « Mes listes » et les redirections sont construits à partir de cette page. Une alerte s'affiche dans l'administration tant qu'elle n'est pas définie
 
 #### Qui peut créer des listes
 - **Options** :

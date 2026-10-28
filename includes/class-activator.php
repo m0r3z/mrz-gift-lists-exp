@@ -34,7 +34,6 @@ class Activator {
      */
     public static function activate(): void {
         self::create_tables();
-        self::create_pages();
         self::add_capabilities();
 
         // Stocke la version de la DB
@@ -108,30 +107,6 @@ class Activator {
 
         dbDelta( $sql_lists );
         dbDelta( $sql_items );
-    }
-
-    /**
-     * Crée les pages nécessaires
-     */
-    private static function create_pages(): void {
-        // Page principale des listes
-        $page_id = get_option( 'mrzgle_page_id' );
-
-        if ( ! $page_id || ! get_post( $page_id ) ) {
-            $page_data = [
-                'post_title'   => __( 'Listes de cadeaux', 'mrz-gift-lists-exp' ),
-                'post_content' => '[mrzgle_lists]',
-                'post_status'  => 'publish',
-                'post_type'    => 'page',
-                'post_author'  => 1,
-            ];
-
-            $page_id = wp_insert_post( $page_data );
-
-            if ( $page_id && ! is_wp_error( $page_id ) ) {
-                update_option( 'mrzgle_page_id', $page_id );
-            }
-        }
     }
 
     /**
