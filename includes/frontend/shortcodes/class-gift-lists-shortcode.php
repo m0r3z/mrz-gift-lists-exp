@@ -54,6 +54,11 @@ class GiftListsShortcode {
             'view' => '',
         ], $atts, 'mrzgle_lists' );
 
+        // Garantit le chargement des assets quand le shortcode est inséré là où
+        // has_shortcode() ne le voit pas (bloc Raw HTML WPBakery, section globale...).
+        wp_enqueue_style( 'mrz-gle-frontend' );
+        wp_enqueue_script( 'mrz-gle-frontend' );
+
         // Détermine la vue à afficher
         $view = $this->get_current_view( $atts );
 
