@@ -4,7 +4,7 @@ Tags: gift list, wishlist, woocommerce, gift registry, wedding registry
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.11.5
+Stable tag: 0.12.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -59,6 +59,12 @@ No. Anyone with the share link can buy items from a list. Creating a list requir
 Yes. The front-end CSS is intentionally minimal (structure only), so it inherits your theme's look. Style the `.mrz-gle-*` classes in your own CSS to match your brand.
 
 == Changelog ==
+
+= 0.12.0 =
+* Declared WooCommerce as a required plugin (`Requires Plugins` header, WordPress 6.5+).
+* All source strings (admin, front end, emails, JavaScript and plugin description) are now in English, as expected by translate.wordpress.org. French is provided as a fr_FR translation.
+* Added translator comments to every string with placeholders.
+* The "Please select a list." JavaScript message is now translatable.
 
 = 0.11.5 =
 * Fix: styles and scripts now load wherever the [mrzgle_lists] shortcode is rendered, including inside page builder blocks.

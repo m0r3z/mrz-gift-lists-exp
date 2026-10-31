@@ -6,7 +6,7 @@
 #     wp i18n make-pot . languages/mrz-gift-lists-exp.pot --domain=mrz-gift-lists-exp
 msgid ""
 msgstr ""
-"Project-Id-Version: MRZ Gift Lists 0.11.5\n"
+"Project-Id-Version: MRZ Gift Lists 0.12.0\n"
 "Report-Msgid-Bugs-To: https://github.com/m0r3z/mrz-gift-lists-exp\n"
 "Last-Translator: Morez.co <hello@morez.co>\n"
 "Language-Team: Morez.co <hello@morez.co>\n"
