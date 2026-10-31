@@ -83,9 +83,20 @@ final class Plugin {
     }
 
     /**
+     * Déclare le dossier languages/ du plugin comme source de traductions.
+     */
+    public function load_textdomain(): void {
+        load_plugin_textdomain( 'mrz-gift-lists-exp', false, dirname( MRZGLE_PLUGIN_BASENAME ) . '/languages' );
+    }
+
+    /**
      * Initialise les hooks
      */
     private function init_hooks(): void {
+        // Traductions livrées dans languages/ (fr_FR notamment). Un pack de
+        // translate.wordpress.org, s'il existe, reste prioritaire.
+        add_action( 'init', [ $this, 'load_textdomain' ], 1 );
+
         // Flush rewrite rules après activation
         add_action( 'init', [ $this, 'maybe_flush_rewrite_rules' ], 99 );
 

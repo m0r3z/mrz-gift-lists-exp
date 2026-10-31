@@ -4,7 +4,6 @@
 *.swo
 node_modules/
 /vendor/
-languages/*.mo
 .idea/
 .vscode/
 CLAUDE.md

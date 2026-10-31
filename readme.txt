@@ -63,6 +63,7 @@ Yes. The front-end CSS is intentionally minimal (structure only), so it inherits
 = 0.12.0 =
 * Declared WooCommerce as a required plugin (`Requires Plugins` header, WordPress 6.5+).
 * All source strings (admin, front end, emails, JavaScript and plugin description) are now in English, as expected by translate.wordpress.org. French is provided as a fr_FR translation.
+* The French (fr_FR) translation now ships with the plugin and is loaded from its `languages/` folder, so French sites stay in French. A translate.wordpress.org language pack, when available, takes precedence.
 * Added translator comments to every string with placeholders.
 * The "Please select a list." JavaScript message is now translatable.
 
