@@ -6,6 +6,7 @@
  * Version:           0.11.5
  * Requires at least: 6.0
  * Requires PHP:      8.0
+ * Requires Plugins:  woocommerce
  * Author:            Morez.co
  * Author URI:        https://morez.co
  * License:           GPLv3 or later
