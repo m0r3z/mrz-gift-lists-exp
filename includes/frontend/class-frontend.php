@@ -205,7 +205,8 @@ class Frontend {
     public static function get_cannot_create_message(): string {
         if ( ! is_user_logged_in() ) {
             return sprintf(
-                __( 'Vous devez <a href="%s">vous connecter</a> pour créer une liste.', 'mrz-gift-lists-exp' ),
+                /* translators: %s: Login URL. */
+                __( 'You must <a href="%s">log in</a> to create a list.', 'mrz-gift-lists-exp' ),
                 esc_url( self::get_account_url() )
             );
         }
@@ -217,12 +218,13 @@ class Frontend {
 
             if ( $current_count >= $max_lists ) {
                 return sprintf(
-                    __( 'Vous avez atteint le nombre maximum de listes actives (%d).', 'mrz-gift-lists-exp' ),
+                    /* translators: %d: Maximum number of active lists per user. */
+                    __( 'You have reached the maximum number of active lists (%d).', 'mrz-gift-lists-exp' ),
                     $max_lists
                 );
             }
         }
 
-        return __( 'Vous n\'avez pas les droits pour créer une liste.', 'mrz-gift-lists-exp' );
+        return __( 'You are not allowed to create a list.', 'mrz-gift-lists-exp' );
     }
 }

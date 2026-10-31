@@ -206,7 +206,7 @@
             var productId = $select.data('product-id');
 
             if (!listId) {
-                alert('Veuillez sélectionner une liste.');
+                alert(mrzGle.i18n.selectList);
                 return;
             }
 

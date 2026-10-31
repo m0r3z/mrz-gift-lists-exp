@@ -107,7 +107,7 @@ class WooCommerce {
             $new_items[ $key ] = $value;
 
             if ( 'orders' === $key ) {
-                $new_items['mrz-gift-lists'] = __( 'Mes listes de cadeaux', 'mrz-gift-lists-exp' );
+                $new_items['mrz-gift-lists'] = __( 'My gift lists', 'mrz-gift-lists-exp' );
             }
         }
 
@@ -167,7 +167,7 @@ class WooCommerce {
     public function display_cart_item_data( array $item_data, array $cart_item ): array {
         if ( isset( $cart_item['mrzgle_list_title'] ) ) {
             $item_data[] = [
-                'key'   => __( 'Liste de cadeaux', 'mrz-gift-lists-exp' ),
+                'key'   => __( 'Gift list', 'mrz-gift-lists-exp' ),
                 'value' => $cart_item['mrzgle_list_title'],
             ];
         }
@@ -248,13 +248,13 @@ class WooCommerce {
         }
 
         echo '<div class="mrz-gle-checkout-fields">';
-        echo '<h3>' . esc_html__( 'Message pour le créateur de la liste', 'mrz-gift-lists-exp' ) . '</h3>';
+        echo '<h3>' . esc_html__( 'Message for the list creator', 'mrz-gift-lists-exp' ) . '</h3>';
 
         woocommerce_form_field( 'mrzgle_gift_message', [
             'type'        => 'textarea',
             'class'       => [ 'form-row-wide' ],
-            'label'       => __( 'Votre message (optionnel)', 'mrz-gift-lists-exp' ),
-            'placeholder' => __( 'Laissez un petit mot pour accompagner votre cadeau...', 'mrz-gift-lists-exp' ),
+            'label'       => __( 'Your message (optional)', 'mrz-gift-lists-exp' ),
+            'placeholder' => __( 'Leave a short note to go with your gift...', 'mrz-gift-lists-exp' ),
         ], $checkout->get_value( 'mrzgle_gift_message' ) );
 
         echo '</div>';
@@ -286,7 +286,7 @@ class WooCommerce {
             $new_columns[ $key ] = $value;
 
             if ( 'order_total' === $key ) {
-                $new_columns['mrzgle_list'] = __( 'Liste cadeaux', 'mrz-gift-lists-exp' );
+                $new_columns['mrzgle_list'] = _x( 'Gift list', 'Admin orders list column', 'mrz-gift-lists-exp' );
             }
         }
 
@@ -342,7 +342,7 @@ class WooCommerce {
         }
         ?>
         <div class="mrz-gle-order-meta">
-            <h4><?php esc_html_e( 'Message cadeau', 'mrz-gift-lists-exp' ); ?></h4>
+            <h4><?php esc_html_e( 'Gift message', 'mrz-gift-lists-exp' ); ?></h4>
             <p><?php echo wp_kses_post( nl2br( $message ) ); ?></p>
         </div>
         <?php
@@ -371,13 +371,13 @@ class WooCommerce {
         ?>
         <div class="mrz-gle-add-to-list-wrapper">
             <button type="button" class="button mrz-gle-add-to-list-toggle">
-                <?php esc_html_e( '+ Ajouter à une liste', 'mrz-gift-lists-exp' ); ?>
+                <?php esc_html_e( '+ Add to a list', 'mrz-gift-lists-exp' ); ?>
             </button>
 
             <div class="mrz-gle-add-to-list-dropdown" style="display: none;">
                 <div class="mrz-gle-add-to-list-row">
                     <select name="mrzgle_add_to_list" class="mrz-gle-list-select" data-product-id="<?php echo esc_attr( $product->get_id() ); ?>">
-                        <option value=""><?php esc_html_e( 'Choisir une liste...', 'mrz-gift-lists-exp' ); ?></option>
+                        <option value=""><?php esc_html_e( 'Choose a list...', 'mrz-gift-lists-exp' ); ?></option>
                         <?php foreach ( $lists as $list ) : ?>
                             <option value="<?php echo esc_attr( $list->id ); ?>">
                                 <?php echo esc_html( $list->title ); ?>
@@ -385,7 +385,7 @@ class WooCommerce {
                         <?php endforeach; ?>
                     </select>
                     <button type="button" class="button mrz-gle-confirm-add-to-list">
-                        <?php esc_html_e( 'Ajouter', 'mrz-gift-lists-exp' ); ?>
+                        <?php esc_html_e( 'Add', 'mrz-gift-lists-exp' ); ?>
                     </button>
                 </div>
             </div>
@@ -403,7 +403,7 @@ class WooCommerce {
      */
     public function display_meta_key( string $display_key, $meta, $item ): string {
         $custom_keys = [
-            '_mrzgle_list_title' => __( 'Liste de cadeaux', 'mrz-gift-lists-exp' ),
+            '_mrzgle_list_title' => __( 'Gift list', 'mrz-gift-lists-exp' ),
         ];
 
         if ( isset( $custom_keys[ $display_key ] ) ) {

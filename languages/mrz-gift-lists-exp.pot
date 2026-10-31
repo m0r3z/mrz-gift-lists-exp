@@ -1,21 +1,876 @@
 # Copyright (C) 2026 Morez.co
 # This file is distributed under the GPLv3 or later.
-#
 # Modèle de traduction pour MRZ Gift Lists.
 # Pour (re)générer ce fichier avec toutes les chaînes du plugin, exécuter
 # depuis la racine du plugin (WP-CLI requis, disponible dans le shell Local) :
-#
 #     wp i18n make-pot . languages/mrz-gift-lists-exp.pot --domain=mrz-gift-lists-exp
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: MRZ Gift Lists Exp 0.11.5\n"
+"Project-Id-Version: MRZ Gift Lists 0.11.5\n"
 "Report-Msgid-Bugs-To: https://github.com/m0r3z/mrz-gift-lists-exp\n"
 "Last-Translator: Morez.co <hello@morez.co>\n"
 "Language-Team: Morez.co <hello@morez.co>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-10-31T16:37:09+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Language: fr_FR\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mrz-gift-lists-exp\n"
+
+#. Plugin Name of the plugin
+#: mrz-gift-lists-exp.php
+msgid "MRZ Gift Lists Exp"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: mrz-gift-lists-exp.php
+msgid "https://github.com/m0r3z/mrz-gift-lists-exp"
+msgstr ""
+
+#. Description of the plugin
+#: mrz-gift-lists-exp.php
+msgid "Gift lists for WooCommerce: your customers build a list of products to receive, share the link, and their friends and family buy them."
+msgstr ""
+
+#. Author of the plugin
+#: mrz-gift-lists-exp.php
+msgid "Morez.co"
+msgstr ""
+
+#. Author URI of the plugin
+#: mrz-gift-lists-exp.php
+msgid "https://morez.co"
+msgstr ""
+
+#: includes/admin/class-admin.php:52
+msgid "MRZ Gift Lists: no lists page is set. Create a page containing the [mrzgle_lists] shortcode, then select it in the settings."
+msgstr ""
+
+#: includes/admin/class-admin.php:54
+msgid "Open settings"
+msgstr ""
+
+#: includes/admin/class-admin.php:72
+#: includes/admin/class-admin.php:73
+#: mrz-gift-lists-exp.php:59
+msgid "MRZ Gift Lists"
+msgstr ""
+
+#: includes/admin/class-admin.php:84
+#: includes/admin/class-admin.php:85
+msgid "All lists"
+msgstr ""
+
+#: includes/admin/class-admin.php:94
+#: includes/admin/class-admin.php:95
+#: includes/admin/class-admin.php:176
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/class-list-table.php:61
+msgid "Title"
+msgstr ""
+
+#: includes/admin/class-list-table.php:62
+#: includes/admin/pages/class-lists-page.php:214
+msgid "Creator"
+msgstr ""
+
+#: includes/admin/class-list-table.php:63
+#: includes/admin/pages/class-lists-page.php:272
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:663
+msgid "Products"
+msgstr ""
+
+#: includes/admin/class-list-table.php:64
+#: includes/admin/pages/class-lists-page.php:238
+#: includes/admin/pages/class-lists-page.php:285
+msgid "Status"
+msgstr ""
+
+#: includes/admin/class-list-table.php:65
+msgid "Date"
+msgstr ""
+
+#: includes/admin/class-list-table.php:209
+msgid "View details"
+msgstr ""
+
+#: includes/admin/class-list-table.php:214
+msgid "View on site"
+msgstr ""
+
+#: includes/admin/class-list-table.php:219
+#: includes/admin/pages/class-lists-page.php:387
+msgid "Are you sure you want to delete this list?"
+msgstr ""
+
+#: includes/admin/class-list-table.php:220
+#: includes/admin/pages/class-lists-page.php:388
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:192
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:193
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:647
+msgid "Delete"
+msgstr ""
+
+#: includes/admin/class-list-table.php:240
+#: includes/admin/pages/class-lists-page.php:222
+msgid "Deleted user"
+msgstr ""
+
+#: includes/admin/class-list-table.php:274
+#: includes/admin/pages/class-lists-page.php:356
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:172
+msgid "purchased"
+msgstr ""
+
+#: includes/admin/class-list-table.php:286
+#: includes/admin/class-list-table.php:338
+#: includes/admin/pages/class-lists-page.php:242
+msgid "Active"
+msgstr ""
+
+#: includes/admin/class-list-table.php:287
+#: includes/admin/class-list-table.php:339
+#: includes/admin/pages/class-lists-page.php:243
+msgid "Archived"
+msgstr ""
+
+#: includes/admin/class-list-table.php:288
+#: includes/admin/class-list-table.php:340
+#: includes/admin/pages/class-lists-page.php:244
+msgid "Completed"
+msgstr ""
+
+#: includes/admin/class-list-table.php:320
+msgid "No lists found."
+msgstr ""
+
+#: includes/admin/class-list-table.php:337
+msgid "All statuses"
+msgstr ""
+
+#: includes/admin/class-list-table.php:342
+msgid "Filter"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:64
+#: includes/admin/pages/class-lists-page.php:70
+msgid "Action not allowed."
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:164
+msgid "Gift lists"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:171
+msgid "Search"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:188
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:568
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:575
+msgid "List not found."
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:198
+msgid "Back"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:210
+msgid "Details"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:227
+msgid "Date created"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:233
+msgid "Event date"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:251
+msgid "Access key"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:255
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:181
+msgid "View"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:261
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:306
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:492
+msgid "Description"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:277
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:685
+msgid "No products in this list."
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:283
+#: includes/emails/class-manager.php:209
+#: includes/emails/class-manager.php:242
+msgid "Product"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:284
+msgid "Price"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:286
+msgid "Purchased by"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:297
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:719
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:753
+msgid "Favorite"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:311
+msgid "Available"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:312
+msgid "Reserved"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:313
+msgid "Purchased"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:343
+msgid "Statistics"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:348
+msgid "products in total"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:352
+msgid "available"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:364
+msgid "Actions"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:368
+msgid "View list"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:375
+msgid "Archive"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:381
+msgid "Reactivate"
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:408
+msgid "List deleted successfully."
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:409
+msgid "List archived successfully."
+msgstr ""
+
+#: includes/admin/pages/class-lists-page.php:410
+msgid "List reactivated successfully."
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:39
+msgid "General settings"
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:48
+msgid "Lists page"
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:58
+msgid "Shop page"
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:68
+msgid "Max lists per user"
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:77
+msgid "Emails"
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:86
+msgid "Admin email"
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:96
+msgid "Notify the list creator"
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:109
+msgid "You do not have sufficient permissions."
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:113
+msgid "MRZ Gift Lists settings"
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:131
+msgid "Configure the general plugin options."
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:135
+msgid "Configure email notifications."
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:148
+#: includes/admin/pages/class-settings-page.php:162
+msgid "-- Select --"
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:152
+msgid "Page containing the [mrzgle_lists] shortcode."
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:166
+msgid "Page that a list’s “Add product” button links to. Defaults to the WooCommerce shop page."
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:173
+msgid "Maximum number of active lists per user (0 = unlimited)."
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:181
+msgid "Email address that receives notifications (leave empty to disable)."
+msgstr ""
+
+#: includes/admin/pages/class-settings-page.php:190
+msgid "Send an email to the list creator when a product is purchased"
+msgstr ""
+
+#: includes/ajax/class-handler.php:85
+msgid "Security check failed. Please refresh the page."
+msgstr ""
+
+#: includes/ajax/class-handler.php:93
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:427
+msgid "You must be logged in."
+msgstr ""
+
+#: includes/ajax/class-handler.php:110
+msgid "You are not allowed to edit this list."
+msgstr ""
+
+#: includes/ajax/class-handler.php:129
+#: includes/ajax/class-handler.php:172
+#: includes/ajax/class-handler.php:203
+#: includes/ajax/class-handler.php:235
+#: includes/ajax/class-handler.php:280
+#: includes/ajax/class-handler.php:313
+msgid "Missing data."
+msgstr ""
+
+#: includes/ajax/class-handler.php:139
+#: includes/ajax/class-handler.php:179
+#: includes/ajax/class-handler.php:209
+msgid "Product not found."
+msgstr ""
+
+#: includes/ajax/class-handler.php:148
+msgid "This product is already in the list."
+msgstr ""
+
+#: includes/ajax/class-handler.php:152
+msgid "Product added to the list."
+msgstr ""
+
+#: includes/ajax/class-handler.php:188
+msgid "Product removed from the list."
+msgstr ""
+
+#: includes/ajax/class-handler.php:190
+#: includes/ajax/class-handler.php:297
+msgid "Error while deleting."
+msgstr ""
+
+#: includes/ajax/class-handler.php:220
+msgid "Marked as priority."
+msgstr ""
+
+#: includes/ajax/class-handler.php:221
+msgid "Priority removed."
+msgstr ""
+
+#: includes/ajax/class-handler.php:261
+msgid "Nothing to update."
+msgstr ""
+
+#: includes/ajax/class-handler.php:265
+msgid "List updated."
+msgstr ""
+
+#: includes/ajax/class-handler.php:267
+msgid "Error while updating."
+msgstr ""
+
+#: includes/ajax/class-handler.php:293
+msgid "List deleted."
+msgstr ""
+
+#: includes/ajax/class-handler.php:320
+msgid "Product not found in the list."
+msgstr ""
+
+#: includes/ajax/class-handler.php:328
+msgid "This product has already been gifted."
+msgstr ""
+
+#: includes/ajax/class-handler.php:344
+msgid "Product added to the cart."
+msgstr ""
+
+#: includes/ajax/class-handler.php:349
+msgid "Error while adding to the cart."
+msgstr ""
+
+#: includes/class-plugin.php:183
+msgid "Are you sure you want to delete this item?"
+msgstr ""
+
+#: includes/class-plugin.php:184
+msgid "Adding..."
+msgstr ""
+
+#: includes/class-plugin.php:185
+msgid "Added!"
+msgstr ""
+
+#: includes/class-plugin.php:186
+msgid "An error occurred"
+msgstr ""
+
+#: includes/class-plugin.php:187
+msgid "Product added to the list"
+msgstr ""
+
+#: includes/class-plugin.php:188
+msgid "Product removed from the list"
+msgstr ""
+
+#: includes/class-plugin.php:189
+msgid "Product added to the cart"
+msgstr ""
+
+#: includes/class-plugin.php:190
+msgid "Link copied!"
+msgstr ""
+
+#: includes/class-plugin.php:191
+msgid "Please select a list."
+msgstr ""
+
+#: includes/class-plugin.php:221
+msgid "Are you sure you want to delete this?"
+msgstr ""
+
+#: includes/class-plugin.php:222
+msgid "Saved"
+msgstr ""
+
+#: includes/class-plugin.php:223
+msgid "Error"
+msgstr ""
+
+#. translators: %s: Site name.
+#: includes/emails/class-manager.php:79
+#, php-format
+msgid "[%s] New gift list created"
+msgstr ""
+
+#. translators: %s: Gift list title.
+#: includes/emails/class-manager.php:134
+#, php-format
+msgid "🎁 A gift has been purchased from your list \"%s\""
+msgstr ""
+
+#. translators: %s: Site name.
+#: includes/emails/class-manager.php:155
+#, php-format
+msgid "[%s] Purchase from a gift list"
+msgstr ""
+
+#. translators: 1: Site name, 2: Gift list title, 3: Creator display name, 4: Creator email address, 5: Gift list URL, 6: Site name.
+#: includes/emails/class-manager.php:190
+#, php-format
+msgid ""
+"Hello,\n"
+"\n"
+"A new gift list has been created on %s.\n"
+"\n"
+"Title: %s\n"
+"Creator: %s (%s)\n"
+"\n"
+"View the list: %s\n"
+"\n"
+"Best regards,\n"
+"%s"
+msgstr ""
+
+#: includes/emails/class-manager.php:193
+msgid "Unknown"
+msgstr ""
+
+#. translators: 1: Gift list title, 2: Product name, 3: Buyer name.
+#: includes/emails/class-manager.php:207
+#, php-format
+msgid ""
+"Hello,\n"
+"\n"
+"Good news! A gift has been purchased from your list \"%s\".\n"
+"\n"
+"Product: %s\n"
+"Gifted by: %s"
+msgstr ""
+
+#. translators: %s: Gift message left by the buyer.
+#: includes/emails/class-manager.php:216
+#, php-format
+msgid ""
+"\n"
+"\n"
+"Message: %s"
+msgstr ""
+
+#. translators: %s: Site name.
+#: includes/emails/class-manager.php:223
+#, php-format
+msgid ""
+"\n"
+"\n"
+"Best regards,\n"
+"%s"
+msgstr ""
+
+#. translators: 1: Gift list title, 2: List owner display name, 3: List owner email address, 4: Product name, 5: Buyer name, 6: Order number, 7: Site name.
+#: includes/emails/class-manager.php:238
+#, php-format
+msgid ""
+"Hello,\n"
+"\n"
+"A purchase has been made from a gift list.\n"
+"\n"
+"List: %s\n"
+"Owner: %s (%s)\n"
+"Product: %s\n"
+"Buyer: %s\n"
+"Order: #%d\n"
+"\n"
+"Best regards,\n"
+"%s"
+msgstr ""
+
+#. translators: %s: Site name, linked to the site home page.
+#: includes/emails/class-manager.php:301
+#, php-format
+msgid "This email was sent by %s"
+msgstr ""
+
+#. translators: %s: Login URL.
+#: includes/frontend/class-frontend.php:209
+#, php-format
+msgid "You must <a href=\"%s\">log in</a> to create a list."
+msgstr ""
+
+#. translators: %d: Maximum number of active lists per user.
+#: includes/frontend/class-frontend.php:222
+#, php-format
+msgid "You have reached the maximum number of active lists (%d)."
+msgstr ""
+
+#: includes/frontend/class-frontend.php:228
+msgid "You are not allowed to create a list."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:126
+msgid "Create your gift list and share it with your loved ones."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:132
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:217
+msgid "My lists"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:138
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:278
+msgid "Create a list"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:142
+msgid "Log in to create a list"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:170
+msgid "products"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:175
+msgid "deactivated"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:182
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:634
+msgid "Edit"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:188
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:642
+msgid "Deactivate"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:190
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:644
+msgid "Activate"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:193
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:647
+msgid "Permanently delete this list?"
+msgstr ""
+
+#. translators: %s: Login URL.
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:207
+#, php-format
+msgid "You must <a href=\"%s\">log in</a> to see your lists."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:221
+msgid "New list"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:228
+msgid "You do not have any lists yet."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:231
+msgid "Create my first list"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:272
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:453
+msgid "Security check failed. Please try again."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:292
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:479
+msgid "List title"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:295
+msgid "E.g. Mary and John’s wedding list"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:299
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:485
+msgid "Event end date"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:302
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:488
+msgid "Your list stays published until this date."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:308
+msgid "Describe your event..."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:312
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:497
+msgid "Image"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:314
+msgid "Cover image for your list (JPG, PNG, max 2 MB)"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:319
+msgid "Create list"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:322
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:510
+msgid "Cancel"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:339
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:528
+msgid "The title is required."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:345
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:534
+msgid "The event end date is required."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:350
+msgid "An image is required."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:374
+msgid "Error while creating the list."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:396
+msgid "File type not allowed."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:401
+msgid "The image is too large (max 2 MB)."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:435
+msgid "List not found or access denied."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:465
+msgid "Edit list"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:502
+msgid "Leave empty to keep the current image (JPG, PNG, max 2 MB)."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:507
+msgid "Save changes"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:555
+msgid "Error while updating the list."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:588
+msgid "This list is no longer available."
+msgstr ""
+
+#. translators: %s: Display name of the list owner.
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:608
+#, php-format
+msgid "By %s"
+msgstr ""
+
+#. translators: %s: Event end date.
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:612
+#, php-format
+msgid "End date: %s"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:620
+msgid "This list is deactivated: people who have the link cannot see it."
+msgstr ""
+
+#. translators: %s: Event end date.
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:624
+#, php-format
+msgid "This list expired on %s and is no longer visible to your guests."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:630
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:690
+msgid "Add product"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:667
+msgid "To give a gift, click “Gift this” right here. Do not add the product to the cart from its product page, or the purchase will not be linked to this list."
+msgstr ""
+
+#. translators: 1: Number of purchased products, 2: Total number of products, 3: Percentage of purchased products.
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:675
+#, php-format
+msgid "%1$d of %2$d products purchased (%3$d%%)"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:687
+msgid "Start by adding products from the shop."
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:728
+msgid "Gifted"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:740
+msgid "Gift this"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:744
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:745
+msgid "View product"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:752
+msgid "Favorite (show at the top)"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:758
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:759
+msgid "Remove from list"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:809
+msgid "To share your list, send this link to your loved ones by text message, email or on social media:"
+msgstr ""
+
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:814
+msgid "Copy link"
+msgstr ""
+
+#: includes/integrations/class-woo-commerce.php:110
+msgid "My gift lists"
+msgstr ""
+
+#: includes/integrations/class-woo-commerce.php:170
+#: includes/integrations/class-woo-commerce.php:406
+msgid "Gift list"
+msgstr ""
+
+#: includes/integrations/class-woo-commerce.php:251
+msgid "Message for the list creator"
+msgstr ""
+
+#: includes/integrations/class-woo-commerce.php:256
+msgid "Your message (optional)"
+msgstr ""
+
+#: includes/integrations/class-woo-commerce.php:257
+msgid "Leave a short note to go with your gift..."
+msgstr ""
+
+#: includes/integrations/class-woo-commerce.php:289
+msgctxt "Admin orders list column"
+msgid "Gift list"
+msgstr ""
+
+#: includes/integrations/class-woo-commerce.php:345
+msgid "Gift message"
+msgstr ""
+
+#: includes/integrations/class-woo-commerce.php:374
+msgid "+ Add to a list"
+msgstr ""
+
+#: includes/integrations/class-woo-commerce.php:380
+msgid "Choose a list..."
+msgstr ""
+
+#: includes/integrations/class-woo-commerce.php:388
+msgid "Add"
+msgstr ""
+
+#: includes/repositories/class-item-repository.php:372
+msgid "Product unavailable"
+msgstr ""
+
+#: mrz-gift-lists-exp.php:60
+msgid "requires WooCommerce to work. Please install and activate WooCommerce."
+msgstr ""

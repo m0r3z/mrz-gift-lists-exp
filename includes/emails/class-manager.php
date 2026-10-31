@@ -75,7 +75,8 @@ class Manager {
         $list_url = \Mrzgle\Plugin::instance()->get_list_url( $list->access_key );
 
         $subject = sprintf(
-            __( '[%s] Nouvelle liste de cadeaux créée', 'mrz-gift-lists-exp' ),
+            /* translators: %s: Site name. */
+            __( '[%s] New gift list created', 'mrz-gift-lists-exp' ),
             get_bloginfo( 'name' )
         );
 
@@ -129,7 +130,8 @@ class Manager {
         $gift_message = $order->get_meta( '_mrzgle_gift_message' );
 
         $subject = sprintf(
-            __( '🎁 Un cadeau a été offert depuis votre liste "%s"', 'mrz-gift-lists-exp' ),
+            /* translators: %s: Gift list title. */
+            __( '🎁 A gift has been purchased from your list "%s"', 'mrz-gift-lists-exp' ),
             $list->title
         );
 
@@ -149,7 +151,8 @@ class Manager {
 
         if ( $admin_email && $admin_email !== $user->user_email ) {
             $admin_subject = sprintf(
-                __( '[%s] Achat depuis une liste de cadeaux', 'mrz-gift-lists-exp' ),
+                /* translators: %s: Site name. */
+                __( '[%s] Purchase from a gift list', 'mrz-gift-lists-exp' ),
                 get_bloginfo( 'name' )
             );
 
@@ -183,10 +186,11 @@ class Manager {
                 $list_url = $data['list_url'];
 
                 return sprintf(
-                    __( "Bonjour,\n\nUne nouvelle liste de cadeaux a été créée sur %s.\n\nTitre : %s\nCréateur : %s (%s)\n\nVoir la liste : %s\n\nCordialement,\n%s", 'mrz-gift-lists-exp' ),
+                    /* translators: 1: Site name, 2: Gift list title, 3: Creator display name, 4: Creator email address, 5: Gift list URL, 6: Site name. */
+                    __( "Hello,\n\nA new gift list has been created on %s.\n\nTitle: %s\nCreator: %s (%s)\n\nView the list: %s\n\nBest regards,\n%s", 'mrz-gift-lists-exp' ),
                     $site_name,
                     $list->title,
-                    $user ? $user->display_name : __( 'Inconnu', 'mrz-gift-lists-exp' ),
+                    $user ? $user->display_name : __( 'Unknown', 'mrz-gift-lists-exp' ),
                     $user ? $user->user_email : '',
                     $list_url,
                     $site_name
@@ -199,21 +203,24 @@ class Manager {
                 $gift_message = $data['gift_message'] ?? '';
 
                 $message = sprintf(
-                    __( "Bonjour,\n\nBonne nouvelle ! Un cadeau a été offert depuis votre liste \"%s\".\n\nProduit : %s\nOffert par : %s", 'mrz-gift-lists-exp' ),
+                    /* translators: 1: Gift list title, 2: Product name, 3: Buyer name. */
+                    __( "Hello,\n\nGood news! A gift has been purchased from your list \"%s\".\n\nProduct: %s\nGifted by: %s", 'mrz-gift-lists-exp' ),
                     $list->title,
-                    $product ? $product->get_name() : __( 'Produit', 'mrz-gift-lists-exp' ),
+                    $product ? $product->get_name() : __( 'Product', 'mrz-gift-lists-exp' ),
                     $buyer_name
                 );
 
                 if ( $gift_message ) {
                     $message .= sprintf(
-                        __( "\n\nMessage : %s", 'mrz-gift-lists-exp' ),
+                        /* translators: %s: Gift message left by the buyer. */
+                        __( "\n\nMessage: %s", 'mrz-gift-lists-exp' ),
                         $gift_message
                     );
                 }
 
                 $message .= sprintf(
-                    __( "\n\nCordialement,\n%s", 'mrz-gift-lists-exp' ),
+                    /* translators: %s: Site name. */
+                    __( "\n\nBest regards,\n%s", 'mrz-gift-lists-exp' ),
                     $site_name
                 );
 
@@ -227,11 +234,12 @@ class Manager {
                 $owner = $data['owner'];
 
                 return sprintf(
-                    __( "Bonjour,\n\nUn achat a été effectué depuis une liste de cadeaux.\n\nListe : %s\nPropriétaire : %s (%s)\nProduit : %s\nAcheteur : %s\nCommande : #%d\n\nCordialement,\n%s", 'mrz-gift-lists-exp' ),
+                    /* translators: 1: Gift list title, 2: List owner display name, 3: List owner email address, 4: Product name, 5: Buyer name, 6: Order number, 7: Site name. */
+                    __( "Hello,\n\nA purchase has been made from a gift list.\n\nList: %s\nOwner: %s (%s)\nProduct: %s\nBuyer: %s\nOrder: #%d\n\nBest regards,\n%s", 'mrz-gift-lists-exp' ),
                     $list->title,
                     $owner->display_name,
                     $owner->user_email,
-                    $product ? $product->get_name() : __( 'Produit', 'mrz-gift-lists-exp' ),
+                    $product ? $product->get_name() : __( 'Product', 'mrz-gift-lists-exp' ),
                     $buyer_name,
                     $order->get_id(),
                     $site_name
@@ -290,7 +298,7 @@ class Manager {
     </div>
     <div class="content">' . nl2br( esc_html( $text ) ) . '</div>
     <div class="footer">
-        <p>' . sprintf( __( 'Cet email a été envoyé par %s', 'mrz-gift-lists-exp' ), '<a href="' . esc_url( $site_url ) . '">' . esc_html( $site_name ) . '</a>' ) . '</p>
+        <p>' . sprintf( /* translators: %s: Site name, linked to the site home page. */ __( 'This email was sent by %s', 'mrz-gift-lists-exp' ), '<a href="' . esc_url( $site_url ) . '">' . esc_html( $site_name ) . '</a>' ) . '</p>
     </div>
 </body>
 </html>';

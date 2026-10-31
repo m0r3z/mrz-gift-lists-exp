@@ -180,14 +180,15 @@ final class Plugin {
             'nonce'     => wp_create_nonce( 'mrzgle_frontend_nonce' ),
             'iconBase'  => MRZGLE_PLUGIN_URL . 'assets/img/',
             'i18n'      => [
-                'confirmDelete'     => __( 'Êtes-vous sûr de vouloir supprimer cet élément ?', 'mrz-gift-lists-exp' ),
-                'adding'            => __( 'Ajout en cours...', 'mrz-gift-lists-exp' ),
-                'added'             => __( 'Ajouté !', 'mrz-gift-lists-exp' ),
-                'error'             => __( 'Une erreur est survenue', 'mrz-gift-lists-exp' ),
-                'productAdded'      => __( 'Produit ajouté à la liste', 'mrz-gift-lists-exp' ),
-                'productRemoved'    => __( 'Produit retiré de la liste', 'mrz-gift-lists-exp' ),
-                'addedToCart'       => __( 'Produit ajouté au panier', 'mrz-gift-lists-exp' ),
-                'copied'            => __( 'Lien copié !', 'mrz-gift-lists-exp' ),
+                'confirmDelete'     => __( 'Are you sure you want to delete this item?', 'mrz-gift-lists-exp' ),
+                'adding'            => __( 'Adding...', 'mrz-gift-lists-exp' ),
+                'added'             => __( 'Added!', 'mrz-gift-lists-exp' ),
+                'error'             => __( 'An error occurred', 'mrz-gift-lists-exp' ),
+                'productAdded'      => __( 'Product added to the list', 'mrz-gift-lists-exp' ),
+                'productRemoved'    => __( 'Product removed from the list', 'mrz-gift-lists-exp' ),
+                'addedToCart'       => __( 'Product added to the cart', 'mrz-gift-lists-exp' ),
+                'copied'            => __( 'Link copied!', 'mrz-gift-lists-exp' ),
+                'selectList'        => __( 'Please select a list.', 'mrz-gift-lists-exp' ),
             ],
         ] );
     }
@@ -217,9 +218,9 @@ final class Plugin {
             'ajaxUrl' => admin_url( 'admin-ajax.php' ),
             'nonce'   => wp_create_nonce( 'mrzgle_admin_nonce' ),
             'i18n'    => [
-                'confirmDelete' => __( 'Êtes-vous sûr de vouloir supprimer ?', 'mrz-gift-lists-exp' ),
-                'saved'         => __( 'Enregistré', 'mrz-gift-lists-exp' ),
-                'error'         => __( 'Erreur', 'mrz-gift-lists-exp' ),
+                'confirmDelete' => __( 'Are you sure you want to delete this?', 'mrz-gift-lists-exp' ),
+                'saved'         => __( 'Saved', 'mrz-gift-lists-exp' ),
+                'error'         => __( 'Error', 'mrz-gift-lists-exp' ),
             ],
         ] );
     }

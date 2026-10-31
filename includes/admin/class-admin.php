@@ -49,9 +49,9 @@ class Admin {
 
         printf(
             '<div class="notice notice-warning"><p>%s <a href="%s">%s</a></p></div>',
-            esc_html__( 'MRZ Gift Lists : aucune page des listes n\'est définie. Créez une page contenant le shortcode [mrzgle_lists], puis sélectionnez-la dans les réglages.', 'mrz-gift-lists-exp' ),
+            esc_html__( 'MRZ Gift Lists: no lists page is set. Create a page containing the [mrzgle_lists] shortcode, then select it in the settings.', 'mrz-gift-lists-exp' ),
             esc_url( admin_url( 'admin.php?page=mrz-gle-settings' ) ),
-            esc_html__( 'Ouvrir les réglages', 'mrz-gift-lists-exp' )
+            esc_html__( 'Open settings', 'mrz-gift-lists-exp' )
         );
     }
 
@@ -81,8 +81,8 @@ class Admin {
         // Sous-menu Listes (remplace le menu parent)
         add_submenu_page(
             'mrz-gle-lists',
-            __( 'Toutes les listes', 'mrz-gift-lists-exp' ),
-            __( 'Toutes les listes', 'mrz-gift-lists-exp' ),
+            __( 'All lists', 'mrz-gift-lists-exp' ),
+            __( 'All lists', 'mrz-gift-lists-exp' ),
             'mrzgle_manage_lists',
             'mrz-gle-lists',
             [ $this, 'render_lists_page' ]
@@ -91,8 +91,8 @@ class Admin {
         // Sous-menu Réglages
         add_submenu_page(
             'mrz-gle-lists',
-            __( 'Réglages', 'mrz-gift-lists-exp' ),
-            __( 'Réglages', 'mrz-gift-lists-exp' ),
+            __( 'Settings', 'mrz-gift-lists-exp' ),
+            __( 'Settings', 'mrz-gift-lists-exp' ),
             'mrzgle_manage_lists',
             'mrz-gle-settings',
             [ $this, 'render_settings_page' ]
@@ -173,7 +173,7 @@ class Admin {
      */
     public function add_plugin_links( array $links ): array {
         $plugin_links = [
-            '<a href="' . admin_url( 'admin.php?page=mrz-gle-settings' ) . '">' . __( 'Réglages', 'mrz-gift-lists-exp' ) . '</a>',
+            '<a href="' . admin_url( 'admin.php?page=mrz-gle-settings' ) . '">' . __( 'Settings', 'mrz-gift-lists-exp' ) . '</a>',
         ];
 
         return array_merge( $plugin_links, $links );

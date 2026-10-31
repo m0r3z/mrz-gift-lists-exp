@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       MRZ Gift Lists Exp
  * Plugin URI:        https://github.com/m0r3z/mrz-gift-lists-exp
- * Description:       Listes de cadeaux pour WooCommerce : vos clients créent une liste de produits, partagent le lien, et leurs proches achètent.
+ * Description:       Gift lists for WooCommerce: your customers build a list of products to receive, share the link, and their friends and family buy them.
  * Version:           0.11.5
  * Requires at least: 6.0
  * Requires PHP:      8.0
@@ -57,7 +57,7 @@ function mrzgle_woocommerce_missing_notice(): void {
     <div class="notice notice-error">
         <p>
             <strong><?php esc_html_e( 'MRZ Gift Lists', 'mrz-gift-lists-exp' ); ?></strong>
-            <?php esc_html_e( 'nécessite WooCommerce pour fonctionner. Veuillez installer et activer WooCommerce.', 'mrz-gift-lists-exp' ); ?>
+            <?php esc_html_e( 'requires WooCommerce to work. Please install and activate WooCommerce.', 'mrz-gift-lists-exp' ); ?>
         </p>
     </div>
     <?php

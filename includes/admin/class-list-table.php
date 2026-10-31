@@ -58,10 +58,10 @@ class ListTable extends \WP_List_Table {
      */
     public function get_columns(): array {
         return [
-            'title'      => __( 'Titre', 'mrz-gift-lists-exp' ),
-            'owner'      => __( 'Créateur', 'mrz-gift-lists-exp' ),
-            'items'      => __( 'Produits', 'mrz-gift-lists-exp' ),
-            'status'     => __( 'Statut', 'mrz-gift-lists-exp' ),
+            'title'      => __( 'Title', 'mrz-gift-lists-exp' ),
+            'owner'      => __( 'Creator', 'mrz-gift-lists-exp' ),
+            'items'      => __( 'Products', 'mrz-gift-lists-exp' ),
+            'status'     => __( 'Status', 'mrz-gift-lists-exp' ),
             'created_at' => __( 'Date', 'mrz-gift-lists-exp' ),
         ];
     }
@@ -206,18 +206,18 @@ class ListTable extends \WP_List_Table {
             'view'   => sprintf(
                 '<a href="%s">%s</a>',
                 esc_url( $view_url ),
-                __( 'Voir détails', 'mrz-gift-lists-exp' )
+                __( 'View details', 'mrz-gift-lists-exp' )
             ),
             'front'  => sprintf(
                 '<a href="%s" target="_blank">%s</a>',
                 esc_url( $front_url ),
-                __( 'Voir sur le site', 'mrz-gift-lists-exp' )
+                __( 'View on site', 'mrz-gift-lists-exp' )
             ),
             'delete' => sprintf(
                 '<a href="%s" class="mrz-gle-delete" onclick="return confirm(\'%s\');">%s</a>',
                 esc_url( $delete_url ),
-                esc_attr__( 'Êtes-vous sûr de vouloir supprimer cette liste ?', 'mrz-gift-lists-exp' ),
-                __( 'Supprimer', 'mrz-gift-lists-exp' )
+                esc_attr__( 'Are you sure you want to delete this list?', 'mrz-gift-lists-exp' ),
+                __( 'Delete', 'mrz-gift-lists-exp' )
             ),
         ];
 
@@ -237,7 +237,7 @@ class ListTable extends \WP_List_Table {
      */
     protected function column_owner( $item ): string {
         if ( empty( $item->owner_name ) ) {
-            return '<em>' . __( 'Utilisateur supprimé', 'mrz-gift-lists-exp' ) . '</em>';
+            return '<em>' . __( 'Deleted user', 'mrz-gift-lists-exp' ) . '</em>';
         }
 
         return sprintf(
@@ -271,7 +271,7 @@ class ListTable extends \WP_List_Table {
             $total,
             $percent > 50 ? '#00a32a' : '#666',
             $percent,
-            __( 'achetés', 'mrz-gift-lists-exp' )
+            __( 'purchased', 'mrz-gift-lists-exp' )
         );
     }
 
@@ -284,8 +284,8 @@ class ListTable extends \WP_List_Table {
     protected function column_status( $item ): string {
         $statuses = [
             'active'    => [ __( 'Active', 'mrz-gift-lists-exp' ), '#00a32a' ],
-            'archived'  => [ __( 'Archivée', 'mrz-gift-lists-exp' ), '#dba617' ],
-            'completed' => [ __( 'Terminée', 'mrz-gift-lists-exp' ), '#2271b1' ],
+            'archived'  => [ __( 'Archived', 'mrz-gift-lists-exp' ), '#dba617' ],
+            'completed' => [ __( 'Completed', 'mrz-gift-lists-exp' ), '#2271b1' ],
         ];
 
         $status = $statuses[ $item->status ] ?? [ $item->status, '#666' ];
@@ -317,7 +317,7 @@ class ListTable extends \WP_List_Table {
      * Message quand aucun item
      */
     public function no_items(): void {
-        esc_html_e( 'Aucune liste trouvée.', 'mrz-gift-lists-exp' );
+        esc_html_e( 'No lists found.', 'mrz-gift-lists-exp' );
     }
 
     /**
@@ -334,12 +334,12 @@ class ListTable extends \WP_List_Table {
         ?>
         <div class="alignleft actions">
             <select name="status">
-                <option value=""><?php esc_html_e( 'Tous les statuts', 'mrz-gift-lists-exp' ); ?></option>
+                <option value=""><?php esc_html_e( 'All statuses', 'mrz-gift-lists-exp' ); ?></option>
                 <option value="active" <?php selected( $current_status, 'active' ); ?>><?php esc_html_e( 'Active', 'mrz-gift-lists-exp' ); ?></option>
-                <option value="archived" <?php selected( $current_status, 'archived' ); ?>><?php esc_html_e( 'Archivée', 'mrz-gift-lists-exp' ); ?></option>
-                <option value="completed" <?php selected( $current_status, 'completed' ); ?>><?php esc_html_e( 'Terminée', 'mrz-gift-lists-exp' ); ?></option>
+                <option value="archived" <?php selected( $current_status, 'archived' ); ?>><?php esc_html_e( 'Archived', 'mrz-gift-lists-exp' ); ?></option>
+                <option value="completed" <?php selected( $current_status, 'completed' ); ?>><?php esc_html_e( 'Completed', 'mrz-gift-lists-exp' ); ?></option>
             </select>
-            <?php submit_button( __( 'Filtrer', 'mrz-gift-lists-exp' ), '', 'filter_action', false ); ?>
+            <?php submit_button( __( 'Filter', 'mrz-gift-lists-exp' ), '', 'filter_action', false ); ?>
         </div>
         <?php
     }

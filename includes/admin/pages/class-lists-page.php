@@ -61,13 +61,13 @@ class ListsPage {
         // Vérifie le nonce
         $nonce = isset( $_GET['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) : '';
         if ( ! wp_verify_nonce( $nonce, 'mrzgle_list_action' ) ) {
-            wp_die( esc_html__( 'Action non autorisée.', 'mrz-gift-lists-exp' ) );
+            wp_die( esc_html__( 'Action not allowed.', 'mrz-gift-lists-exp' ) );
         }
 
         // Défense en profondeur : handle_actions() s'exécute sur toute requête
         // admin (via le constructeur), avant le contrôle de capacité du menu.
         if ( ! current_user_can( 'mrzgle_manage_lists' ) ) {
-            wp_die( esc_html__( 'Action non autorisée.', 'mrz-gift-lists-exp' ) );
+            wp_die( esc_html__( 'Action not allowed.', 'mrz-gift-lists-exp' ) );
         }
 
         switch ( $action ) {
@@ -161,14 +161,14 @@ class ListsPage {
         $this->display_messages();
         ?>
         <div class="wrap">
-            <h1 class="wp-heading-inline"><?php esc_html_e( 'Listes de cadeaux', 'mrz-gift-lists-exp' ); ?></h1>
+            <h1 class="wp-heading-inline"><?php esc_html_e( 'Gift lists', 'mrz-gift-lists-exp' ); ?></h1>
 
             <hr class="wp-header-end">
 
             <form method="get">
                 <input type="hidden" name="page" value="mrz-gle-lists">
                 <?php
-                $table->search_box( __( 'Rechercher', 'mrz-gift-lists-exp' ), 'mrz-gle-search' );
+                $table->search_box( __( 'Search', 'mrz-gift-lists-exp' ), 'mrz-gle-search' );
                 $table->display();
                 ?>
             </form>
@@ -185,7 +185,7 @@ class ListsPage {
         $list = $this->list_repo->find( $list_id );
 
         if ( ! $list ) {
-            wp_die( esc_html__( 'Liste non trouvée.', 'mrz-gift-lists-exp' ) );
+            wp_die( esc_html__( 'List not found.', 'mrz-gift-lists-exp' ) );
         }
 
         $items = $this->item_repo->find_by_list( $list_id );
@@ -195,7 +195,7 @@ class ListsPage {
         <div class="wrap">
             <h1 class="wp-heading-inline">
                 <a href="<?php echo esc_url( admin_url( 'admin.php?page=mrz-gle-lists' ) ); ?>" class="page-title-action" style="margin-right: 10px;">
-                    ← <?php esc_html_e( 'Retour', 'mrz-gift-lists-exp' ); ?>
+                    ← <?php esc_html_e( 'Back', 'mrz-gift-lists-exp' ); ?>
                 </a>
                 <?php echo esc_html( $list->title ); ?>
             </h1>
@@ -207,11 +207,11 @@ class ListsPage {
                 <div>
                     <!-- Informations -->
                     <div class="postbox">
-                        <h2 class="hndle"><?php esc_html_e( 'Informations', 'mrz-gift-lists-exp' ); ?></h2>
+                        <h2 class="hndle"><?php esc_html_e( 'Details', 'mrz-gift-lists-exp' ); ?></h2>
                         <div class="inside">
                             <table class="form-table">
                                 <tr>
-                                    <th><?php esc_html_e( 'Créateur', 'mrz-gift-lists-exp' ); ?></th>
+                                    <th><?php esc_html_e( 'Creator', 'mrz-gift-lists-exp' ); ?></th>
                                     <td>
                                         <?php if ( $user ) : ?>
                                             <a href="<?php echo esc_url( get_edit_user_link( $user->ID ) ); ?>">
@@ -219,40 +219,40 @@ class ListsPage {
                                             </a>
                                             (<?php echo esc_html( $user->user_email ); ?>)
                                         <?php else : ?>
-                                            <?php esc_html_e( 'Utilisateur supprimé', 'mrz-gift-lists-exp' ); ?>
+                                            <?php esc_html_e( 'Deleted user', 'mrz-gift-lists-exp' ); ?>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><?php esc_html_e( 'Date de création', 'mrz-gift-lists-exp' ); ?></th>
+                                    <th><?php esc_html_e( 'Date created', 'mrz-gift-lists-exp' ); ?></th>
                                     <td><?php echo esc_html( wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $list->created_at ) ) ); ?></td>
                                 </tr>
                                 <?php $event_ts = ( $list->event_date && '0000-00-00' !== $list->event_date ) ? strtotime( $list->event_date ) : false; ?>
                                 <?php if ( $event_ts ) : ?>
                                 <tr>
-                                    <th><?php esc_html_e( 'Date de l\'événement', 'mrz-gift-lists-exp' ); ?></th>
+                                    <th><?php esc_html_e( 'Event date', 'mrz-gift-lists-exp' ); ?></th>
                                     <td><?php echo esc_html( wp_date( get_option( 'date_format' ), $event_ts ) ); ?></td>
                                 </tr>
                                 <?php endif; ?>
                                 <tr>
-                                    <th><?php esc_html_e( 'Statut', 'mrz-gift-lists-exp' ); ?></th>
+                                    <th><?php esc_html_e( 'Status', 'mrz-gift-lists-exp' ); ?></th>
                                     <td>
                                         <?php
                                         $statuses = [
                                             'active'   => '<span style="color: #00a32a;">● ' . __( 'Active', 'mrz-gift-lists-exp' ) . '</span>',
-                                            'archived' => '<span style="color: #dba617;">● ' . __( 'Archivée', 'mrz-gift-lists-exp' ) . '</span>',
-                                            'completed' => '<span style="color: #2271b1;">● ' . __( 'Terminée', 'mrz-gift-lists-exp' ) . '</span>',
+                                            'archived' => '<span style="color: #dba617;">● ' . __( 'Archived', 'mrz-gift-lists-exp' ) . '</span>',
+                                            'completed' => '<span style="color: #2271b1;">● ' . __( 'Completed', 'mrz-gift-lists-exp' ) . '</span>',
                                         ];
                                         echo wp_kses_post( $statuses[ $list->status ] ?? $list->status );
                                         ?>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><?php esc_html_e( 'Clé d\'accès', 'mrz-gift-lists-exp' ); ?></th>
+                                    <th><?php esc_html_e( 'Access key', 'mrz-gift-lists-exp' ); ?></th>
                                     <td>
                                         <code><?php echo esc_html( $list->access_key ); ?></code>
                                         <a href="<?php echo esc_url( \Mrzgle\Plugin::instance()->get_list_url( $list->access_key ) ); ?>" target="_blank" class="button button-small">
-                                            <?php esc_html_e( 'Voir', 'mrz-gift-lists-exp' ); ?>
+                                            <?php esc_html_e( 'View', 'mrz-gift-lists-exp' ); ?>
                                         </a>
                                     </td>
                                 </tr>
@@ -269,21 +269,21 @@ class ListsPage {
                     <!-- Produits -->
                     <div class="postbox">
                         <h2 class="hndle">
-                            <?php esc_html_e( 'Produits', 'mrz-gift-lists-exp' ); ?>
+                            <?php esc_html_e( 'Products', 'mrz-gift-lists-exp' ); ?>
                             <span class="count">(<?php echo esc_html( count( $items ) ); ?>)</span>
                         </h2>
                         <div class="inside">
                             <?php if ( empty( $items ) ) : ?>
-                                <p><?php esc_html_e( 'Aucun produit dans cette liste.', 'mrz-gift-lists-exp' ); ?></p>
+                                <p><?php esc_html_e( 'No products in this list.', 'mrz-gift-lists-exp' ); ?></p>
                             <?php else : ?>
                                 <table class="wp-list-table widefat fixed striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 50px;"></th>
-                                            <th><?php esc_html_e( 'Produit', 'mrz-gift-lists-exp' ); ?></th>
-                                            <th style="width: 100px;"><?php esc_html_e( 'Prix', 'mrz-gift-lists-exp' ); ?></th>
-                                            <th style="width: 100px;"><?php esc_html_e( 'Statut', 'mrz-gift-lists-exp' ); ?></th>
-                                            <th><?php esc_html_e( 'Acheté par', 'mrz-gift-lists-exp' ); ?></th>
+                                            <th><?php esc_html_e( 'Product', 'mrz-gift-lists-exp' ); ?></th>
+                                            <th style="width: 100px;"><?php esc_html_e( 'Price', 'mrz-gift-lists-exp' ); ?></th>
+                                            <th style="width: 100px;"><?php esc_html_e( 'Status', 'mrz-gift-lists-exp' ); ?></th>
+                                            <th><?php esc_html_e( 'Purchased by', 'mrz-gift-lists-exp' ); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -294,7 +294,7 @@ class ListsPage {
                                                 </td>
                                                 <td>
                                                     <?php if ( $item->priority ) : ?>
-                                                        <span title="<?php esc_attr_e( 'Favori', 'mrz-gift-lists-exp' ); ?>">⭐</span>
+                                                        <span title="<?php esc_attr_e( 'Favorite', 'mrz-gift-lists-exp' ); ?>">⭐</span>
                                                     <?php endif; ?>
                                                     <?php if ( $item->product_exists ) : ?>
                                                         <a href="<?php echo esc_url( get_edit_post_link( $item->product_id ) ); ?>">
@@ -308,9 +308,9 @@ class ListsPage {
                                                 <td>
                                                     <?php
                                                     $item_statuses = [
-                                                        'available' => '<span style="color: #00a32a;">' . __( 'Disponible', 'mrz-gift-lists-exp' ) . '</span>',
-                                                        'reserved'  => '<span style="color: #dba617;">' . __( 'Réservé', 'mrz-gift-lists-exp' ) . '</span>',
-                                                        'purchased' => '<span style="color: #2271b1;">' . __( 'Acheté', 'mrz-gift-lists-exp' ) . '</span>',
+                                                        'available' => '<span style="color: #00a32a;">' . __( 'Available', 'mrz-gift-lists-exp' ) . '</span>',
+                                                        'reserved'  => '<span style="color: #dba617;">' . __( 'Reserved', 'mrz-gift-lists-exp' ) . '</span>',
+                                                        'purchased' => '<span style="color: #2271b1;">' . __( 'Purchased', 'mrz-gift-lists-exp' ) . '</span>',
                                                     ];
                                                     echo wp_kses_post( $item_statuses[ $item->status ] ?? $item->status );
                                                     ?>
@@ -340,20 +340,20 @@ class ListsPage {
                 <div>
                     <!-- Statistiques -->
                     <div class="postbox">
-                        <h2 class="hndle"><?php esc_html_e( 'Statistiques', 'mrz-gift-lists-exp' ); ?></h2>
+                        <h2 class="hndle"><?php esc_html_e( 'Statistics', 'mrz-gift-lists-exp' ); ?></h2>
                         <div class="inside">
                             <ul style="margin: 0;">
                                 <li style="padding: 8px 0; border-bottom: 1px solid #eee;">
                                     <strong><?php echo esc_html( $stats->total_items ); ?></strong>
-                                    <?php esc_html_e( 'produits au total', 'mrz-gift-lists-exp' ); ?>
+                                    <?php esc_html_e( 'products in total', 'mrz-gift-lists-exp' ); ?>
                                 </li>
                                 <li style="padding: 8px 0; border-bottom: 1px solid #eee;">
                                     <strong style="color: #00a32a;"><?php echo esc_html( $stats->available_items ); ?></strong>
-                                    <?php esc_html_e( 'disponibles', 'mrz-gift-lists-exp' ); ?>
+                                    <?php esc_html_e( 'available', 'mrz-gift-lists-exp' ); ?>
                                 </li>
                                 <li style="padding: 8px 0;">
                                     <strong style="color: #2271b1;"><?php echo esc_html( $stats->purchased_items ); ?></strong>
-                                    <?php esc_html_e( 'achetés', 'mrz-gift-lists-exp' ); ?>
+                                    <?php esc_html_e( 'purchased', 'mrz-gift-lists-exp' ); ?>
                                 </li>
                             </ul>
                         </div>
@@ -365,27 +365,27 @@ class ListsPage {
                         <div class="inside">
                             <p>
                                 <a href="<?php echo esc_url( \Mrzgle\Plugin::instance()->get_list_url( $list->access_key ) ); ?>" class="button button-primary" target="_blank" style="width: 100%; text-align: center;">
-                                    <?php esc_html_e( 'Voir la liste', 'mrz-gift-lists-exp' ); ?>
+                                    <?php esc_html_e( 'View list', 'mrz-gift-lists-exp' ); ?>
                                 </a>
                             </p>
 
                             <?php if ( 'active' === $list->status ) : ?>
                                 <p>
                                     <a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mrz-gle-lists&action=archive&list_id=' . $list->id ), 'mrzgle_list_action' ) ); ?>" class="button" style="width: 100%; text-align: center;">
-                                        <?php esc_html_e( 'Archiver', 'mrz-gift-lists-exp' ); ?>
+                                        <?php esc_html_e( 'Archive', 'mrz-gift-lists-exp' ); ?>
                                     </a>
                                 </p>
                             <?php else : ?>
                                 <p>
                                     <a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mrz-gle-lists&action=activate&list_id=' . $list->id ), 'mrzgle_list_action' ) ); ?>" class="button" style="width: 100%; text-align: center;">
-                                        <?php esc_html_e( 'Réactiver', 'mrz-gift-lists-exp' ); ?>
+                                        <?php esc_html_e( 'Reactivate', 'mrz-gift-lists-exp' ); ?>
                                     </a>
                                 </p>
                             <?php endif; ?>
 
                             <p>
-                                <a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mrz-gle-lists&action=delete&list_id=' . $list->id ), 'mrzgle_list_action' ) ); ?>" class="button" style="width: 100%; text-align: center; color: #d63638;" onclick="return confirm('<?php esc_attr_e( 'Êtes-vous sûr de vouloir supprimer cette liste ?', 'mrz-gift-lists-exp' ); ?>');">
-                                    <?php esc_html_e( 'Supprimer', 'mrz-gift-lists-exp' ); ?>
+                                <a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mrz-gle-lists&action=delete&list_id=' . $list->id ), 'mrzgle_list_action' ) ); ?>" class="button" style="width: 100%; text-align: center; color: #d63638;" onclick="return confirm('<?php esc_attr_e( 'Are you sure you want to delete this list?', 'mrz-gift-lists-exp' ); ?>');">
+                                    <?php esc_html_e( 'Delete', 'mrz-gift-lists-exp' ); ?>
                                 </a>
                             </p>
                         </div>
@@ -405,9 +405,9 @@ class ListsPage {
         }
 
         $messages = [
-            'deleted'   => __( 'Liste supprimée avec succès.', 'mrz-gift-lists-exp' ),
-            'archived'  => __( 'Liste archivée avec succès.', 'mrz-gift-lists-exp' ),
-            'activated' => __( 'Liste réactivée avec succès.', 'mrz-gift-lists-exp' ),
+            'deleted'   => __( 'List deleted successfully.', 'mrz-gift-lists-exp' ),
+            'archived'  => __( 'List archived successfully.', 'mrz-gift-lists-exp' ),
+            'activated' => __( 'List reactivated successfully.', 'mrz-gift-lists-exp' ),
         ];
 
         $message_key = sanitize_key( $_GET['message'] );

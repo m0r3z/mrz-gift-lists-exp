@@ -369,7 +369,7 @@ class ItemRepository extends BaseRepository {
                     $item->variation_attributes = $product->get_variation_attributes();
                 }
             } else {
-                $item->product_name = __( 'Produit non disponible', 'mrz-gift-lists-exp' );
+                $item->product_name = __( 'Product unavailable', 'mrz-gift-lists-exp' );
                 $item->product_price = 0;
                 $item->product_price_html = '';
                 $item->product_image = wc_placeholder_img_src();

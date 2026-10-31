@@ -82,7 +82,7 @@ class Handler {
         $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
         if ( ! wp_verify_nonce( $nonce, $nonce_action ) ) {
             wp_send_json_error( [
-                'message' => __( 'Erreur de sécurité. Veuillez rafraîchir la page.', 'mrz-gift-lists-exp' ),
+                'message' => __( 'Security check failed. Please refresh the page.', 'mrz-gift-lists-exp' ),
             ] );
             return false;
         }
@@ -90,7 +90,7 @@ class Handler {
         // Vérifie la connexion si nécessaire
         if ( $check_login && ! is_user_logged_in() ) {
             wp_send_json_error( [
-                'message' => __( 'Vous devez être connecté.', 'mrz-gift-lists-exp' ),
+                'message' => __( 'You must be logged in.', 'mrz-gift-lists-exp' ),
             ] );
             return false;
         }
@@ -107,7 +107,7 @@ class Handler {
     private function verify_ownership( int $list_id ): bool {
         if ( ! $this->list_repo->user_owns_list( $list_id, get_current_user_id() ) ) {
             wp_send_json_error( [
-                'message' => __( 'Vous n\'êtes pas autorisé à modifier cette liste.', 'mrz-gift-lists-exp' ),
+                'message' => __( 'You are not allowed to edit this list.', 'mrz-gift-lists-exp' ),
             ] );
             return false;
         }
@@ -126,7 +126,7 @@ class Handler {
         $quantity = isset( $_POST['quantity'] ) ? absint( $_POST['quantity'] ) : 1;
 
         if ( ! $list_id || ! $product_id ) {
-            wp_send_json_error( [ 'message' => __( 'Données manquantes.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Missing data.', 'mrz-gift-lists-exp' ) ] );
         }
 
         if ( ! $this->verify_ownership( $list_id ) ) {
@@ -136,7 +136,7 @@ class Handler {
         // Vérifie que le produit existe
         $product = wc_get_product( $product_id );
         if ( ! $product ) {
-            wp_send_json_error( [ 'message' => __( 'Produit introuvable.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Product not found.', 'mrz-gift-lists-exp' ) ] );
         }
 
         // Ajoute le produit
@@ -145,11 +145,11 @@ class Handler {
         ] );
 
         if ( ! $item_id ) {
-            wp_send_json_error( [ 'message' => __( 'Ce produit est déjà dans la liste.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'This product is already in the list.', 'mrz-gift-lists-exp' ) ] );
         }
 
         wp_send_json_success( [
-            'message' => __( 'Produit ajouté à la liste.', 'mrz-gift-lists-exp' ),
+            'message' => __( 'Product added to the list.', 'mrz-gift-lists-exp' ),
             'item_id' => $item_id,
             'product' => [
                 'id'    => $product->get_id(),
@@ -169,14 +169,14 @@ class Handler {
         $item_id = isset( $_POST['item_id'] ) ? absint( $_POST['item_id'] ) : 0;
 
         if ( ! $item_id ) {
-            wp_send_json_error( [ 'message' => __( 'Données manquantes.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Missing data.', 'mrz-gift-lists-exp' ) ] );
         }
 
         // Récupère l'item pour vérifier la propriété
         $item = $this->item_repo->find( $item_id );
 
         if ( ! $item ) {
-            wp_send_json_error( [ 'message' => __( 'Produit introuvable.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Product not found.', 'mrz-gift-lists-exp' ) ] );
         }
 
         if ( ! $this->verify_ownership( (int) $item->list_id ) ) {
@@ -185,9 +185,9 @@ class Handler {
 
         // Supprime l'item
         if ( $this->item_repo->delete( $item_id ) ) {
-            wp_send_json_success( [ 'message' => __( 'Produit retiré de la liste.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_success( [ 'message' => __( 'Product removed from the list.', 'mrz-gift-lists-exp' ) ] );
         } else {
-            wp_send_json_error( [ 'message' => __( 'Erreur lors de la suppression.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Error while deleting.', 'mrz-gift-lists-exp' ) ] );
         }
     }
 
@@ -200,13 +200,13 @@ class Handler {
         $item_id = isset( $_POST['item_id'] ) ? absint( $_POST['item_id'] ) : 0;
 
         if ( ! $item_id ) {
-            wp_send_json_error( [ 'message' => __( 'Données manquantes.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Missing data.', 'mrz-gift-lists-exp' ) ] );
         }
 
         $item = $this->item_repo->find( $item_id );
 
         if ( ! $item ) {
-            wp_send_json_error( [ 'message' => __( 'Produit introuvable.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Product not found.', 'mrz-gift-lists-exp' ) ] );
         }
 
         if ( ! $this->verify_ownership( (int) $item->list_id ) ) {
@@ -217,8 +217,8 @@ class Handler {
 
         wp_send_json_success( [
             'message'  => $new_priority
-                ? __( 'Marqué comme prioritaire.', 'mrz-gift-lists-exp' )
-                : __( 'Priorité retirée.', 'mrz-gift-lists-exp' ),
+                ? __( 'Marked as priority.', 'mrz-gift-lists-exp' )
+                : __( 'Priority removed.', 'mrz-gift-lists-exp' ),
             'priority' => $new_priority,
         ] );
     }
@@ -232,7 +232,7 @@ class Handler {
         $list_id = isset( $_POST['list_id'] ) ? absint( $_POST['list_id'] ) : 0;
 
         if ( ! $list_id ) {
-            wp_send_json_error( [ 'message' => __( 'Données manquantes.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Missing data.', 'mrz-gift-lists-exp' ) ] );
         }
 
         if ( ! $this->verify_ownership( $list_id ) ) {
@@ -258,13 +258,13 @@ class Handler {
         }
 
         if ( empty( $data ) ) {
-            wp_send_json_error( [ 'message' => __( 'Aucune donnée à mettre à jour.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Nothing to update.', 'mrz-gift-lists-exp' ) ] );
         }
 
         if ( $this->list_repo->update( $list_id, $data ) ) {
-            wp_send_json_success( [ 'message' => __( 'Liste mise à jour.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_success( [ 'message' => __( 'List updated.', 'mrz-gift-lists-exp' ) ] );
         } else {
-            wp_send_json_error( [ 'message' => __( 'Erreur lors de la mise à jour.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Error while updating.', 'mrz-gift-lists-exp' ) ] );
         }
     }
 
@@ -277,7 +277,7 @@ class Handler {
         $list_id = isset( $_POST['list_id'] ) ? absint( $_POST['list_id'] ) : 0;
 
         if ( ! $list_id ) {
-            wp_send_json_error( [ 'message' => __( 'Données manquantes.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Missing data.', 'mrz-gift-lists-exp' ) ] );
         }
 
         if ( ! $this->verify_ownership( $list_id ) ) {
@@ -290,11 +290,11 @@ class Handler {
         // Puis la liste
         if ( $this->list_repo->delete( $list_id ) ) {
             wp_send_json_success( [
-                'message'  => __( 'Liste supprimée.', 'mrz-gift-lists-exp' ),
+                'message'  => __( 'List deleted.', 'mrz-gift-lists-exp' ),
                 'redirect' => \Mrzgle\Plugin::instance()->get_lists_page_url(),
             ] );
         } else {
-            wp_send_json_error( [ 'message' => __( 'Erreur lors de la suppression.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Error while deleting.', 'mrz-gift-lists-exp' ) ] );
         }
     }
 
@@ -310,14 +310,14 @@ class Handler {
         $quantity = isset( $_POST['quantity'] ) ? absint( $_POST['quantity'] ) : 1;
 
         if ( ! $product_id || ! $list_id || ! $item_id ) {
-            wp_send_json_error( [ 'message' => __( 'Données manquantes.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Missing data.', 'mrz-gift-lists-exp' ) ] );
         }
 
         // Vérifie que le produit est dans la liste
         $item = $this->item_repo->find( $item_id );
 
         if ( ! $item || (int) $item->list_id !== $list_id ) {
-            wp_send_json_error( [ 'message' => __( 'Produit introuvable dans la liste.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Product not found in the list.', 'mrz-gift-lists-exp' ) ] );
         }
 
         // Calcule la quantité restante
@@ -325,7 +325,7 @@ class Handler {
 
         // Vérifie que le produit n'est pas déjà entièrement acheté
         if ( $quantity_remaining <= 0 ) {
-            wp_send_json_error( [ 'message' => __( 'Ce produit a déjà été offert.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'This product has already been gifted.', 'mrz-gift-lists-exp' ) ] );
         }
 
         // Limite la quantité disponible
@@ -341,12 +341,12 @@ class Handler {
 
         if ( $cart_item_key ) {
             wp_send_json_success( [
-                'message'   => __( 'Produit ajouté au panier.', 'mrz-gift-lists-exp' ),
+                'message'   => __( 'Product added to the cart.', 'mrz-gift-lists-exp' ),
                 'cart_url'  => wc_get_cart_url(),
                 'cart_hash' => WC()->cart->get_cart_hash(),
             ] );
         } else {
-            wp_send_json_error( [ 'message' => __( 'Erreur lors de l\'ajout au panier.', 'mrz-gift-lists-exp' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Error while adding to the cart.', 'mrz-gift-lists-exp' ) ] );
         }
     }
 }
