@@ -14,7 +14,7 @@
  * Text Domain:       mrz-gift-lists-exp
  * Domain Path:       /languages
  * WC requires at least: 8.0
- * WC tested up to:   9.0
+ * WC tested up to:   11.2
  *
  * MRZ Gift Lists — Copyright (C) 2026 Morez.co <hello@morez.co>
  * "MRZ Gift Lists" is a trademark of Morez.co. See LICENSE for full terms.
