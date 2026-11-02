@@ -3,7 +3,7 @@
 Ce dossier contient les visuels affichés sur la page publique du plugin sur
 wordpress.org. Il n'est **pas** livré dans le plugin (exclu via `.distignore`).
 
-## Fichiers attendus (à fournir par Morez.co)
+## Fichiers
 
 | Fichier | Dimensions | Rôle |
 |---|---|---|
