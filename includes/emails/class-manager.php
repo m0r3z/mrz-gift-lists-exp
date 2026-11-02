@@ -187,7 +187,7 @@ class Manager {
 
                 return sprintf(
                     /* translators: 1: Site name, 2: Gift list title, 3: Creator display name, 4: Creator email address, 5: Gift list URL, 6: Site name. */
-                    __( "Hello,\n\nA new gift list has been created on %s.\n\nTitle: %s\nCreator: %s (%s)\n\nView the list: %s\n\nBest regards,\n%s", 'mrz-gift-lists-exp' ),
+                    __( "Hello,\n\nA new gift list has been created on %1\$s.\n\nTitle: %2\$s\nCreator: %3\$s (%4\$s)\n\nView the list: %5\$s\n\nBest regards,\n%6\$s", 'mrz-gift-lists-exp' ),
                     $site_name,
                     $list->title,
                     $user ? $user->display_name : __( 'Unknown', 'mrz-gift-lists-exp' ),
@@ -204,7 +204,7 @@ class Manager {
 
                 $message = sprintf(
                     /* translators: 1: Gift list title, 2: Product name, 3: Buyer name. */
-                    __( "Hello,\n\nGood news! A gift has been purchased from your list \"%s\".\n\nProduct: %s\nGifted by: %s", 'mrz-gift-lists-exp' ),
+                    __( "Hello,\n\nGood news! A gift has been purchased from your list \"%1\$s\".\n\nProduct: %2\$s\nGifted by: %3\$s", 'mrz-gift-lists-exp' ),
                     $list->title,
                     $product ? $product->get_name() : __( 'Product', 'mrz-gift-lists-exp' ),
                     $buyer_name
@@ -235,7 +235,7 @@ class Manager {
 
                 return sprintf(
                     /* translators: 1: Gift list title, 2: List owner display name, 3: List owner email address, 4: Product name, 5: Buyer name, 6: Order number, 7: Site name. */
-                    __( "Hello,\n\nA purchase has been made from a gift list.\n\nList: %s\nOwner: %s (%s)\nProduct: %s\nBuyer: %s\nOrder: #%d\n\nBest regards,\n%s", 'mrz-gift-lists-exp' ),
+                    __( "Hello,\n\nA purchase has been made from a gift list.\n\nList: %1\$s\nOwner: %2\$s (%3\$s)\nProduct: %4\$s\nBuyer: %5\$s\nOrder: #%6\$d\n\nBest regards,\n%7\$s", 'mrz-gift-lists-exp' ),
                     $list->title,
                     $owner->display_name,
                     $owner->user_email,

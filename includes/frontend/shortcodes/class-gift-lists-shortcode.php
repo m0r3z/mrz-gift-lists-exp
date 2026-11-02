@@ -167,9 +167,9 @@ class GiftListsShortcode {
             <div class="mrz-gle-row-main">
                 <a class="mrz-gle-row-title" href="<?php echo esc_url( $list_url ); ?>"><?php echo esc_html( $list->title ); ?></a>
                 <div class="mrz-gle-row-stats">
-                    <span><?php echo esc_html( $stats->total_items ); ?> <?php esc_html_e( 'products', 'mrz-gift-lists-exp' ); ?></span>
+                    <span><?php echo esc_html( sprintf( /* translators: %d: Number of products in the list. */ _n( '%d product', '%d products', (int) $stats->total_items, 'mrz-gift-lists-exp' ), (int) $stats->total_items ) ); ?></span>
                     <?php if ( $stats->purchased_items > 0 ) : ?>
-                        <span><?php echo esc_html( $stats->purchased_items ); ?> <?php esc_html_e( 'purchased', 'mrz-gift-lists-exp' ); ?></span>
+                        <span><?php echo esc_html( sprintf( /* translators: %d: Number of purchased products. */ _n( '%d purchased', '%d purchased', (int) $stats->purchased_items, 'mrz-gift-lists-exp' ), (int) $stats->purchased_items ) ); ?></span>
                     <?php endif; ?>
                     <?php if ( ! $is_active ) : ?>
                         <span class="mrz-gle-row-inactive"><?php esc_html_e( 'deactivated', 'mrz-gift-lists-exp' ); ?></span>
@@ -672,7 +672,7 @@ class GiftListsShortcode {
                         <div class="mrz-gle-progress-bar">
                             <div class="mrz-gle-progress-fill" style="width: <?php echo esc_attr( $percent ); ?>%;"></div>
                         </div>
-                        <p class="mrz-gle-progress-text"><?php echo esc_html( sprintf( /* translators: 1: Number of purchased products, 2: Total number of products, 3: Percentage of purchased products. */ __( '%1$d of %2$d products purchased (%3$d%%)', 'mrz-gift-lists-exp' ), $stats->purchased_items, $stats->total_items, $percent ) ); ?></p>
+                        <p class="mrz-gle-progress-text"><?php echo esc_html( sprintf( /* translators: 1: Number of purchased products, 2: Total number of products, 3: Percentage of purchased products. */ _n( '%1$d of %2$d product purchased (%3$d%%)', '%1$d of %2$d products purchased (%3$d%%)', (int) $stats->total_items, 'mrz-gift-lists-exp' ), $stats->purchased_items, $stats->total_items, $percent ) ); ?></p>
                     </div>
 
                     <ul class="mrz-gle-products-list">
