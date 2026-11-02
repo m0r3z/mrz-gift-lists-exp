@@ -4,7 +4,7 @@ Tags: gift list, wishlist, woocommerce, gift registry, wedding registry
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.12.1
+Stable tag: 0.12.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -59,6 +59,11 @@ No. Anyone with the share link can buy items from a list. Creating a list requir
 Yes. The front-end CSS is intentionally minimal (structure only), so it inherits your theme's look. Style the `.mrz-gle-*` classes in your own CSS to match your brand.
 
 == Changelog ==
+
+= 0.12.2 =
+* Security: escaped the page dropdowns on the settings screen.
+* Use wp_rand() instead of rand() when adding a gift to the cart.
+* Code cleanup for Plugin Check: icons are printed with escaped output, the admin list query and the uninstall routine are documented, and uninstall variables are prefixed.
 
 = 0.12.1 =
 * Fix: email placeholders are now numbered, so translations can reorder them.
