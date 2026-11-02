@@ -4,7 +4,7 @@ Tags: gift list, wishlist, woocommerce, gift registry, wedding registry
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 0.12.0
+Stable tag: 0.12.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -59,6 +59,14 @@ No. Anyone with the share link can buy items from a list. Creating a list requir
 Yes. The front-end CSS is intentionally minimal (structure only), so it inherits your theme's look. Style the `.mrz-gle-*` classes in your own CSS to match your brand.
 
 == Changelog ==
+
+= 0.12.1 =
+* Fix: email placeholders are now numbered, so translations can reorder them.
+* Fix: product counts use proper singular and plural forms ("1 product", "2 products").
+* Security: escaped the Settings link on the Plugins screen and unslashed the list key before sanitizing it.
+* Delete confirmations and the share link field no longer use inline `onclick` handlers; they are handled by the plugin scripts.
+* Tested with WooCommerce 11.2.
+* Updated the fr_FR translation.
 
 = 0.12.0 =
 * Declared WooCommerce as a required plugin (`Requires Plugins` header, WordPress 6.5+).
