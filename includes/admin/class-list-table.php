@@ -164,7 +164,8 @@ class ListTable extends \WP_List_Table {
                 ORDER BY l.{$orderby} {$order}
                 LIMIT %d OFFSET %d";
 
-        return $wpdb->get_results( $wpdb->prepare( $sql, $params ) );
+        // $orderby, $order et le nom de table sont en liste blanche ou constants (voir plus haut) ; les valeurs passent par prepare().
+        return $wpdb->get_results( $wpdb->prepare( $sql, $params ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     }
 
     /**

@@ -16,17 +16,18 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 global $wpdb;
 
 // Supprime les tables
-$tables = [
+$mrzgle_tables = [
     $wpdb->prefix . 'mrzgle_lists',
     $wpdb->prefix . 'mrzgle_items',
 ];
 
-foreach ( $tables as $table ) {
-    $wpdb->query( "DROP TABLE IF EXISTS {$table}" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+foreach ( $mrzgle_tables as $mrzgle_table ) {
+    // Nom de table construit à partir de $wpdb->prefix et d'une liste fixe : rien à préparer ni à mettre en cache.
+    $wpdb->query( "DROP TABLE IF EXISTS {$mrzgle_table}" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
 }
 
 // Supprime les options
-$options = [
+$mrzgle_options = [
     'mrzgle_db_version',
     'mrzgle_page_id',
     'mrzgle_shop_page_id',
@@ -39,19 +40,19 @@ $options = [
     'mrzgle_share_networks',
 ];
 
-foreach ( $options as $option ) {
-    delete_option( $option );
+foreach ( $mrzgle_options as $mrzgle_option ) {
+    delete_option( $mrzgle_option );
 }
 
 // Supprime les capabilities
-$roles = [ 'administrator', 'shop_manager' ];
-$capabilities = [ 'mrzgle_manage_lists', 'mrzgle_edit_lists', 'mrzgle_delete_lists' ];
+$mrzgle_roles = [ 'administrator', 'shop_manager' ];
+$mrzgle_capabilities = [ 'mrzgle_manage_lists', 'mrzgle_edit_lists', 'mrzgle_delete_lists' ];
 
-foreach ( $roles as $role_name ) {
-    $role = get_role( $role_name );
-    if ( $role ) {
-        foreach ( $capabilities as $cap ) {
-            $role->remove_cap( $cap );
+foreach ( $mrzgle_roles as $mrzgle_role_name ) {
+    $mrzgle_role = get_role( $mrzgle_role_name );
+    if ( $mrzgle_role ) {
+        foreach ( $mrzgle_capabilities as $mrzgle_cap ) {
+            $mrzgle_role->remove_cap( $mrzgle_cap );
         }
     }
 }

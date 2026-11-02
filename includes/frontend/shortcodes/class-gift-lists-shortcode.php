@@ -178,19 +178,19 @@ class GiftListsShortcode {
             </div>
 
             <div class="mrz-gle-row-actions">
-                <a class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon" href="<?php echo esc_url( $list_url ); ?>" title="<?php esc_attr_e( 'View', 'mrz-gift-lists-exp' ); ?>"><?php echo $this->icon( 'eye', __( 'View', 'mrz-gift-lists-exp' ) ); ?></a>
-                <a class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon" href="<?php echo esc_url( add_query_arg( [ 'action' => 'edit', 'list_id' => $list->id ], \Mrzgle\Plugin::instance()->get_lists_page_url() ) ); ?>" title="<?php esc_attr_e( 'Edit', 'mrz-gift-lists-exp' ); ?>"><?php echo $this->icon( 'edit', __( 'Edit', 'mrz-gift-lists-exp' ) ); ?></a>
+                <a class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon" href="<?php echo esc_url( $list_url ); ?>" title="<?php esc_attr_e( 'View', 'mrz-gift-lists-exp' ); ?>"><?php $this->render_icon( 'eye', __( 'View', 'mrz-gift-lists-exp' ) ); ?></a>
+                <a class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon" href="<?php echo esc_url( add_query_arg( [ 'action' => 'edit', 'list_id' => $list->id ], \Mrzgle\Plugin::instance()->get_lists_page_url() ) ); ?>" title="<?php esc_attr_e( 'Edit', 'mrz-gift-lists-exp' ); ?>"><?php $this->render_icon( 'edit', __( 'Edit', 'mrz-gift-lists-exp' ) ); ?></a>
                 <form method="post" class="mrz-gle-list-manage">
                     <?php wp_nonce_field( 'mrzgle_owner_list_action_' . $list->id, 'mrzgle_list_nonce' ); ?>
                     <input type="hidden" name="mrzgle_list_id" value="<?php echo esc_attr( $list->id ); ?>">
                     <input type="hidden" name="mrzgle_return" value="my-lists">
                     <?php if ( $is_active ) : ?>
-                        <button type="submit" name="mrzgle_list_action" value="deactivate" class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon" title="<?php esc_attr_e( 'Deactivate', 'mrz-gift-lists-exp' ); ?>"><?php echo $this->icon( 'pause-circle', __( 'Deactivate', 'mrz-gift-lists-exp' ) ); ?></button>
+                        <button type="submit" name="mrzgle_list_action" value="deactivate" class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon" title="<?php esc_attr_e( 'Deactivate', 'mrz-gift-lists-exp' ); ?>"><?php $this->render_icon( 'pause-circle', __( 'Deactivate', 'mrz-gift-lists-exp' ) ); ?></button>
                     <?php else : ?>
-                        <button type="submit" name="mrzgle_list_action" value="activate" class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon" title="<?php esc_attr_e( 'Activate', 'mrz-gift-lists-exp' ); ?>"><?php echo $this->icon( 'play-circle', __( 'Activate', 'mrz-gift-lists-exp' ) ); ?></button>
+                        <button type="submit" name="mrzgle_list_action" value="activate" class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon" title="<?php esc_attr_e( 'Activate', 'mrz-gift-lists-exp' ); ?>"><?php $this->render_icon( 'play-circle', __( 'Activate', 'mrz-gift-lists-exp' ) ); ?></button>
                     <?php endif; ?>
                     <button type="submit" name="mrzgle_list_action" value="delete" class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon mrz-gle-btn-danger mrz-gle-confirm" title="<?php esc_attr_e( 'Delete', 'mrz-gift-lists-exp' ); ?>"
-                            data-confirm="<?php esc_attr_e( 'Permanently delete this list?', 'mrz-gift-lists-exp' ); ?>"><?php echo $this->icon( 'trash', __( 'Delete', 'mrz-gift-lists-exp' ) ); ?></button>
+                            data-confirm="<?php esc_attr_e( 'Permanently delete this list?', 'mrz-gift-lists-exp' ); ?>"><?php $this->render_icon( 'trash', __( 'Delete', 'mrz-gift-lists-exp' ) ); ?></button>
                 </form>
             </div>
         </li>
@@ -218,7 +218,7 @@ class GiftListsShortcode {
 
                 <?php if ( Frontend::can_create_list() ) : ?>
                     <a href="<?php echo esc_url( add_query_arg( 'action', 'create' ) ); ?>" class="mrz-gle-btn mrz-gle-btn-primary">
-                        <?php echo $this->icon( 'add', '' ); ?> <?php esc_html_e( 'New list', 'mrz-gift-lists-exp' ); ?>
+                        <?php $this->render_icon( 'add', '' ); ?> <?php esc_html_e( 'New list', 'mrz-gift-lists-exp' ); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -627,11 +627,11 @@ class GiftListsShortcode {
 
                 <div class="mrz-gle-owner-actions">
                     <a href="<?php echo esc_url( $this->get_shop_url() ); ?>" class="mrz-gle-btn mrz-gle-btn-primary">
-                        <?php echo $this->icon( 'add', '' ); ?> <?php esc_html_e( 'Add product', 'mrz-gift-lists-exp' ); ?>
+                        <?php $this->render_icon( 'add', '' ); ?> <?php esc_html_e( 'Add product', 'mrz-gift-lists-exp' ); ?>
                     </a>
 
                     <a href="<?php echo esc_url( add_query_arg( [ 'action' => 'edit', 'list_id' => $list->id ], \Mrzgle\Plugin::instance()->get_lists_page_url() ) ); ?>" class="mrz-gle-btn">
-                        <?php echo $this->icon( 'edit', '' ); ?> <?php esc_html_e( 'Edit', 'mrz-gift-lists-exp' ); ?>
+                        <?php $this->render_icon( 'edit', '' ); ?> <?php esc_html_e( 'Edit', 'mrz-gift-lists-exp' ); ?>
                     </a>
 
                     <form method="post" class="mrz-gle-list-manage">
@@ -639,12 +639,12 @@ class GiftListsShortcode {
                         <input type="hidden" name="mrzgle_list_id" value="<?php echo esc_attr( $list->id ); ?>">
                         <input type="hidden" name="mrzgle_return" value="list">
                         <?php if ( 'active' === $list->status ) : ?>
-                            <button type="submit" name="mrzgle_list_action" value="deactivate" class="mrz-gle-btn"><?php echo $this->icon( 'pause-circle', '' ); ?> <?php esc_html_e( 'Deactivate', 'mrz-gift-lists-exp' ); ?></button>
+                            <button type="submit" name="mrzgle_list_action" value="deactivate" class="mrz-gle-btn"><?php $this->render_icon( 'pause-circle', '' ); ?> <?php esc_html_e( 'Deactivate', 'mrz-gift-lists-exp' ); ?></button>
                         <?php else : ?>
-                            <button type="submit" name="mrzgle_list_action" value="activate" class="mrz-gle-btn"><?php echo $this->icon( 'play-circle', '' ); ?> <?php esc_html_e( 'Activate', 'mrz-gift-lists-exp' ); ?></button>
+                            <button type="submit" name="mrzgle_list_action" value="activate" class="mrz-gle-btn"><?php $this->render_icon( 'play-circle', '' ); ?> <?php esc_html_e( 'Activate', 'mrz-gift-lists-exp' ); ?></button>
                         <?php endif; ?>
                         <button type="submit" name="mrzgle_list_action" value="delete" class="mrz-gle-btn mrz-gle-btn-danger mrz-gle-confirm"
-                                data-confirm="<?php esc_attr_e( 'Permanently delete this list?', 'mrz-gift-lists-exp' ); ?>"><?php echo $this->icon( 'trash', '' ); ?> <?php esc_html_e( 'Delete', 'mrz-gift-lists-exp' ); ?></button>
+                                data-confirm="<?php esc_attr_e( 'Permanently delete this list?', 'mrz-gift-lists-exp' ); ?>"><?php $this->render_icon( 'trash', '' ); ?> <?php esc_html_e( 'Delete', 'mrz-gift-lists-exp' ); ?></button>
                     </form>
                 </div>
             <?php endif; ?>
@@ -687,7 +687,7 @@ class GiftListsShortcode {
                             <p><?php esc_html_e( 'Start by adding products from the shop.', 'mrz-gift-lists-exp' ); ?></p>
                             <p class="mrz-gle-empty-actions">
                                 <a href="<?php echo esc_url( $this->get_shop_url() ); ?>" class="mrz-gle-btn mrz-gle-btn-primary">
-                                    <?php echo $this->icon( 'add', '' ); ?> <?php esc_html_e( 'Add product', 'mrz-gift-lists-exp' ); ?>
+                                    <?php $this->render_icon( 'add', '' ); ?> <?php esc_html_e( 'Add product', 'mrz-gift-lists-exp' ); ?>
                                 </a>
                             </p>
                         <?php endif; ?>
@@ -742,7 +742,7 @@ class GiftListsShortcode {
                 <?php endif; ?>
 
                 <a class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon" href="<?php echo esc_url( $item->product_url ); ?>" title="<?php esc_attr_e( 'View product', 'mrz-gift-lists-exp' ); ?>">
-                    <?php echo $this->icon( 'eye', __( 'View product', 'mrz-gift-lists-exp' ) ); ?>
+                    <?php $this->render_icon( 'eye', __( 'View product', 'mrz-gift-lists-exp' ) ); ?>
                 </a>
 
                 <?php if ( $is_owner ) : ?>
@@ -750,13 +750,13 @@ class GiftListsShortcode {
                             class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon mrz-gle-toggle-priority"
                             data-item-id="<?php echo esc_attr( $item->id ); ?>"
                             title="<?php esc_attr_e( 'Favorite (show at the top)', 'mrz-gift-lists-exp' ); ?>">
-                        <?php echo $this->icon( $item->priority ? 'star-active' : 'star', __( 'Favorite', 'mrz-gift-lists-exp' ) ); ?>
+                        <?php $this->render_icon( $item->priority ? 'star-active' : 'star', __( 'Favorite', 'mrz-gift-lists-exp' ) ); ?>
                     </button>
                     <button type="button"
                             class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon mrz-gle-btn-danger mrz-gle-remove-item"
                             data-item-id="<?php echo esc_attr( $item->id ); ?>"
                             title="<?php esc_attr_e( 'Remove from list', 'mrz-gift-lists-exp' ); ?>">
-                        <?php echo $this->icon( 'trash', __( 'Remove from list', 'mrz-gift-lists-exp' ) ); ?>
+                        <?php $this->render_icon( 'trash', __( 'Remove from list', 'mrz-gift-lists-exp' ) ); ?>
                     </button>
                 <?php endif; ?>
             </div>
@@ -782,14 +782,13 @@ class GiftListsShortcode {
     }
 
     /**
-     * Retourne la balise <img> d'une icône du plugin (assets/img/<name>.svg).
+     * Affiche la balise <img> d'une icône du plugin (assets/img/<name>.svg).
      *
      * @param string $name  Nom du fichier, sans extension.
      * @param string $label Texte alternatif (accessibilité).
-     * @return string
      */
-    private function icon( string $name, string $label ): string {
-        return sprintf(
+    private function render_icon( string $name, string $label ): void {
+        printf(
             '<img class="mrz-gle-icon" src="%s" alt="%s">',
             esc_url( MRZGLE_PLUGIN_URL . 'assets/img/' . $name . '.svg' ),
             esc_attr( $label )
@@ -811,7 +810,7 @@ class GiftListsShortcode {
             <div class="mrz-gle-share-link">
                 <input type="text" class="mrz-gle-share-url" value="<?php echo esc_url( $list_url ); ?>" readonly>
                 <button type="button" class="mrz-gle-btn mrz-gle-share-copy" data-url="<?php echo esc_attr( $list_url ); ?>">
-                    <?php echo $this->icon( 'copy-alt', '' ); ?> <?php esc_html_e( 'Copy link', 'mrz-gift-lists-exp' ); ?>
+                    <?php $this->render_icon( 'copy-alt', '' ); ?> <?php esc_html_e( 'Copy link', 'mrz-gift-lists-exp' ); ?>
                 </button>
             </div>
         </div>
