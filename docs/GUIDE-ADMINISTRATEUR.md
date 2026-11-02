@@ -176,9 +176,9 @@ Si la commande contient un produit de liste :
 
 | Capacité | Description |
 |----------|-------------|
-| `mrz_gle_manage_lists` | Accès complet à l'administration du plugin |
-| `mrz_gle_edit_lists` | Modification des listes |
-| `mrz_gle_delete_lists` | Suppression des listes |
+| `mrzgle_manage_lists` | Accès complet à l'administration du plugin |
+| `mrzgle_edit_lists` | Modification des listes |
+| `mrzgle_delete_lists` | Suppression des listes |
 
 ### Rôles avec accès
 
@@ -194,7 +194,7 @@ Si la commande contient un produit de liste :
 add_action( 'init', function() {
     $role = get_role( 'editor' ); // ou autre rôle
     if ( $role ) {
-        $role->add_cap( 'mrz_gle_manage_lists' );
+        $role->add_cap( 'mrzgle_manage_lists' );
     }
 });
 ```
@@ -207,10 +207,10 @@ add_action( 'init', function() {
 
 | Table | Description |
 |-------|-------------|
-| `wp_mrz_gle_lists` | Listes de cadeaux |
-| `wp_mrz_gle_items` | Produits dans les listes |
+| `wp_mrzgle_lists` | Listes de cadeaux |
+| `wp_mrzgle_items` | Produits dans les listes |
 
-### Structure wp_mrz_gle_lists
+### Structure wp_mrzgle_lists
 
 | Colonne | Type | Description |
 |---------|------|-------------|
@@ -225,7 +225,7 @@ add_action( 'init', function() {
 | created_at | DATETIME | Date de création |
 | updated_at | DATETIME | Date de modification |
 
-### Structure wp_mrz_gle_items
+### Structure wp_mrzgle_items
 
 | Colonne | Type | Description |
 |---------|------|-------------|
@@ -246,8 +246,8 @@ add_action( 'init', function() {
 
 La suppression du plugin via WordPress supprime :
 - Les 2 tables de base de données
-- Toutes les options (mrz_gle_*)
+- Toutes les options (mrzgle_*)
 - Les capacités des rôles
 - Les transients
 
-**Non supprimé** : Les métadonnées des commandes WooCommerce (_mrz_gle_*)
+**Non supprimé** : Les métadonnées des commandes WooCommerce (_mrzgle_*)

@@ -30,7 +30,8 @@ Plugin WordPress/WooCommerce permettant aux clients de créer des listes de cade
 
 À l'activation, le plugin :
 - Crée les tables nécessaires dans la base de données
-- Crée une page "Listes de cadeaux" avec le shortcode `[mrz_gift_lists]`
+
+Aucune page n'est créée automatiquement : créez une page contenant le shortcode `[mrzgle_lists]`, puis sélectionnez-la dans les réglages du plugin.
 
 ---
 
@@ -104,7 +105,7 @@ Affiche :
 
 | Option | Description | Valeur par défaut |
 |--------|-------------|-------------------|
-| Page des listes | Page contenant le shortcode principal | Page créée à l'activation |
+| Page des listes | Page contenant le shortcode principal | Aucune (à sélectionner) |
 | Qui peut créer | Utilisateurs connectés ou clients WC uniquement | Utilisateurs connectés |
 | Listes max par utilisateur | Limite de listes actives simultanées (0 = illimité) | 5 |
 
@@ -121,7 +122,7 @@ Affiche :
 
 ### Page d'accueil des listes
 
-Accessible via la page créée à l'activation ou en ajoutant le shortcode `[mrz_gift_lists]` sur n'importe quelle page.
+Accessible sur la page qui contient le shortcode `[mrzgle_lists]`.
 
 **Affiche :**
 - Titre et description d'introduction
@@ -168,7 +169,7 @@ Le créateur de la liste a accès à des fonctionnalités supplémentaires :
 
 La page de la liste affiche un champ en lecture seule contenant le lien de partage, accompagné d'un bouton **"Copier le lien"**. C'est le seul moyen de partage : la liste est privée et n'est accessible qu'à partir de ce lien.
 
-**URL de la liste** : `https://votre-site.com/mrz-gift-lists/?mrz_gle_list_key=XXXXXX`
+**URL de la liste** : `https://votre-site.com/mrz-gift-lists/?mrzgle_list_key=XXXXXX`
 
 ### Offrir un cadeau
 
@@ -220,7 +221,7 @@ Le message cadeau (si renseigné) est affiché dans les détails de la commande 
 
 ## Shortcodes
 
-### [mrz_gift_lists]
+### [mrzgle_lists]
 
 Shortcode principal affichant l'interface complète des listes.
 
@@ -233,9 +234,9 @@ Shortcode principal affichant l'interface complète des listes.
 **Exemples :**
 
 ```
-[mrz_gift_lists]                    // Interface complète
-[mrz_gift_lists view="my-lists"]    // Affiche directement "Mes listes"
-[mrz_gift_lists view="create"]      // Affiche directement le formulaire de création
+[mrzgle_lists]                    // Interface complète
+[mrzgle_lists view="my-lists"]    // Affiche directement "Mes listes"
+[mrzgle_lists view="create"]      // Affiche directement le formulaire de création
 ```
 
 ---
@@ -246,13 +247,13 @@ Shortcode principal affichant l'interface complète des listes.
 
 | Action | Description | Paramètres |
 |--------|-------------|------------|
-| `mrz_gle_list_created` | Déclenchée après la création d'une liste | `$list_id` |
-| `mrz_gle_item_purchased` | Déclenchée après l'achat d'un produit | `$item_id`, `$list_id`, `$order_id`, `$buyer_name` |
+| `mrzgle_list_created` | Déclenchée après la création d'une liste | `$list_id` |
+| `mrzgle_item_purchased` | Déclenchée après l'achat d'un produit | `$item_id`, `$list_id`, `$order_id`, `$buyer_name` |
 
 **Exemple d'utilisation :**
 
 ```php
-add_action( 'mrz_gle_list_created', function( $list_id ) {
+add_action( 'mrzgle_list_created', function( $list_id ) {
     // Votre code personnalisé
     error_log( 'Nouvelle liste créée : ' . $list_id );
 } );
@@ -264,7 +265,7 @@ Les données sont accessibles via les repositories :
 
 ```php
 // Récupérer une liste
-$list_repo = new \MrzGiftsListsExp\Repositories\ListRepository();
+$list_repo = new \Mrzgle\Repositories\ListRepository();
 $list = $list_repo->find( $list_id );
 $list = $list_repo->find_by_access_key( 'abc123' );
 
@@ -272,7 +273,7 @@ $list = $list_repo->find_by_access_key( 'abc123' );
 $lists = $list_repo->find_by_user( $user_id );
 
 // Récupérer les produits d'une liste
-$item_repo = new \MrzGiftsListsExp\Repositories\ItemRepository();
+$item_repo = new \Mrzgle\Repositories\ItemRepository();
 $items = $item_repo->find_by_list( $list_id );
 
 // Statistiques d'une liste
@@ -286,7 +287,7 @@ $stats = $item_repo->get_list_stats( $list_id );
 
 ### Comment changer l'URL de la page des listes ?
 
-1. Créez une nouvelle page avec le shortcode `[mrz_gift_lists]`
+1. Créez une nouvelle page avec le shortcode `[mrzgle_lists]`
 2. Allez dans **Listes cadeaux > Réglages**
 3. Sélectionnez la nouvelle page dans "Page des listes"
 
@@ -347,10 +348,4 @@ Pour signaler un bug ou demander une fonctionnalité, créez une issue sur le d�
 
 ## Changelog
 
-### Version 1.0.0
-- Version initiale
-- Création et gestion des listes de cadeaux
-- Intégration complète WooCommerce
-- Partage de liste par lien
-- Notifications par email
-- Interface d'administration complète
+Le journal des versions est tenu dans la section `== Changelog ==` de [`readme.txt`](readme.txt).
