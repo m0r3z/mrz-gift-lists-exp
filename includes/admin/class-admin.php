@@ -173,7 +173,7 @@ class Admin {
      */
     public function add_plugin_links( array $links ): array {
         $plugin_links = [
-            '<a href="' . admin_url( 'admin.php?page=mrz-gle-settings' ) . '">' . __( 'Settings', 'mrz-gift-lists-exp' ) . '</a>',
+            '<a href="' . esc_url( admin_url( 'admin.php?page=mrz-gle-settings' ) ) . '">' . esc_html__( 'Settings', 'mrz-gift-lists-exp' ) . '</a>',
         ];
 
         return array_merge( $plugin_links, $links );

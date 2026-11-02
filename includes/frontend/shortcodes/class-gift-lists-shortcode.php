@@ -189,8 +189,8 @@ class GiftListsShortcode {
                     <?php else : ?>
                         <button type="submit" name="mrzgle_list_action" value="activate" class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon" title="<?php esc_attr_e( 'Activate', 'mrz-gift-lists-exp' ); ?>"><?php echo $this->icon( 'play-circle', __( 'Activate', 'mrz-gift-lists-exp' ) ); ?></button>
                     <?php endif; ?>
-                    <button type="submit" name="mrzgle_list_action" value="delete" class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon mrz-gle-btn-danger" title="<?php esc_attr_e( 'Delete', 'mrz-gift-lists-exp' ); ?>"
-                            onclick="return confirm('<?php echo esc_js( __( 'Permanently delete this list?', 'mrz-gift-lists-exp' ) ); ?>');"><?php echo $this->icon( 'trash', __( 'Delete', 'mrz-gift-lists-exp' ) ); ?></button>
+                    <button type="submit" name="mrzgle_list_action" value="delete" class="mrz-gle-btn mrz-gle-btn-small mrz-gle-btn-icon mrz-gle-btn-danger mrz-gle-confirm" title="<?php esc_attr_e( 'Delete', 'mrz-gift-lists-exp' ); ?>"
+                            data-confirm="<?php esc_attr_e( 'Permanently delete this list?', 'mrz-gift-lists-exp' ); ?>"><?php echo $this->icon( 'trash', __( 'Delete', 'mrz-gift-lists-exp' ) ); ?></button>
                 </form>
             </div>
         </li>
@@ -562,7 +562,7 @@ class GiftListsShortcode {
      * Affiche une liste unique
      */
     private function render_single_list(): void {
-        $list_key = isset( $_GET['mrzgle_list_key'] ) ? sanitize_key( $_GET['mrzgle_list_key'] ) : '';
+        $list_key = isset( $_GET['mrzgle_list_key'] ) ? sanitize_key( wp_unslash( $_GET['mrzgle_list_key'] ) ) : '';
 
         if ( empty( $list_key ) ) {
             echo '<p>' . esc_html__( 'List not found.', 'mrz-gift-lists-exp' ) . '</p>';
@@ -643,8 +643,8 @@ class GiftListsShortcode {
                         <?php else : ?>
                             <button type="submit" name="mrzgle_list_action" value="activate" class="mrz-gle-btn"><?php echo $this->icon( 'play-circle', '' ); ?> <?php esc_html_e( 'Activate', 'mrz-gift-lists-exp' ); ?></button>
                         <?php endif; ?>
-                        <button type="submit" name="mrzgle_list_action" value="delete" class="mrz-gle-btn mrz-gle-btn-danger"
-                                onclick="return confirm('<?php echo esc_js( __( 'Permanently delete this list?', 'mrz-gift-lists-exp' ) ); ?>');"><?php echo $this->icon( 'trash', '' ); ?> <?php esc_html_e( 'Delete', 'mrz-gift-lists-exp' ); ?></button>
+                        <button type="submit" name="mrzgle_list_action" value="delete" class="mrz-gle-btn mrz-gle-btn-danger mrz-gle-confirm"
+                                data-confirm="<?php esc_attr_e( 'Permanently delete this list?', 'mrz-gift-lists-exp' ); ?>"><?php echo $this->icon( 'trash', '' ); ?> <?php esc_html_e( 'Delete', 'mrz-gift-lists-exp' ); ?></button>
                     </form>
                 </div>
             <?php endif; ?>
@@ -809,7 +809,7 @@ class GiftListsShortcode {
                 <?php esc_html_e( 'To share your list, send this link to your loved ones by text message, email or on social media:', 'mrz-gift-lists-exp' ); ?>
             </p>
             <div class="mrz-gle-share-link">
-                <input type="text" class="mrz-gle-share-url" value="<?php echo esc_url( $list_url ); ?>" readonly onclick="this.select();">
+                <input type="text" class="mrz-gle-share-url" value="<?php echo esc_url( $list_url ); ?>" readonly>
                 <button type="button" class="mrz-gle-btn mrz-gle-share-copy" data-url="<?php echo esc_attr( $list_url ); ?>">
                     <?php echo $this->icon( 'copy-alt', '' ); ?> <?php esc_html_e( 'Copy link', 'mrz-gift-lists-exp' ); ?>
                 </button>

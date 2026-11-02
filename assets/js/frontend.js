@@ -24,7 +24,19 @@
         initTogglePriority();
         initShareButtons();
         initAddToListFromProduct();
+        initConfirmActions();
     });
+
+    /**
+     * Confirmation avant une action destructive (message dans data-confirm)
+     */
+    function initConfirmActions() {
+        $(document).on('click', '.mrz-gle-confirm', function(e) {
+            if (!confirm($(this).data('confirm'))) {
+                e.preventDefault();
+            }
+        });
+    }
 
     /**
      * Ajout au panier depuis la liste
@@ -164,6 +176,11 @@
      * Boutons de partage
      */
     function initShareButtons() {
+        // Sélectionner le lien au clic dans le champ
+        $(document).on('click', '.mrz-gle-share-url', function() {
+            this.select();
+        });
+
         // Copier le lien
         $(document).on('click', '.mrz-gle-share-copy', function(e) {
             e.preventDefault();

@@ -25,12 +25,9 @@
      * Confirmation de suppression
      */
     function initConfirmDelete() {
-        $(document).on('click', '.mrz-gle-delete, [onclick*="confirm"]', function(e) {
-            if ($(this).attr('onclick')) {
-                return; // Déjà géré par onclick
-            }
-
-            if (!confirm(mrzGleAdmin.i18n.confirmDelete)) {
+        $(document).on('click', '.mrz-gle-delete', function(e) {
+            // Message propre au lien (data-confirm), sinon message générique
+            if (!confirm($(this).data('confirm') || mrzGleAdmin.i18n.confirmDelete)) {
                 e.preventDefault();
                 return false;
             }

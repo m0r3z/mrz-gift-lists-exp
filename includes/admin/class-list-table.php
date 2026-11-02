@@ -214,7 +214,7 @@ class ListTable extends \WP_List_Table {
                 __( 'View on site', 'mrz-gift-lists-exp' )
             ),
             'delete' => sprintf(
-                '<a href="%s" class="mrz-gle-delete" onclick="return confirm(\'%s\');">%s</a>',
+                '<a href="%s" class="mrz-gle-delete" data-confirm="%s">%s</a>',
                 esc_url( $delete_url ),
                 esc_attr__( 'Are you sure you want to delete this list?', 'mrz-gift-lists-exp' ),
                 __( 'Delete', 'mrz-gift-lists-exp' )

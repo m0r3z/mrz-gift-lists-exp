@@ -384,7 +384,7 @@ class ListsPage {
                             <?php endif; ?>
 
                             <p>
-                                <a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mrz-gle-lists&action=delete&list_id=' . $list->id ), 'mrzgle_list_action' ) ); ?>" class="button" style="width: 100%; text-align: center; color: #d63638;" onclick="return confirm('<?php esc_attr_e( 'Are you sure you want to delete this list?', 'mrz-gift-lists-exp' ); ?>');">
+                                <a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mrz-gle-lists&action=delete&list_id=' . $list->id ), 'mrzgle_list_action' ) ); ?>" class="button mrz-gle-delete" style="width: 100%; text-align: center; color: #d63638;" data-confirm="<?php esc_attr_e( 'Are you sure you want to delete this list?', 'mrz-gift-lists-exp' ); ?>">
                                     <?php esc_html_e( 'Delete', 'mrz-gift-lists-exp' ); ?>
                                 </a>
                             </p>
