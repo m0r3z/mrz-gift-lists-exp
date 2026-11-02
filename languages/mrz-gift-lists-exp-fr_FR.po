@@ -1,6 +1,3 @@
-# Traduction française de MRZ Gift Lists.
-# Copyright (C) 2026 Morez.co
-# This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
 "Project-Id-Version: MRZ Gift Lists 0.12.0\n"
@@ -12,9 +9,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-10-31T16:37:09+00:00\n"
 "PO-Revision-Date: 2026-10-31 16:37+0000\n"
+"Language: fr_FR\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mrz-gift-lists-exp\n"
-"Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. Plugin Name of the plugin
@@ -120,7 +117,6 @@ msgstr "Utilisateur supprimé"
 
 #: includes/admin/class-list-table.php:274
 #: includes/admin/pages/class-lists-page.php:356
-#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:172
 msgid "purchased"
 msgstr "achetés"
 
@@ -435,51 +431,51 @@ msgstr "Produit ajouté au panier."
 msgid "Error while adding to the cart."
 msgstr "Erreur lors de l'ajout au panier."
 
-#: includes/class-plugin.php:183
+#: includes/class-plugin.php:194
 msgid "Are you sure you want to delete this item?"
 msgstr "Êtes-vous sûr de vouloir supprimer cet élément ?"
 
-#: includes/class-plugin.php:184
+#: includes/class-plugin.php:195
 msgid "Adding..."
 msgstr "Ajout en cours..."
 
-#: includes/class-plugin.php:185
+#: includes/class-plugin.php:196
 msgid "Added!"
 msgstr "Ajouté !"
 
-#: includes/class-plugin.php:186
+#: includes/class-plugin.php:197
 msgid "An error occurred"
 msgstr "Une erreur est survenue"
 
-#: includes/class-plugin.php:187
+#: includes/class-plugin.php:198
 msgid "Product added to the list"
 msgstr "Produit ajouté à la liste"
 
-#: includes/class-plugin.php:188
+#: includes/class-plugin.php:199
 msgid "Product removed from the list"
 msgstr "Produit retiré de la liste"
 
-#: includes/class-plugin.php:189
+#: includes/class-plugin.php:200
 msgid "Product added to the cart"
 msgstr "Produit ajouté au panier"
 
-#: includes/class-plugin.php:190
+#: includes/class-plugin.php:201
 msgid "Link copied!"
 msgstr "Lien copié !"
 
-#: includes/class-plugin.php:191
+#: includes/class-plugin.php:202
 msgid "Please select a list."
 msgstr "Veuillez sélectionner une liste."
 
-#: includes/class-plugin.php:221
+#: includes/class-plugin.php:232
 msgid "Are you sure you want to delete this?"
 msgstr "Êtes-vous sûr de vouloir supprimer ?"
 
-#: includes/class-plugin.php:222
+#: includes/class-plugin.php:233
 msgid "Saved"
 msgstr "Enregistré"
 
-#: includes/class-plugin.php:223
+#: includes/class-plugin.php:234
 msgid "Error"
 msgstr "Erreur"
 
@@ -501,55 +497,9 @@ msgstr "🎁 Un cadeau a été offert depuis votre liste \"%s\""
 msgid "[%s] Purchase from a gift list"
 msgstr "[%s] Achat depuis une liste de cadeaux"
 
-#. translators: 1: Site name, 2: Gift list title, 3: Creator display name, 4: Creator email address, 5: Gift list URL, 6: Site name.
-#: includes/emails/class-manager.php:190
-#, php-format
-msgid ""
-"Hello,\n"
-"\n"
-"A new gift list has been created on %s.\n"
-"\n"
-"Title: %s\n"
-"Creator: %s (%s)\n"
-"\n"
-"View the list: %s\n"
-"\n"
-"Best regards,\n"
-"%s"
-msgstr ""
-"Bonjour,\n"
-"\n"
-"Une nouvelle liste de cadeaux a été créée sur %s.\n"
-"\n"
-"Titre : %s\n"
-"Créateur : %s (%s)\n"
-"\n"
-"Voir la liste : %s\n"
-"\n"
-"Cordialement,\n"
-"%s"
-
 #: includes/emails/class-manager.php:193
 msgid "Unknown"
 msgstr "Inconnu"
-
-#. translators: 1: Gift list title, 2: Product name, 3: Buyer name.
-#: includes/emails/class-manager.php:207
-#, php-format
-msgid ""
-"Hello,\n"
-"\n"
-"Good news! A gift has been purchased from your list \"%s\".\n"
-"\n"
-"Product: %s\n"
-"Gifted by: %s"
-msgstr ""
-"Bonjour,\n"
-"\n"
-"Bonne nouvelle ! Un cadeau a été offert depuis votre liste \"%s\".\n"
-"\n"
-"Produit : %s\n"
-"Offert par : %s"
 
 #. translators: %s: Gift message left by the buyer.
 #: includes/emails/class-manager.php:216
@@ -573,36 +523,6 @@ msgid ""
 "%s"
 msgstr ""
 "\n"
-"\n"
-"Cordialement,\n"
-"%s"
-
-#. translators: 1: Gift list title, 2: List owner display name, 3: List owner email address, 4: Product name, 5: Buyer name, 6: Order number, 7: Site name.
-#: includes/emails/class-manager.php:238
-#, php-format
-msgid ""
-"Hello,\n"
-"\n"
-"A purchase has been made from a gift list.\n"
-"\n"
-"List: %s\n"
-"Owner: %s (%s)\n"
-"Product: %s\n"
-"Buyer: %s\n"
-"Order: #%d\n"
-"\n"
-"Best regards,\n"
-"%s"
-msgstr ""
-"Bonjour,\n"
-"\n"
-"Un achat a été effectué depuis une liste de cadeaux.\n"
-"\n"
-"Liste : %s\n"
-"Propriétaire : %s (%s)\n"
-"Produit : %s\n"
-"Acheteur : %s\n"
-"Commande : #%d\n"
 "\n"
 "Cordialement,\n"
 "%s"
@@ -646,10 +566,6 @@ msgstr "Créer une liste"
 #: includes/frontend/shortcodes/class-gift-lists-shortcode.php:142
 msgid "Log in to create a list"
 msgstr "Se connecter pour créer une liste"
-
-#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:170
-msgid "products"
-msgstr "produits"
 
 #: includes/frontend/shortcodes/class-gift-lists-shortcode.php:175
 msgid "deactivated"
@@ -820,12 +736,6 @@ msgstr "Ajouter un produit"
 msgid "To give a gift, click “Gift this” right here. Do not add the product to the cart from its product page, or the purchase will not be linked to this list."
 msgstr "Pour offrir un cadeau, cliquez sur « Offrir » ici même. N'ajoutez pas le produit au panier depuis sa fiche : l'achat ne serait alors pas rattaché à cette liste."
 
-#. translators: 1: Number of purchased products, 2: Total number of products, 3: Percentage of purchased products.
-#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:675
-#, php-format
-msgid "%1$d of %2$d products purchased (%3$d%%)"
-msgstr "%1$d sur %2$d produits achetés (%3$d%%)"
-
 #: includes/frontend/shortcodes/class-gift-lists-shortcode.php:687
 msgid "Start by adding products from the shop."
 msgstr "Commencez par ajouter des produits depuis votre boutique."
@@ -909,3 +819,103 @@ msgstr "Produit non disponible"
 #: mrz-gift-lists-exp.php:60
 msgid "requires WooCommerce to work. Please install and activate WooCommerce."
 msgstr "nécessite WooCommerce pour fonctionner. Veuillez installer et activer WooCommerce."
+
+#. translators: 1: Site name, 2: Gift list title, 3: Creator display name, 4: Creator email address, 5: Gift list URL, 6: Site name.
+#: includes/emails/class-manager.php:190
+#, php-format
+msgid ""
+"Hello,\n"
+"\n"
+"A new gift list has been created on %1$s.\n"
+"\n"
+"Title: %2$s\n"
+"Creator: %3$s (%4$s)\n"
+"\n"
+"View the list: %5$s\n"
+"\n"
+"Best regards,\n"
+"%6$s"
+msgstr ""
+"Bonjour,\n"
+"\n"
+"Une nouvelle liste de cadeaux a été créée sur %1$s.\n"
+"\n"
+"Titre : %2$s\n"
+"Créateur : %3$s (%4$s)\n"
+"\n"
+"Voir la liste : %5$s\n"
+"\n"
+"Cordialement,\n"
+"%6$s"
+
+#. translators: 1: Gift list title, 2: Product name, 3: Buyer name.
+#: includes/emails/class-manager.php:207
+#, php-format
+msgid ""
+"Hello,\n"
+"\n"
+"Good news! A gift has been purchased from your list \"%1$s\".\n"
+"\n"
+"Product: %2$s\n"
+"Gifted by: %3$s"
+msgstr ""
+"Bonjour,\n"
+"\n"
+"Bonne nouvelle ! Un cadeau a été offert depuis votre liste \"%1$s\".\n"
+"\n"
+"Produit : %2$s\n"
+"Offert par : %3$s"
+
+#. translators: 1: Gift list title, 2: List owner display name, 3: List owner email address, 4: Product name, 5: Buyer name, 6: Order number, 7: Site name.
+#: includes/emails/class-manager.php:238
+#, php-format
+msgid ""
+"Hello,\n"
+"\n"
+"A purchase has been made from a gift list.\n"
+"\n"
+"List: %1$s\n"
+"Owner: %2$s (%3$s)\n"
+"Product: %4$s\n"
+"Buyer: %5$s\n"
+"Order: #%6$d\n"
+"\n"
+"Best regards,\n"
+"%7$s"
+msgstr ""
+"Bonjour,\n"
+"\n"
+"Un achat a été effectué depuis une liste de cadeaux.\n"
+"\n"
+"Liste : %1$s\n"
+"Propriétaire : %2$s (%3$s)\n"
+"Produit : %4$s\n"
+"Acheteur : %5$s\n"
+"Commande : #%6$d\n"
+"\n"
+"Cordialement,\n"
+"%7$s"
+
+#. translators: %d: Number of products in the list.
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:170
+#, php-format
+msgid "%d product"
+msgid_plural "%d products"
+msgstr[0] "%d produit"
+msgstr[1] "%d produits"
+
+#. translators: %d: Number of purchased products.
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:172
+#, php-format
+msgid "%d purchased"
+msgid_plural "%d purchased"
+msgstr[0] "%d acheté"
+msgstr[1] "%d achetés"
+
+#. translators: 1: Number of purchased products, 2: Total number of products, 3: Percentage of purchased products.
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:675
+#, php-format
+msgid "%1$d of %2$d product purchased (%3$d%%)"
+msgid_plural "%1$d of %2$d products purchased (%3$d%%)"
+msgstr[0] "%1$d sur %2$d produit acheté (%3$d%%)"
+msgstr[1] "%1$d sur %2$d produits achetés (%3$d%%)"

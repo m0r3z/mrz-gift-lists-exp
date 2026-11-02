@@ -1,19 +1,15 @@
 # Copyright (C) 2026 Morez.co
 # This file is distributed under the GPLv3 or later.
-# Modèle de traduction pour MRZ Gift Lists.
-# Pour (re)générer ce fichier avec toutes les chaînes du plugin, exécuter
-# depuis la racine du plugin (WP-CLI requis, disponible dans le shell Local) :
-#     wp i18n make-pot . languages/mrz-gift-lists-exp.pot --domain=mrz-gift-lists-exp
 msgid ""
 msgstr ""
-"Project-Id-Version: MRZ Gift Lists 0.12.0\n"
-"Report-Msgid-Bugs-To: https://github.com/m0r3z/mrz-gift-lists-exp\n"
-"Last-Translator: Morez.co <hello@morez.co>\n"
-"Language-Team: Morez.co <hello@morez.co>\n"
+"Project-Id-Version: MRZ Gift Lists Exp 0.12.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mrz-gift-lists-exp\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-31T16:37:09+00:00\n"
+"POT-Creation-Date: 2026-11-02T14:10:28+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mrz-gift-lists-exp\n"
@@ -121,7 +117,6 @@ msgstr ""
 
 #: includes/admin/class-list-table.php:274
 #: includes/admin/pages/class-lists-page.php:356
-#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:172
 msgid "purchased"
 msgstr ""
 
@@ -436,51 +431,51 @@ msgstr ""
 msgid "Error while adding to the cart."
 msgstr ""
 
-#: includes/class-plugin.php:183
+#: includes/class-plugin.php:194
 msgid "Are you sure you want to delete this item?"
 msgstr ""
 
-#: includes/class-plugin.php:184
+#: includes/class-plugin.php:195
 msgid "Adding..."
 msgstr ""
 
-#: includes/class-plugin.php:185
+#: includes/class-plugin.php:196
 msgid "Added!"
 msgstr ""
 
-#: includes/class-plugin.php:186
+#: includes/class-plugin.php:197
 msgid "An error occurred"
 msgstr ""
 
-#: includes/class-plugin.php:187
+#: includes/class-plugin.php:198
 msgid "Product added to the list"
 msgstr ""
 
-#: includes/class-plugin.php:188
+#: includes/class-plugin.php:199
 msgid "Product removed from the list"
 msgstr ""
 
-#: includes/class-plugin.php:189
+#: includes/class-plugin.php:200
 msgid "Product added to the cart"
 msgstr ""
 
-#: includes/class-plugin.php:190
+#: includes/class-plugin.php:201
 msgid "Link copied!"
 msgstr ""
 
-#: includes/class-plugin.php:191
+#: includes/class-plugin.php:202
 msgid "Please select a list."
 msgstr ""
 
-#: includes/class-plugin.php:221
+#: includes/class-plugin.php:232
 msgid "Are you sure you want to delete this?"
 msgstr ""
 
-#: includes/class-plugin.php:222
+#: includes/class-plugin.php:233
 msgid "Saved"
 msgstr ""
 
-#: includes/class-plugin.php:223
+#: includes/class-plugin.php:234
 msgid "Error"
 msgstr ""
 
@@ -508,15 +503,15 @@ msgstr ""
 msgid ""
 "Hello,\n"
 "\n"
-"A new gift list has been created on %s.\n"
+"A new gift list has been created on %1$s.\n"
 "\n"
-"Title: %s\n"
-"Creator: %s (%s)\n"
+"Title: %2$s\n"
+"Creator: %3$s (%4$s)\n"
 "\n"
-"View the list: %s\n"
+"View the list: %5$s\n"
 "\n"
 "Best regards,\n"
-"%s"
+"%6$s"
 msgstr ""
 
 #: includes/emails/class-manager.php:193
@@ -529,10 +524,10 @@ msgstr ""
 msgid ""
 "Hello,\n"
 "\n"
-"Good news! A gift has been purchased from your list \"%s\".\n"
+"Good news! A gift has been purchased from your list \"%1$s\".\n"
 "\n"
-"Product: %s\n"
-"Gifted by: %s"
+"Product: %2$s\n"
+"Gifted by: %3$s"
 msgstr ""
 
 #. translators: %s: Gift message left by the buyer.
@@ -562,14 +557,14 @@ msgid ""
 "\n"
 "A purchase has been made from a gift list.\n"
 "\n"
-"List: %s\n"
-"Owner: %s (%s)\n"
-"Product: %s\n"
-"Buyer: %s\n"
-"Order: #%d\n"
+"List: %1$s\n"
+"Owner: %2$s (%3$s)\n"
+"Product: %4$s\n"
+"Buyer: %5$s\n"
+"Order: #%6$d\n"
 "\n"
 "Best regards,\n"
-"%s"
+"%7$s"
 msgstr ""
 
 #. translators: %s: Site name, linked to the site home page.
@@ -612,9 +607,21 @@ msgstr ""
 msgid "Log in to create a list"
 msgstr ""
 
+#. translators: %d: Number of products in the list.
 #: includes/frontend/shortcodes/class-gift-lists-shortcode.php:170
-msgid "products"
-msgstr ""
+#, php-format
+msgid "%d product"
+msgid_plural "%d products"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: Number of purchased products.
+#: includes/frontend/shortcodes/class-gift-lists-shortcode.php:172
+#, php-format
+msgid "%d purchased"
+msgid_plural "%d purchased"
+msgstr[0] ""
+msgstr[1] ""
 
 #: includes/frontend/shortcodes/class-gift-lists-shortcode.php:175
 msgid "deactivated"
@@ -788,8 +795,10 @@ msgstr ""
 #. translators: 1: Number of purchased products, 2: Total number of products, 3: Percentage of purchased products.
 #: includes/frontend/shortcodes/class-gift-lists-shortcode.php:675
 #, php-format
-msgid "%1$d of %2$d products purchased (%3$d%%)"
-msgstr ""
+msgid "%1$d of %2$d product purchased (%3$d%%)"
+msgid_plural "%1$d of %2$d products purchased (%3$d%%)"
+msgstr[0] ""
+msgstr[1] ""
 
 #: includes/frontend/shortcodes/class-gift-lists-shortcode.php:687
 msgid "Start by adding products from the shop."
