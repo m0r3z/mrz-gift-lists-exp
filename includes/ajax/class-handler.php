@@ -336,7 +336,7 @@ class Handler {
             'mrzgle_list_id'    => $list_id,
             'mrzgle_item_id'    => $item_id,
             'mrzgle_list_title' => $this->list_repo->find( $list_id )->title ?? '',
-            'unique_key'      => md5( microtime() . rand() ),
+            'unique_key'      => md5( microtime() . wp_rand() ),
         ] );
 
         if ( $cart_item_key ) {

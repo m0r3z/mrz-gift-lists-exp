@@ -150,7 +150,7 @@ class WooCommerce {
                 $cart_item_data['mrzgle_list_title'] = $list ? $list->title : '';
 
                 // Clé unique pour permettre le même produit plusieurs fois
-                $cart_item_data['unique_key'] = md5( microtime() . rand() );
+                $cart_item_data['unique_key'] = md5( microtime() . wp_rand() );
             }
         }
 

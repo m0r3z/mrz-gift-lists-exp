@@ -144,8 +144,8 @@ class SettingsPage {
 
         wp_dropdown_pages( [
             'name'              => 'mrzgle_page_id',
-            'selected'          => $page_id,
-            'show_option_none'  => __( '-- Select --', 'mrz-gift-lists-exp' ),
+            'selected'          => absint( $page_id ),
+            'show_option_none'  => esc_html__( '-- Select --', 'mrz-gift-lists-exp' ),
             'option_none_value' => 0,
         ] );
 
@@ -158,8 +158,8 @@ class SettingsPage {
 
         wp_dropdown_pages( [
             'name'              => 'mrzgle_shop_page_id',
-            'selected'          => $page_id,
-            'show_option_none'  => __( '-- Select --', 'mrz-gift-lists-exp' ),
+            'selected'          => absint( $page_id ),
+            'show_option_none'  => esc_html__( '-- Select --', 'mrz-gift-lists-exp' ),
             'option_none_value' => 0,
         ] );
 
