@@ -75,7 +75,7 @@ class Admin {
             'mrz-gle-lists',
             [ $this, 'render_lists_page' ],
             $this->get_menu_icon(),
-            '80.9' // Juste sous « Réglages » (position 80).
+            90 // Avec les autres plugins MRZ (menu_position 90), sous ACF (80).
         );
 
         // Sous-menu Listes (remplace le menu parent)
